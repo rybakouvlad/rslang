@@ -1,5 +1,5 @@
 {
-  "name": "sudoku",
+  "name": "rslang",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rybakouvlad/sudoku.git"
+    "url": "git+https://github.com/rybakouvlad/rslang.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rybakouvlad/sudoku/issues"
+    "url": "https://github.com/rybakouvlad/rslang/issues"
   },
-  "homepage": "https://github.com/rybakouvlad/sudoku#readme",
+  "homepage": "https://github.com/rybakouvlad/rslang#readme",
   "dependencies": {
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
