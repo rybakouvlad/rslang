@@ -22,6 +22,17 @@ export default function (state: IAuth = initialState, action: AuthAction): IAuth
       return {
         ...state,
       };
+    case AuthActionsTypes.LOGOUT_AUTH:
+      return {
+        ...initialState,
+      };
+    case AuthActionsTypes.LOGIN_AUTH: {
+      return {
+        ...state,
+        token: action.payload.token,
+        userId: action.payload.userId,
+      };
+    }
     default:
       return state;
   }

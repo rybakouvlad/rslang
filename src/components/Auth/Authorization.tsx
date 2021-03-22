@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useTypeSelector } from '../hooks/useTypesSelector';
-import { sendPostAuth } from '../store/actions/auth';
+import { useHistory } from 'react-router-dom';
+import { useTypeSelector } from '../../hooks/useTypesSelector';
+import { sendPostAuth } from '../../store/actions/auth';
 
-export const Auth: React.FC = () => {
+export const Authorization: React.FC = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-
+  const history = useHistory();
   const { token } = useTypeSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -20,11 +21,12 @@ export const Auth: React.FC = () => {
   const loginHandler = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
     event.preventDefault();
     dispatch(sendPostAuth(form.email, form.password));
-    console.log(form);
   };
 
   useEffect(() => {
-    console.log(token);
+    if (token) {
+      history.push('/');
+    }
   }, [token]);
 
   if (token) {
@@ -56,7 +58,6 @@ export const Auth: React.FC = () => {
       <Button variant="primary" type="submit" onClick={loginHandler}>
         Login
       </Button>
-      ;
     </Form>
   );
 };

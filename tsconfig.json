@@ -13,10 +13,10 @@
         "checkJs": false,
         "paths": {
             "App": [
-                "src/client/App"
+                "src/App"
             ],
-            "Pages/*": [
-                "src/client/Pages/*"
+            "Components/*": [
+                "src/components/*"
             ],
             
         },
