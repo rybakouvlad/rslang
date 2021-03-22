@@ -42,7 +42,7 @@ node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
-typings/
+#typings/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -103,4 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
+package-lock.json
+
+.DS_Store
 package-lock.json

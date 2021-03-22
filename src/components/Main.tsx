@@ -14,14 +14,16 @@ export const Main: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <main className="body-wrapper">
-      <SmartMenu />
+    <div>
+      <main className="body-wrapper">
+        <SmartMenu />
 
-      <section className="main-wrapper">
-        <Header />
-        <Routes />
-        <Footer />
-      </section>
-    </main>
+        <section className="main-wrapper">
+          <Header />
+          <Routes />
+          <Footer />
+        </section>
+      </main>
+    </div>
   );
 };
