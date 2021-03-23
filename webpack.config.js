@@ -78,7 +78,7 @@ module.exports = (env) => {
     },
     svg: {
       test: /\.svg$/,
-      use: ['file-loader'],
+      use: ['@svgr/webpack', 'url-loader'],
     },
     font: {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -106,9 +106,9 @@ module.exports = (env) => {
   }
 
   const resolve = {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', 'svg'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      App: path.resolve(__dirname, 'src/client/App/'),
+      App: path.resolve(__dirname, 'src/App/'),
     },
   };
 

@@ -62,7 +62,7 @@ module.exports = (env, argv) => {
       new ESLintPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/client/Html/Browser.html',
+        template: './src/Html/Browser.html',
       }),
       // new CopyPlugin({
       //   patterns: [
@@ -76,7 +76,7 @@ module.exports = (env, argv) => {
       // new Dotenv(),
     ],
     entry: {
-      main: './src/client/Client.tsx',
+      main: './src/Client.tsx',
     },
     output: {
       filename: watchMode ? 'assets/[name].[hash].js' : 'assets/[name].[chunkhash].js',

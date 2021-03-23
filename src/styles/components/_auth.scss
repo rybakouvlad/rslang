@@ -1,0 +1,19 @@
+.auth-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: #ad5f82;
+  border-radius: 50%;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  svg {
+    width: 45px;
+    fill: white;
+    &:hover {
+      fill: #576566;
+    }
+  }
+}
