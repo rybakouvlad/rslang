@@ -1,38 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nextPage, previousPage } from '../../store/actions/book';
+import { nextPage, previousPage, changeGroup } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
-//import {useLocation} from 'react-router-dom';
 import './book.css';
 
 export const Book: React.FC = () => {
-  //console.log(new URLSearchParams(useLocation().search))
   const dispatch = useDispatch();
   const { page, group } = useTypeSelector((state) => state.book);
-  // const page = useSelector(state => state.book.page);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const goToNextPage = () => {
+  useEffect(() => {
+    getData().then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    getData().then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [page, group]);
+
+  const getData = async (): Promise<any> => {
+    const response = await fetch(`https://server-team19-rsschool.herokuapp.com/words?group=${group}&page=${page}`);
+    const json = await response.json();
+    return json;
+  };
+
+  const goToNextPage = (): void => {
     dispatch(nextPage());
   };
 
-  const goToPrevPage = () => {
+  const goToPrevPage = (): void => {
     dispatch(previousPage());
   };
 
+  const handlerRadioButton = (e: React.FormEvent<HTMLDivElement> | any): void => {
+    dispatch(changeGroup(+e.target.value));
+  };
+
   return (
-    <div className="book">
-      <div className="book-group">1 2 3 4 5</div>
-      <div className="book-content">Content</div>
+    <div className="book" onChange={(e) => handlerRadioButton(e)}>
+      <div>
+        <input type="radio" value="0" name="group" checked={group === 0} /> 1
+        <input type="radio" value="1" name="group" checked={group === 1} /> 2
+        <input type="radio" value="2" name="group" checked={group === 2} /> 3
+        <input type="radio" value="3" name="group" checked={group === 3} /> 4
+        <input type="radio" value="4" name="group" checked={group === 4} /> 5
+        <input type="radio" value="5" name="group" checked={group === 5} /> 6
+      </div>
+      {loading ? (
+        <div className="spinner-border" role="status" />
+      ) : (
+        <ul>
+          {data.map((element) => (
+            <li key={element.id}>
+              {element.word} - {element.wordTranslate}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="control-panel-page">
-        <div>
-          {' '}
-          Page is, {page}, group is {group}{' '}
-        </div>
-        <button disabled={page === 29 ? true : false} onClick={goToNextPage}>
-          +
-        </button>
         <button disabled={page === 0 ? true : false} onClick={goToPrevPage}>
           -
+        </button>
+        <span>{page}</span>
+        <button disabled={page === 29 ? true : false} onClick={goToNextPage}>
+          +
         </button>
       </div>
     </div>
