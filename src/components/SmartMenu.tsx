@@ -4,7 +4,7 @@ import { ReactComponent as BookSvg } from '../assets/svg/book.svg';
 import { ReactComponent as HomeSvg } from '../assets/svg/home.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
-
+import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
 export const SmartMenu: React.FC = () => {
   return (
     <>
@@ -25,9 +25,9 @@ export const SmartMenu: React.FC = () => {
               <GameSvg />
             </div>
           </Link>
-          <Link to="/games">
+          <Link to="/audiocall">
             <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
-              <GameSvg />
+              <AudioCallSvg />
             </div>
           </Link>
           <Link to="/games">
