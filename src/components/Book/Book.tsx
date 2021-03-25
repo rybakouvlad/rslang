@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nextPage, previousPage, changeGroup } from '../../store/actions/book';
+import { nextPage, previousPage, changeGroup, changePageAndGroup } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
+import { useQuery } from '../../hooks/useQuery';
+import { useHistory } from 'react-router-dom';
 import './book.css';
 
 export const Book: React.FC = () => {
@@ -9,8 +11,22 @@ export const Book: React.FC = () => {
   const { page, group } = useTypeSelector((state) => state.book);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const query = useQuery();
+  const history = useHistory();
 
   useEffect(() => {
+    const pageOfUrl = query.get('page');
+    const groupOfUrl = query.get('group');
+
+    console.log(pageOfUrl, groupOfUrl);
+    console.log('redux', page, group);
+
+    if (pageOfUrl || groupOfUrl) {
+      console.log(group, +groupOfUrl);
+      changePageAndGroup(+pageOfUrl, +groupOfUrl);
+      changeGroup(+groupOfUrl);
+      console.log(group);
+    }
     getData().then((res) => {
       setData(res);
       setLoading(false);
@@ -25,17 +41,21 @@ export const Book: React.FC = () => {
     });
   }, [page, group]);
 
+  useEffect(() => {
+    history.push(`/book?page=${page}&group=${group}`);
+  }, [page, group]);
+
   const getData = async (): Promise<any> => {
     const response = await fetch(`https://server-team19-rsschool.herokuapp.com/words?group=${group}&page=${page}`);
     const json = await response.json();
     return json;
   };
 
-  const goToNextPage = (): void => {
+  const nextPageHandler = (): void => {
     dispatch(nextPage());
   };
 
-  const goToPrevPage = (): void => {
+  const previousPageHandler = (): void => {
     dispatch(previousPage());
   };
 
@@ -64,15 +84,32 @@ export const Book: React.FC = () => {
           ))}
         </ul>
       )}
-      <div className="control-panel-page">
-        <button disabled={page === 0 ? true : false} onClick={goToPrevPage}>
+      {/*<div className="control-panel-page">
+        <button disabled={page === 0 ? true : false} onClick={previousPageHandler}>
           -
         </button>
         <span>{page}</span>
-        <button disabled={page === 29 ? true : false} onClick={goToNextPage}>
+        <button disabled={page === 29 ? true : false} onClick={nextPageHandler}>
           +
         </button>
-      </div>
+          </div>*/}
+      <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          <li className={`page-item ${page === 0 ? 'disabled' : ''}`} onClick={previousPageHandler}>
+            <a className="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li className="page-item active" aria-current="page">
+            <span className="page-link">{page + 1}</span>
+          </li>
+          <li className="page-item" onClick={nextPageHandler}>
+            <a className="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 };

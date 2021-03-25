@@ -7,6 +7,8 @@ export enum BookActionsTypes {
   NEXT_PAGE = 'NEXT_PAGE',
   PREVIOUS_PAGE = 'PREVIOUS_PAGE',
   CHANGE_GROUP = 'CHANGE_GROUP',
+  CHANGE_PAGE = 'CHANGE_PAGE',
+  CHANGE_PAGE_ANG_GROUP = 'CHANGE_PAGE_ANG_GROUP',
 }
 
 interface NextPageAction {
@@ -22,4 +24,12 @@ interface ChangeGroupAction {
   payload: number;
 }
 
-export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction;
+interface ChangePageAndGroup {
+  type: BookActionsTypes.CHANGE_PAGE_ANG_GROUP;
+  payload: {
+    page: number;
+    group: number;
+  };
+}
+
+export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction | ChangePageAndGroup;

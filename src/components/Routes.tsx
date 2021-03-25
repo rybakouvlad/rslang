@@ -4,7 +4,7 @@ import { Auth } from './Auth/Auth';
 import { Dictionary } from './Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
-import { Book } from './Book/Book'
+import { Book } from './Book/Book';
 
 export const Routes: React.FC = () => {
   return (

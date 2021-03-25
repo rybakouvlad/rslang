@@ -18,3 +18,15 @@ export const changeGroup = (group: number) => {
     dispatch({ type: BookActionsTypes.CHANGE_GROUP, payload: group });
   };
 };
+
+export const changePageAndGroup = (page: number, group: number) => {
+  return (dispatch: Dispatch<BookAction>) => {
+    dispatch({
+      type: BookActionsTypes.CHANGE_PAGE_ANG_GROUP,
+      payload: {
+        page,
+        group,
+      },
+    });
+  };
+};
