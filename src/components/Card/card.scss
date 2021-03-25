@@ -1,0 +1,60 @@
+.card {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-template-areas: 
+  'word image'
+  'mean mean'
+  'mean-tr mean-tr'
+  'ex ex'
+  'ex-tr ex-tr';
+  border: 1px solid black;
+  border-radius: 10px;
+
+  .card__image {
+    grid-area: image;  
+    border-radius: 20px;
+    width: 100px;
+    padding: 5px;
+  }
+
+  .card__word {
+    grid-area: word;
+  }
+
+  .card__meaning {
+    grid-area: mean;
+  }
+
+  .card__example {
+    grid-area: ex;
+  }
+
+  .card__meaning-translate {
+    grid-area: mean-tr;
+  }
+
+  .card__example-translate {
+    grid-area: ex-tr;
+  }
+
+  .card-audio {
+    width: 20px;
+    margin-left: 5px;
+  }
+
+  .card-audio:hover {
+    cursor: pointer;
+  }
+}
+
+.card>*{
+  padding-left: 10px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  gap: 10px;
+  overflow-y: scroll;
+  height: 75vh;
+}
