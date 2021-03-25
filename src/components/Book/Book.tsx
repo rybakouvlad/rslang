@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { /*nextPage, previousPage,*/ changeGroup, changePageAndGroup, changeWords } from '../../store/actions/book';
+import { changeGroup, changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { useQuery } from '../../hooks/useQuery';
 import { useHistory } from 'react-router-dom';
@@ -72,33 +72,7 @@ export const Book: React.FC = () => {
           ))}
         </ul>
       )}
-      {/*<div className="control-panel-page">
-        <button disabled={page === 0 ? true : false} onClick={previousPageHandler}>
-          -
-        </button>
-        <span>{page}</span>
-        <button disabled={page === 29 ? true : false} onClick={nextPageHandler}>
-          +
-        </button>
-          </div>*/}
-      {/*<nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className={`page-item ${page === 0 ? 'disabled' : ''}`} onClick={previousPageHandler}>
-            <a className="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li className="page-item active" aria-current="page">
-            <span className="page-link">{page + 1}</span>
-          </li>
-          <li className="page-item" onClick={nextPageHandler}>
-            <a className="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-        </nav>*/}
-        <Pagination />
+      <Pagination />
     </div>
   );
 };
