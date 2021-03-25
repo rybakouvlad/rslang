@@ -39,3 +39,12 @@ export const changeWords = (words: Array<Word>) => {
     });
   };
 };
+
+export const changePageByBumber = (page: number) => {
+  return (dispatch: Dispatch<BookAction>) => {
+    dispatch({
+      type: BookActionsTypes.CHANGE_PAGE_BY_NUMBER,
+      payload: page,
+    });
+  };
+};

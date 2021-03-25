@@ -34,6 +34,11 @@ export default function (state: IBook = initialState, action: BookAction): IBook
         ...state,
         words: action.payload,
       };
+    case BookActionsTypes.CHANGE_PAGE_BY_NUMBER:
+      return {
+        ...state,
+        page: action.payload,
+      };
     default:
       return state;
   }

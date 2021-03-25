@@ -4,8 +4,9 @@ import { changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { useQuery } from '../../hooks/useQuery';
 import { useHistory } from 'react-router-dom';
-import { Pagination } from './Pagination';
+import { PaginationBook } from './PaginationBook';
 import { Panel } from './Panel';
+import { Spinner } from 'react-bootstrap';
 import './book.css';
 
 export const Book: React.FC = () => {
@@ -52,7 +53,7 @@ export const Book: React.FC = () => {
     <div className="book">
       <Panel />
       {loading ? (
-        <div className="spinner-border" role="status" />
+        <Spinner animation="border" role="status" />
       ) : (
         <ul>
           {words.map((element) => (
@@ -62,7 +63,7 @@ export const Book: React.FC = () => {
           ))}
         </ul>
       )}
-      <Pagination />
+      <PaginationBook />
     </div>
   );
 };

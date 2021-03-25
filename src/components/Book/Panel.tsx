@@ -14,22 +14,22 @@ export const Panel: React.FC = () => {
 
   return (
     <ButtonGroup aria-label="buttons" onClick={(e: any) => handlerRadioButton(e)}>
-      <Button value="0" active={group === 0}>
+      <Button variant="outline-primary" value="0" active={group === 0}>
         1
       </Button>
-      <Button value="1" active={group === 1}>
+      <Button variant="outline-primary" value="1" active={group === 1}>
         2
       </Button>
-      <Button value="2" active={group === 2}>
+      <Button variant="outline-primary" value="2" active={group === 2}>
         3
       </Button>
-      <Button value="3" active={group === 3}>
+      <Button variant="outline-primary" value="3" active={group === 3}>
         4
       </Button>
-      <Button value="4" active={group === 4}>
+      <Button variant="outline-primary" value="4" active={group === 4}>
         5
       </Button>
-      <Button value="5" active={group === 5}>
+      <Button variant="outline-primary" value="5" active={group === 5}>
         6
       </Button>
     </ButtonGroup>

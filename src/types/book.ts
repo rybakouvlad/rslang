@@ -11,6 +11,7 @@ export enum BookActionsTypes {
   CHANGE_PAGE = 'CHANGE_PAGE',
   CHANGE_PAGE_ANG_GROUP = 'CHANGE_PAGE_ANG_GROUP',
   CHANGE_WORDS = 'CHANGE_WORDS',
+  CHANGE_PAGE_BY_NUMBER = 'CHANGE_PAGE_BY_NUMBER',
 }
 
 export type Word = {
@@ -56,4 +57,15 @@ interface ChangeWords {
   payload: Array<Word>;
 }
 
-export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction | ChangePageAndGroup | ChangeWords;
+interface ChangePageByNumber {
+  type: BookActionsTypes.CHANGE_PAGE_BY_NUMBER;
+  payload: number;
+}
+
+export type BookAction =
+  | NextPageAction
+  | PreviousPageAction
+  | ChangeGroupAction
+  | ChangePageAndGroup
+  | ChangeWords
+  | ChangePageByNumber;
