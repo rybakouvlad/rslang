@@ -1,6 +1,7 @@
 export interface IBook {
   page: number;
   group: number;
+  words: Array<any>;
 }
 
 export enum BookActionsTypes {
@@ -9,6 +10,7 @@ export enum BookActionsTypes {
   CHANGE_GROUP = 'CHANGE_GROUP',
   CHANGE_PAGE = 'CHANGE_PAGE',
   CHANGE_PAGE_ANG_GROUP = 'CHANGE_PAGE_ANG_GROUP',
+  CHANGE_WORDS = 'CHANGE_WORDS',
 }
 
 interface NextPageAction {
@@ -32,4 +34,9 @@ interface ChangePageAndGroup {
   };
 }
 
-export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction | ChangePageAndGroup;
+interface ChangeWords {
+  type: BookActionsTypes.CHANGE_WORDS;
+  payload: Array<any>;
+}
+
+export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction | ChangePageAndGroup | ChangeWords;

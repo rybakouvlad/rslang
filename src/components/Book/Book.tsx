@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nextPage, previousPage, changeGroup, changePageAndGroup } from '../../store/actions/book';
+import { nextPage, previousPage, changeGroup, changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { useQuery } from '../../hooks/useQuery';
 import { useHistory } from 'react-router-dom';
@@ -8,8 +8,7 @@ import './book.css';
 
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
-  const { page, group } = useTypeSelector((state) => state.book);
-  const [data, setData] = useState([]);
+  const { page, group, words } = useTypeSelector((state) => state.book);
   const [loading, setLoading] = useState(true);
   const query = useQuery();
   const history = useHistory();
@@ -21,18 +20,11 @@ export const Book: React.FC = () => {
     if (pageOfUrl || groupOfUrl) {
       dispatch(changePageAndGroup(+pageOfUrl, +groupOfUrl));
     }
-    getData().then((res) => {
-      setData(res);
-      setLoading(false);
-    });
+    changeWordsState();
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    getData().then((res) => {
-      setData(res);
-      setLoading(false);
-    });
+    changeWordsState();
   }, [page, group]);
 
   useEffect(() => {
@@ -57,6 +49,14 @@ export const Book: React.FC = () => {
     dispatch(changeGroup(+e.target.value));
   };
 
+  const changeWordsState = (): void => {
+    setLoading(true);
+    getData().then((res) => {
+      dispatch(changeWords(res));
+      setLoading(false);
+    });
+  };
+
   return (
     <div className="book" onChange={(e) => handlerRadioButton(e)}>
       <div>
@@ -71,7 +71,7 @@ export const Book: React.FC = () => {
         <div className="spinner-border" role="status" />
       ) : (
         <ul>
-          {data.map((element) => (
+          {words.map((element) => (
             <li key={element.id}>
               {element.word} - {element.wordTranslate}
             </li>

@@ -3,6 +3,7 @@ import { IBook, BookActionsTypes, BookAction } from '../../types/book';
 const initialState: IBook = {
   page: 0,
   group: 0,
+  words: [],
 };
 
 export default function (state: IBook = initialState, action: BookAction): IBook {
@@ -27,6 +28,11 @@ export default function (state: IBook = initialState, action: BookAction): IBook
         ...state,
         page: action.payload.page,
         group: action.payload.group,
+      };
+    case BookActionsTypes.CHANGE_WORDS:
+      return {
+        ...state,
+        words: action.payload,
       };
     default:
       return state;

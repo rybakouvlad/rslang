@@ -30,3 +30,12 @@ export const changePageAndGroup = (page: number, group: number) => {
     });
   };
 };
+
+export const changeWords = (words: Array<any>) => {
+  return (dispatch: Dispatch<BookAction>) => {
+    dispatch({
+      type: BookActionsTypes.CHANGE_WORDS,
+      payload: words,
+    });
+  };
+};
