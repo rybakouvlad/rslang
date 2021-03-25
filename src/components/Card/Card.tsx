@@ -1,6 +1,5 @@
 import React from 'react';
 import { IData } from './dataForCard';
-// import audio from '../../assets/svg/audio.svg'
 import { ReactComponent as AudioSvg } from '../../assets/svg/audio.svg';
 import './card.scss';
 
@@ -12,9 +11,9 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   const {
     word,
     image,
-    // audio,
-    // audioMeaning,
-    // audioExample,
+    audio,
+    audioMeaning,
+    audioExample,
     textMeaning,
     textExample,
     transcription,
@@ -25,6 +24,24 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
 
   const SERVER_PATH = 'https://server-team19-rsschool.herokuapp.com';
 
+  const handleClick = () => {
+    const audioArray = [audio, audioMeaning, audioExample];
+
+    let index = 1;
+    const audioObj = new Audio();
+
+    audioObj.src = `${SERVER_PATH}/${audioArray[0]}`;
+    audioObj.play();
+
+    audioObj.onended = function () {
+      if (index < audioArray.length) {
+        audioObj.src = `${SERVER_PATH}/${audioArray[index]}`;
+        audioObj.play();
+        index++;
+      }
+    };
+  };
+
   return (
     <li className="card">
       <img className="card__image" src={`${SERVER_PATH}/${image}`}></img>
@@ -32,7 +49,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         <div>{word}</div>
         <div style={{ display: 'flex' }}>
           <div>{transcription}</div>
-          <div className="card-audio">
+          <div className="card-audio" onClick={handleClick}>
             <AudioSvg />
           </div>
         </div>

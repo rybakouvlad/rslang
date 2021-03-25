@@ -47,7 +47,7 @@
   }
 }
 
-.card>*{
+.card > * {
   padding-left: 10px;
 }
 
@@ -57,4 +57,5 @@
   gap: 10px;
   overflow-y: scroll;
   height: 75vh;
+  padding: 0 20px;
 }
