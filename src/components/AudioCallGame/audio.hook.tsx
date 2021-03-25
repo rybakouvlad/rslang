@@ -28,6 +28,7 @@ interface IContext {
   hiddenWord: IWord;
   isEndGame: boolean;
   repeatGame(): void;
+  playSound(): void;
 }
 
 interface IProps {
@@ -113,7 +114,18 @@ export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
   }, [words, index]);
   return (
     <AudioCallGameContext.Provider
-      value={{ isShowResult, index, setIsShowResult, nextIndex, words, hiddenWord, gameArr, isEndGame, repeatGame }}
+      value={{
+        isShowResult,
+        index,
+        setIsShowResult,
+        nextIndex,
+        words,
+        hiddenWord,
+        gameArr,
+        isEndGame,
+        repeatGame,
+        playSound,
+      }}
     >
       {children}
     </AudioCallGameContext.Provider>

@@ -4,6 +4,7 @@ import { AudioCard } from './AudioCard';
 import { NextShowButtons } from './NextShowButtons';
 import { EndGame } from './EndGame';
 import { Card } from 'react-bootstrap';
+import { RepeatButton } from './RepeatButton';
 
 export const Game: React.FC = () => {
   const { words, hiddenWord, gameArr, isEndGame } = useAudioGame();
@@ -18,6 +19,7 @@ export const Game: React.FC = () => {
       ) : (
         <Card className="audiocall-game-card">
           <AudioCard words={gameArr} hiddenWord={hiddenWord} />
+          <RepeatButton />
           <NextShowButtons />
         </Card>
       )}
