@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { /*changeGroup,*/ changePageAndGroup, changeWords } from '../../store/actions/book';
+import { changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { useQuery } from '../../hooks/useQuery';
 import { useHistory } from 'react-router-dom';
@@ -40,10 +40,6 @@ export const Book: React.FC = () => {
     return json;
   };
 
-  /*const handlerRadioButton = (e: React.FormEvent<HTMLDivElement> | any): void => {
-    dispatch(changeGroup(+e.target.value));
-  };*/
-
   const changeWordsState = (): void => {
     setLoading(true);
     getData().then((res) => {
@@ -55,14 +51,6 @@ export const Book: React.FC = () => {
   return (
     <div className="book">
       <Panel />
-      {/* <div>
-        <input type="radio" value="0" name="group" checked={group === 0} /> 1
-        <input type="radio" value="1" name="group" checked={group === 1} /> 2
-        <input type="radio" value="2" name="group" checked={group === 2} /> 3
-        <input type="radio" value="3" name="group" checked={group === 3} /> 4
-        <input type="radio" value="4" name="group" checked={group === 4} /> 5
-        <input type="radio" value="5" name="group" checked={group === 5} /> 6
-     </div>*/}
       {loading ? (
         <div className="spinner-border" role="status" />
       ) : (
