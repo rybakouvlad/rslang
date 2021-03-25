@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { BookActionsTypes, BookAction } from '../../types/book';
+import { BookActionsTypes, BookAction, Word } from '../../types/book';
 
 export const nextPage = () => {
   return (dispatch: Dispatch<BookAction>) => {
@@ -31,7 +31,7 @@ export const changePageAndGroup = (page: number, group: number) => {
   };
 };
 
-export const changeWords = (words: Array<any>) => {
+export const changeWords = (words: Array<Word>) => {
   return (dispatch: Dispatch<BookAction>) => {
     dispatch({
       type: BookActionsTypes.CHANGE_WORDS,

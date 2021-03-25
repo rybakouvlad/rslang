@@ -1,7 +1,7 @@
 export interface IBook {
   page: number;
   group: number;
-  words: Array<any>;
+  words: Array<Word>;
 }
 
 export enum BookActionsTypes {
@@ -12,6 +12,23 @@ export enum BookActionsTypes {
   CHANGE_PAGE_ANG_GROUP = 'CHANGE_PAGE_ANG_GROUP',
   CHANGE_WORDS = 'CHANGE_WORDS',
 }
+
+export type Word = {
+  id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  textExampleTranslate: string;
+  textMeaningTranslate: string;
+  wordTranslate: string;
+};
 
 interface NextPageAction {
   type: BookActionsTypes.NEXT_PAGE;
@@ -36,7 +53,7 @@ interface ChangePageAndGroup {
 
 interface ChangeWords {
   type: BookActionsTypes.CHANGE_WORDS;
-  payload: Array<any>;
+  payload: Array<Word>;
 }
 
 export type BookAction = NextPageAction | PreviousPageAction | ChangeGroupAction | ChangePageAndGroup | ChangeWords;

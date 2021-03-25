@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nextPage, previousPage, changeGroup, changePageAndGroup, changeWords } from '../../store/actions/book';
+import { /*nextPage, previousPage,*/ changeGroup, changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { useQuery } from '../../hooks/useQuery';
 import { useHistory } from 'react-router-dom';
+import { Pagination } from './Pagination';
 import './book.css';
 
 export const Book: React.FC = () => {
@@ -19,8 +20,9 @@ export const Book: React.FC = () => {
 
     if (pageOfUrl || groupOfUrl) {
       dispatch(changePageAndGroup(+pageOfUrl, +groupOfUrl));
+    } else {
+      changeWordsState();
     }
-    changeWordsState();
   }, []);
 
   useEffect(() => {
@@ -35,14 +37,6 @@ export const Book: React.FC = () => {
     const response = await fetch(`https://server-team19-rsschool.herokuapp.com/words?group=${group}&page=${page}`);
     const json = await response.json();
     return json;
-  };
-
-  const nextPageHandler = (): void => {
-    dispatch(nextPage());
-  };
-
-  const previousPageHandler = (): void => {
-    dispatch(previousPage());
   };
 
   const handlerRadioButton = (e: React.FormEvent<HTMLDivElement> | any): void => {
@@ -87,7 +81,7 @@ export const Book: React.FC = () => {
           +
         </button>
           </div>*/}
-      <nav aria-label="Page navigation example">
+      {/*<nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className={`page-item ${page === 0 ? 'disabled' : ''}`} onClick={previousPageHandler}>
             <a className="page-link" href="#" aria-label="Previous">
@@ -103,7 +97,8 @@ export const Book: React.FC = () => {
             </a>
           </li>
         </ul>
-      </nav>
+        </nav>*/}
+        <Pagination />
     </div>
   );
 };
