@@ -18,14 +18,8 @@ export const Book: React.FC = () => {
     const pageOfUrl = query.get('page');
     const groupOfUrl = query.get('group');
 
-    console.log(pageOfUrl, groupOfUrl);
-    console.log('redux', page, group);
-
     if (pageOfUrl || groupOfUrl) {
-      console.log(group, +groupOfUrl);
-      changePageAndGroup(+pageOfUrl, +groupOfUrl);
-      changeGroup(+groupOfUrl);
-      console.log(group);
+      dispatch(changePageAndGroup(+pageOfUrl, +groupOfUrl));
     }
     getData().then((res) => {
       setData(res);

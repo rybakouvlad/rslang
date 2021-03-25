@@ -18,7 +18,6 @@ export default function (state: IBook = initialState, action: BookAction): IBook
         page: state.page - 1,
       };
     case BookActionsTypes.CHANGE_GROUP:
-      console.log('change-group')
       return {
         ...state,
         group: action.payload,
