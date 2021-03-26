@@ -51,22 +51,22 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   };
 
   return (
-    <li className="card">
-      <img className="card__image" src={`${SERVER_PATH}/${image}`} alt="imagine"></img>
-      <div className="card__word">
+    <li className="card-book">
+      <img className="card-book__image" src={`${SERVER_PATH}/${image}`} alt="imagine"></img>
+      <div className="card-book__word">
         <div>{word}</div>
         <div style={{ display: 'flex' }}>
           <div>{transcription}</div>
-          <div className="card-audio" onClick={playAudioSequence}>
+          <div className="card-book-audio" onClick={playAudioSequence}>
             <AudioSvg />
           </div>
         </div>
         <div>{wordTranslate}</div>
       </div>
-      <span className="card__meaning" dangerouslySetInnerHTML={{ __html: textMeaning }} />
-      <span className="card__example" dangerouslySetInnerHTML={{ __html: textExample }} />
-      <span className="card__example-translate">{textExampleTranslate}</span>
-      <span className="card__meaning-translate">{textMeaningTranslate}</span>
+      <span className="card-book__meaning" dangerouslySetInnerHTML={{ __html: textMeaning }} />
+      <span className="card-book__example" dangerouslySetInnerHTML={{ __html: textExample }} />
+      <span className="card-book__example-translate">{textExampleTranslate}</span>
+      <span className="card-book__meaning-translate">{textMeaningTranslate}</span>
     </li>
   );
 };

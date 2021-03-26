@@ -1,4 +1,4 @@
-.card {
+.card-book {
   display: grid;
   grid-template-columns: 1fr 100px;
   grid-template-areas: 
@@ -10,7 +10,7 @@
   border: 1px solid black;
   border-radius: 10px;
 
-  .card__image {
+  .card-book__image {
     grid-area: image;  
     border-radius: 20px;
     width: 100px;
@@ -19,37 +19,37 @@
     justify-self: center;
   }
 
-  .card__word {
+  .card-book__word {
     grid-area: word;
   }
 
-  .card__meaning {
+  .card-book__meaning {
     grid-area: mean;
   }
 
-  .card__example {
+  .card-book__example {
     grid-area: ex;
   }
 
-  .card__meaning-translate {
+  .card-book__meaning-translate {
     grid-area: mean-tr;
   }
 
-  .card__example-translate {
+  .card-book__example-translate {
     grid-area: ex-tr;
   }
 
-  .card-audio {
+  .card-book-audio {
     width: 20px;
     margin-left: 5px;
   }
 
-  .card-audio:hover {
+  .card-book-audio:hover {
     cursor: pointer;
   }
 }
 
-.card > * {
+.card-book > * {
   padding-left: 10px;
 }
 
