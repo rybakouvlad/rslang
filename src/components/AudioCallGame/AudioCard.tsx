@@ -35,7 +35,7 @@ export const AudioCard: React.FC<IProps> = (props: IProps) => {
               onClick={checkHandler}
               active={isShowResult}
             >
-              {el.word}
+              {el.wordTranslate}
             </Button>
           );
         })}
