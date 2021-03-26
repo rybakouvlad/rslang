@@ -5,7 +5,7 @@ import { ReactComponent as HomeSvg } from '../assets/svg/home.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
-import {useTypeSelector} from '../hooks/useTypesSelector';
+import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
   const { page, group } = useTypeSelector((state) => state.book);

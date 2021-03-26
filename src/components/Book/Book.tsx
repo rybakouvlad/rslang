@@ -7,12 +7,14 @@ import { useHistory } from 'react-router-dom';
 import { PaginationBook } from './PaginationBook';
 import { Panel } from './Panel';
 import { Spinner } from 'react-bootstrap';
+import Card from '../Card/Card';
 import './book.css';
 
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
   const { page, group, words } = useTypeSelector((state) => state.book);
   const [loading, setLoading] = useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const query = useQuery();
   const history = useHistory();
 
@@ -55,11 +57,9 @@ export const Book: React.FC = () => {
       {loading ? (
         <Spinner animation="border" role="status" />
       ) : (
-        <ul>
-          {words.map((element) => (
-            <li key={element.id}>
-              {element.word} - {element.wordTranslate}
-            </li>
+        <ul className="cards-container">
+          {words.map((elem) => (
+            <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
           ))}
         </ul>
       )}
