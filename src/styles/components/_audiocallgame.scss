@@ -1,0 +1,47 @@
+.audiocall-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  //   justify-content: center;
+  align-items: center;
+}
+.audiocall-game {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  background-color: white;
+}
+
+.audiocall-game-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 500px;
+  padding: 1rem;
+}
+.audiocall-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.audiocall-body {
+  height: 250px;
+}
+
+.audiocall-repeat-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: yellowgreen;
+  svg {
+    g {
+      stroke: white;
+     
+    }
+    &:hover g{
+        stroke: red;
+      }
+  }
+}
