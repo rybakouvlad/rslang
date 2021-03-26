@@ -14,6 +14,7 @@ export const Book: React.FC = () => {
   const dispatch = useDispatch();
   const { page, group, words } = useTypeSelector((state) => state.book);
   const [loading, setLoading] = useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const query = useQuery();
   const history = useHistory();
 
@@ -58,7 +59,7 @@ export const Book: React.FC = () => {
       ) : (
         <ul className="cards-container">
           {words.map((elem) => (
-            <Card key={elem.id} data={elem} />
+            <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
           ))}
         </ul>
       )}

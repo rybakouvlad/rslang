@@ -5,6 +5,8 @@ import './card.scss';
 
 interface CardProps {
   data: Word;
+  isAudioPlaying: boolean;
+  setIsAudioPlaying: (param: boolean) => void;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
@@ -21,10 +23,14 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     textMeaningTranslate,
     wordTranslate,
   } = props.data;
+  const { isAudioPlaying, setIsAudioPlaying } = props;
 
   const SERVER_PATH = 'https://server-team19-rsschool.herokuapp.com';
 
   const playAudioSequence = () => {
+    if (isAudioPlaying) return;
+    setIsAudioPlaying(true);
+
     const audioArray = [audio, audioMeaning, audioExample];
 
     let index = 1;
@@ -38,6 +44,8 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         audioObj.src = `${SERVER_PATH}/${audioArray[index]}`;
         audioObj.play();
         index++;
+      } else {
+        setIsAudioPlaying(false);
       }
     };
   };
