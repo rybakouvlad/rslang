@@ -4,8 +4,10 @@ import { ReactComponent as BookSvg } from '../assets/svg/book.svg';
 import { ReactComponent as HomeSvg } from '../assets/svg/home.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
+import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
+  const { page, group } = useTypeSelector((state) => state.book);
   return (
     <>
       <div className="smart-menu">
@@ -13,6 +15,11 @@ export const SmartMenu: React.FC = () => {
           <Link to="/">
             <div className="svg-wrapper" style={{ backgroundColor: '#5AAEFA' }}>
               <HomeSvg />
+            </div>
+          </Link>
+          <Link to={`book?page=${page}&group=${group}`}>
+            <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
+              <BookSvg />
             </div>
           </Link>
           <Link to="/dictionary">
