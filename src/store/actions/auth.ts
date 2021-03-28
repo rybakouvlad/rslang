@@ -5,6 +5,7 @@ const storageName = 'userData';
 
 export const sendPostAuth = (email: string, password: string) => {
   return async (dispatch: Dispatch<AuthAction>) => {
+    dispatch({ type: AuthActionsTypes.FETCH_AUTH_START });
     try {
       const data = await fetch('https://server-team19-rsschool.herokuapp.com/signin', {
         method: 'POST',
@@ -14,10 +15,14 @@ export const sendPostAuth = (email: string, password: string) => {
         },
       });
       const result = await data.json();
+      console.log(data);
+
       login(result.userId, result.token);
       dispatch({ type: AuthActionsTypes.FETCH_AUTH_SUCCESS, payload: result });
     } catch (error) {
-      dispatch({ type: AuthActionsTypes.FETCH_AUTH_START });
+      console.log(error);
+
+      dispatch({ type: AuthActionsTypes.FETCH_AUTH_ERROR, payload: 'Авторизация неудалась' });
     }
   };
 };
@@ -61,5 +66,11 @@ export const checkLogin = () => {
         },
       });
     } else logout;
+  };
+};
+
+export const clearError = () => {
+  return (dispatch: Dispatch<AuthAction>) => {
+    dispatch({ type: AuthActionsTypes.AUTH_CLEAR_ERROR });
   };
 };

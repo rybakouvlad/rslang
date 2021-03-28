@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 // import { useHttp } from '../hooks/http.hook';
 import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import validator from 'validator';
 import { ToastCopmponent } from '../Toasts/ToastCopmponent';
 
 interface ISet {
@@ -22,6 +23,18 @@ export const Register: FC<ISet> = (props: ISet) => {
 
   const registerHandler = async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     event.preventDefault();
+
+    if (!validator.isEmail(form.email)) {
+      setRegisterMessage('Некоректная почта');
+      changeShow(true);
+      return;
+    }
+    if (!validator.isStrongPassword(form.password)) {
+      setRegisterMessage('Некоректный пароль');
+      changeShow(true);
+      return;
+    }
+
     try {
       const data = await fetch('https://server-team19-rsschool.herokuapp.com/users', {
         method: 'POST',
@@ -62,7 +75,11 @@ export const Register: FC<ISet> = (props: ISet) => {
         <OverlayTrigger
           key="top"
           placement="top"
-          overlay={<Tooltip id="tooltip-top">Enter more than 6 symbols.</Tooltip>}
+          overlay={
+            <Tooltip id="tooltip-top">
+              Папроль должен содеражать не менее 8 символов. Большая буква цифра и специальнй символ
+            </Tooltip>
+          }
         >
           <Form.Control
             type="password"
