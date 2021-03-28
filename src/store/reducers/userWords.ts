@@ -17,6 +17,9 @@ export default function (state: IUserWords = initialState, action: UserWordsActi
     case 'UPDATE_USER_WORD':
       state.wordsSettings.get(action.payload.wordId).difficulty = action.payload.difficulty;
       return { ...state };
+    case 'DELETE_USER_WORD':
+      state.wordsSettings.delete(action.payload);
+      return { ...state };
     default:
       return { ...state };
   }
