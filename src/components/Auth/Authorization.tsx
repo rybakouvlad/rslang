@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, Form, OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
@@ -56,7 +56,7 @@ export const Authorization: React.FC = () => {
   };
 
   if (loading) {
-    return <h1>Loading</h1>;
+    return <Spinner animation="border" role="status" />;
   }
   return (
     <Form>
@@ -72,7 +72,7 @@ export const Authorization: React.FC = () => {
           placement="top"
           overlay={
             <Tooltip id="tooltip-top">
-              Папроль должен содеражать не менее 8 символов. Большая буква цифра и специальнй символ
+              Пароль должен содеражать не менее 8 символов. Большая буква цифра и специальнй символ
             </Tooltip>
           }
         >
