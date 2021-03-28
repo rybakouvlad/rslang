@@ -52,7 +52,9 @@ export const Book: React.FC = () => {
       setLoading(false);
     });
   };
-  {console.log(wordsSettings)}
+  {
+    console.log(wordsSettings);
+  }
 
   return (
     <div className="book">
@@ -61,11 +63,11 @@ export const Book: React.FC = () => {
         <Spinner animation="border" role="status" />
       ) : (
         <ul className="cards-container">
-          {words.map((elem) =>
-            { return (wordsSettings.has(elem.id) && wordsSettings.get(elem.id).difficulty === 'delete') ? null :
-               <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying}/>
-          }
-          )}
+          {words.map((elem) => {
+            return wordsSettings.has(elem.id) && wordsSettings.get(elem.id).difficulty === 'delete' ? null : (
+              <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
+            );
+          })}
         </ul>
       )}
       <PaginationBook />

@@ -1,9 +1,9 @@
 import React from 'react';
-import {Route, Switch} from "react-router-dom";
-import {DictionaryHome} from "./DictionaryHome";
-import {DictionaryLearn} from "./DictionaryLearn";
-import {DictionaryHard} from "Components/Dictionary/DictionaryHard";
-import {DictionaryDeleted} from "Components/Dictionary/DictionaryDeleted";
+import { Route, Switch } from 'react-router-dom';
+import { DictionaryHome } from './DictionaryHome';
+import { DictionaryLearn } from './DictionaryLearn';
+import { DictionaryHard } from './DictionaryHard';
+import { DictionaryDeleted } from './DictionaryDeleted';
 
 export const Dictionary: React.FC = () => {
   return (
@@ -23,6 +23,5 @@ export const Dictionary: React.FC = () => {
         </Route>
       </Switch>
     </>
-    )
-
+  );
 };

@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import {UserWordsAction, UserWordsActionsTypes} from "../../types/userWords";
+import { UserWordsAction, UserWordsActionsTypes } from '../../types/userWords';
 
 export const FetchUserWords = () => {
   const userID = JSON.parse(localStorage.getItem('userData')).userId;
@@ -11,14 +11,14 @@ export const FetchUserWords = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`
+          Authorization: `Bearer ${userToken}`,
         },
       });
       const result = await data.json();
-      console.log('result!!!', result)
+      console.log('result!!!', result);
       dispatch({ type: UserWordsActionsTypes.FETCH_USER_WORDS, payload: result });
     } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!')
+      console.log('ERROR!!!!!!!!!!!!!!');
     }
   };
 };
@@ -26,8 +26,8 @@ export const FetchUserWords = () => {
 export const SetUserWord = (wordId: string, difficulty: string, userId: string, userToken: string) => {
   const userID = JSON.parse(localStorage.getItem('userData')).userId;
   // const userToken = JSON.parse(localStorage.getItem('userData')).token;
-console.log(userId)
-console.log(userToken)
+  console.log(userId);
+  console.log(userToken);
   return async (dispatch: Dispatch<UserWordsAction>) => {
     try {
       const data = await fetch(`https://server-team19-rsschool.herokuapp.com/users/${userID}/words/${wordId}`, {
@@ -35,14 +35,14 @@ console.log(userToken)
         body: JSON.stringify({ difficulty: difficulty, optional: {} }),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`
+          Authorization: `Bearer ${userToken}`,
         },
       });
       const result = await data.json();
-      console.log('result: ', result)
-      dispatch({ type: UserWordsActionsTypes.SET_USER_WORD, payload: {wordId, difficulty}});
+      console.log('result: ', result);
+      dispatch({ type: UserWordsActionsTypes.SET_USER_WORD, payload: { wordId, difficulty } });
     } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!')
+      console.log('ERROR!!!!!!!!!!!!!!');
     }
   };
 };
@@ -50,8 +50,8 @@ console.log(userToken)
 export const UpdateUserWord = (wordId: string, difficulty: string, userId: string, userToken: string) => {
   const userID = JSON.parse(localStorage.getItem('userData')).userId;
   // const userToken = JSON.parse(localStorage.getItem('userData')).token;
-  console.log(userId)
-  console.log(userToken)
+  console.log(userId);
+  console.log(userToken);
   return async (dispatch: Dispatch<UserWordsAction>) => {
     try {
       const data = await fetch(`https://server-team19-rsschool.herokuapp.com/users/${userID}/words/${wordId}`, {
@@ -59,14 +59,14 @@ export const UpdateUserWord = (wordId: string, difficulty: string, userId: strin
         body: JSON.stringify({ difficulty: difficulty, optional: {} }),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`
+          Authorization: `Bearer ${userToken}`,
         },
       });
       const result = await data.json();
-      console.log('result: ', result)
-      dispatch({ type: UserWordsActionsTypes.UPDATE_USER_WORD, payload: {wordId, difficulty}});
+      console.log('result: ', result);
+      dispatch({ type: UserWordsActionsTypes.UPDATE_USER_WORD, payload: { wordId, difficulty } });
     } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!')
+      console.log('ERROR!!!!!!!!!!!!!!');
     }
   };
 };

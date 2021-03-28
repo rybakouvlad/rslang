@@ -18,7 +18,7 @@ export const SmartMenu: React.FC = () => {
               <HomeSvg />
             </div>
           </Link>
-          <Link to={`book?page=${page}&group=${group}`}>
+          <Link to={`/book?page=${page}&group=${group}`}>
             <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
               <BookSvg />
             </div>
