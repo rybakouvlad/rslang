@@ -52,8 +52,6 @@ export const Book: React.FC = () => {
       setLoading(false);
     });
   };
-  {
-  }
 
   return (
     <div className="book">
