@@ -4,7 +4,7 @@ export interface IUserWords {
 
 export type Setting = {
   difficulty: string;
-  optional: object;
+  optional: any;
 };
 export interface ISetting {
   difficulty: string;

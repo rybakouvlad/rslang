@@ -53,7 +53,6 @@ export const Book: React.FC = () => {
     });
   };
   {
-    console.log(wordsSettings);
   }
 
   return (
