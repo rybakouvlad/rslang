@@ -1,0 +1,29 @@
+.dictionary-wrapper{
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .dictionary-block{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 20px;
+    &:hover{
+      cursor:pointer;
+      transform: scale(1.05);
+    }
+  }
+  .learn-block{
+    background-color: mix($background-main, blue, $weight: 80%);
+  }
+  .hard-block{
+    background-color: mix($background-main, red, $weight: 70%);;
+  }
+  .delete-block{
+    background-color: mix($background-main, gray, $weight: 70%);;
+  }
+}
