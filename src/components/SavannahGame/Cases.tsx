@@ -5,6 +5,7 @@ interface CasesProps {
   answers: string[];
   newRound: (index: number, isAnswerCorrect: boolean) => void;
   index: number;
+  correctKey: number;
 }
 
 class Cases extends Component<CasesProps> {
@@ -14,9 +15,25 @@ class Cases extends Component<CasesProps> {
       index,
       currentWord: { wordTranslate },
     } = this.props;
-
     const isAnswerCorrect = selectedWord === wordTranslate;
     newRound(index + 1, isAnswerCorrect);
+  }
+
+  handleKeyUp = (key: string) => {
+    const { correctKey, index, newRound } = this.props;
+    const isAvailibleKey = ['1', '2', '3', '4'].includes(key);
+    if (isAvailibleKey) {
+      const isAnswerCorrect = correctKey === +key;
+      newRound(index + 1, isAnswerCorrect);
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener('keyup', ({ key }) => this.handleKeyUp(key));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', ({ key }) => this.handleKeyUp(key));
   }
 
   render(): JSX.Element {

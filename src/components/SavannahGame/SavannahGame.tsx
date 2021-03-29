@@ -14,6 +14,10 @@ interface SavannahState {
   words: Word[];
   index: number;
   gameOver: boolean;
+  statistics: {
+    correct: number;
+    wrong: number;
+  };
 }
 
 class SavannahGame extends Component<{}, SavannahState> {
@@ -33,6 +37,10 @@ class SavannahGame extends Component<{}, SavannahState> {
       words: wordsArray,
       index: 0,
       gameOver: false,
+      statistics: {
+        correct: 0,
+        wrong: 0,
+      },
     };
   }
 
@@ -46,20 +54,24 @@ class SavannahGame extends Component<{}, SavannahState> {
   }
 
   newRound = (index: number, isAnswerCorrect: boolean): void => {
-    const { words, lifes } = this.state;
+    const {
+      words,
+      lifes,
+      statistics: { correct, wrong },
+    } = this.state;
 
     const currentLifes = isAnswerCorrect ? lifes : lifes - 1;
+    const updatedStatistics = isAnswerCorrect ? { correct: correct + 1, wrong } : { correct, wrong: wrong + 1 };
     const isGameOver = words.length < index + 1 || currentLifes === 0;
 
     if (isGameOver) {
-      this.setState({ gameOver: true });
+      this.setState({ gameOver: true, statistics: updatedStatistics });
       return;
     }
 
     if (isAnswerCorrect) {
       this.changeBGPosition();
     }
-
 
     const { word, wordTranslate } = words[index];
     const wordsWithoutCurrentWord = words.filter((wordObj) => wordObj.word !== word);
@@ -71,6 +83,7 @@ class SavannahGame extends Component<{}, SavannahState> {
       answers: shuffledAnswers,
       index,
       lifes: currentLifes,
+      statistics: updatedStatistics,
     });
   };
 
@@ -80,8 +93,23 @@ class SavannahGame extends Component<{}, SavannahState> {
     return shuffledWords.slice(-3);
   }
 
+  newGame = () => {
+    const initState = this.createInitState();
+    this.setState(initState);
+  };
+
   render() {
-    const { currentWord, lifes, answers, index, gameOver } = this.state;
+    const {
+      currentWord,
+      lifes,
+      answers,
+      index,
+      gameOver,
+      statistics: { correct, wrong },
+    } = this.state;
+
+    const correctKey = answers.indexOf(currentWord.wordTranslate) + 1;
+
     return (
       <>
         <h1>Саванна</h1>
@@ -90,13 +118,23 @@ class SavannahGame extends Component<{}, SavannahState> {
           {gameOver ? (
             <div className="game-result">
               <div>GAME OVER</div>
-              <div>Popup with statistic</div>
+              <div>Correct: {correct}</div>
+              <div>Wrong: {wrong}</div>
+              <button className="new-game-btn" onClick={this.newGame}>
+                Начать игру заново
+              </button>
             </div>
           ) : (
             <>
               <Lifes lifesCounter={lifes} />
               <WordComponent currentWord={currentWord} />
-              <Cases currentWord={currentWord} answers={answers} newRound={this.newRound} index={index} />
+              <Cases
+                currentWord={currentWord}
+                answers={answers}
+                correctKey={correctKey}
+                newRound={this.newRound}
+                index={index}
+              />
             </>
           )}
         </div>
