@@ -12,6 +12,8 @@ import Card from '../Card/Card';
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
   const { page, group, words } = useTypeSelector((state) => state.book);
+  const { wordsSettings } = useTypeSelector((state) => state.userWords);
+
   const [loading, setLoading] = useState(true);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const query = useQuery();
@@ -57,9 +59,11 @@ export const Book: React.FC = () => {
         <Spinner animation="border" role="status" />
       ) : (
         <div className="cards-container">
-          {words.map((elem) => (
-            <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
-          ))}
+          {words.map((elem) => {
+            return wordsSettings.has(elem.id) && wordsSettings.get(elem.id).difficulty === 'delete' ? null : (
+              <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
+            );
+          })}
         </div>
       )}
       <PaginationBook />
