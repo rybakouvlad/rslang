@@ -57,7 +57,11 @@
     text-align: center;
     font-weight: 600;
 }
-
+.our_game_btn__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 .our_game_result_modal {
     position: fixed;
     left: 1%;
@@ -73,3 +77,11 @@
         min-width: 80%;
     }
 }
+
+.word:fullscreen {
+    font: #fff;
+
+}
+ .ourGame_wrapper:fullscreen {
+    background-color: rgb(71, 0, 151);
+ }

@@ -40,6 +40,7 @@ export const OurGame: React.FC = () => {
   const [findWords, setFindWords] = useState([]);
   const [notCurrentWords, setNotCurrentWords] = useState([]);
   const EngWordElement = useRef(null);
+  const fullScreenGame = useRef(null);
   // const Arr = [...words];
 
   // const randomArr = useMemo(() => {
@@ -171,14 +172,27 @@ export const OurGame: React.FC = () => {
     return <></>;
   };
 
+  const showFullScreen = () => {
+    const isFullscreenEnabled: any = document.fullscreenElement;
+    if (!isFullscreenEnabled) {
+      fullScreenGame.current.requestFullscreen();
+    } else document.exitFullscreen();
+  };
+
   return (
-    <Container className="ourGame_wrapper">
+    <Container ref={fullScreenGame} className="ourGame_wrapper">
       <div className="head_game">
         <h4>Score: {score}</h4>
       </div>
-      <Button variant="outline-info" onClick={runNewGame}>
-        New Game
-      </Button>
+      <div className="our_game_btn__wrapper">
+        <Button variant="outline-info" onClick={runNewGame}>
+          New Game
+        </Button>
+        <Button variant="outline-info" onClick={showFullScreen}>
+          Full Screen
+        </Button>
+      </div>
+
       <div className="ourGame_inner">
         <Row ref={EngWordElement}>
           <Col className="col_wrapper">
