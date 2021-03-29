@@ -6,6 +6,7 @@ import { Dictionary } from './Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
 import { Book } from './Book/Book';
+import { OurGame } from './OurGeme/OurGame';
 
 export const Routes: React.FC = () => {
   return (
@@ -28,6 +29,9 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/audiocall">
           <AudioCallGame />
+        </Route>
+        <Route path="/our-game">
+          <OurGame />
         </Route>
       </Switch>
     </>
