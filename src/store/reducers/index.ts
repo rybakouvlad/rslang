@@ -4,7 +4,7 @@ import bookReducer from './book';
 
 const allReducers = {
   auth: authReducer,
-  book: bookReducer
+  book: bookReducer,
 };
 
 const rootReducer = combineReducers(allReducers);

@@ -17,3 +17,14 @@
     }
   }
 }
+
+.auth-popup {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  a {
+    cursor: pointer;
+  }
+}

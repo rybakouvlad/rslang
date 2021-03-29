@@ -5,6 +5,7 @@ export interface IAuth {
   userId: string;
   name?: string;
   loading?: boolean;
+  error?: string;
 }
 
 export enum AuthActionsTypes {
@@ -13,6 +14,7 @@ export enum AuthActionsTypes {
   FETCH_AUTH_ERROR = 'FETCH_AUTH_ERROR',
   LOGOUT_AUTH = 'LOGOUT_AUTH',
   LOGIN_AUTH = 'LOGIN_AUTH',
+  AUTH_CLEAR_ERROR = 'AUTH_CLEAR_ERROR',
 }
 
 interface LoginAuthAction {
@@ -39,9 +41,14 @@ interface FetchAuthSucces {
   payload: IAuth;
 }
 
+interface AuthClearError {
+  type: AuthActionsTypes.AUTH_CLEAR_ERROR;
+}
+
 export type AuthAction =
   | FetchAuthStartAction
   | FetchAuthErrorAction
   | FetchAuthSucces
   | LogoutAuthAction
-  | LoginAuthAction;
+  | LoginAuthAction
+  | AuthClearError;
