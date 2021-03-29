@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 
 interface CasesProps {
+  currentWord: { word: string; wordTranslate: string };
   answers: string[];
-  newRound: (index: number) => void;
+  newRound: (index: number, isAnswerCorrect: boolean) => void;
   index: number;
 }
 
 class Cases extends Component<CasesProps> {
-  handleClick(target: any) {
-    
-    console.log(target);
-    const { newRound, index } = this.props;
+  handleClick(selectedWord: string): void {
+    const {
+      newRound,
+      index,
+      currentWord: { wordTranslate },
+    } = this.props;
 
-    newRound(index + 1);
+    const isAnswerCorrect = selectedWord === wordTranslate;
+    newRound(index + 1, isAnswerCorrect);
   }
 
   render(): JSX.Element {
@@ -23,7 +27,7 @@ class Cases extends Component<CasesProps> {
         {answers.map((translateWord, index) => {
           const buttonName = `${index + 1}. ${translateWord}`;
           return (
-            <button key={index} data-answer={translateWord} onClick={({ target }) => this.handleClick(target)}>
+            <button key={index} data-answer={translateWord} onClick={() => this.handleClick(translateWord)}>
               {buttonName}
             </button>
           );

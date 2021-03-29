@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 
 interface WordComponentProps {
-  currentWord: string;
+  currentWord: { word: string; wordTranslate: string };
 }
 
 class WordComponent extends Component<WordComponentProps> {
-  render(): JSX.Element {
-    const { currentWord } = this.props;
+  render() {
+    const {
+      currentWord: { word },
+    } = this.props;
 
     return (
       <>
-        <div className="game-word">{currentWord}</div>
+        <div className="game-word">{word}</div>
       </>
     );
   }

@@ -8,11 +8,12 @@ import { Word } from '../../types/book';
 import { shuffle } from '../../utils/shuffleArray';
 
 interface SavannahState {
-  currentWord: string;
+  currentWord: { word: string; wordTranslate: string };
   answers: string[];
   lifes: number;
   words: Word[];
   index: number;
+  gameOver: boolean;
 }
 
 class SavannahGame extends Component<{}, SavannahState> {
@@ -22,49 +23,82 @@ class SavannahGame extends Component<{}, SavannahState> {
     const wordsArray = shuffle(testWords);
     const { word: initWord, wordTranslate: initWordTranslate } = wordsArray[0];
     const wordsArrayWithoutInitWord = wordsArray.filter(({ word }) => word !== initWord);
-    const answers = [...this.get4RandomAnswers(wordsArrayWithoutInitWord), initWordTranslate];
+    const answers = [...this.get3RandomAnswers(wordsArrayWithoutInitWord), initWordTranslate];
     const shuffledAnswers = shuffle(answers);
 
     return {
-      currentWord: initWord,
+      currentWord: { word: initWord, wordTranslate: initWordTranslate },
       answers: shuffledAnswers,
       lifes: 5,
       words: wordsArray,
       index: 0,
+      gameOver: false,
     };
   }
 
-  newRound = (index: number): void => {
+  changeBGPosition() {
     const { words } = this.state;
-    if (words.length === index + 1) return;
+    const changeStep = 100 / words.length;
+    const gameContainer: HTMLElement = document.querySelector('.game-container');
+    const currentBGPosition: number = Number.parseFloat(window.getComputedStyle(gameContainer).backgroundPositionY);
+    const newPosition = currentBGPosition - changeStep;
+    gameContainer.style.backgroundPositionY = `${newPosition}%`;
+  }
+
+  newRound = (index: number, isAnswerCorrect: boolean): void => {
+    const { words, lifes } = this.state;
+
+    const currentLifes = isAnswerCorrect ? lifes : lifes - 1;
+    const isGameOver = words.length < index + 1 || currentLifes === 0;
+
+    if (isGameOver) {
+      this.setState({ gameOver: true });
+      return;
+    }
+
+    if (isAnswerCorrect) {
+      this.changeBGPosition();
+    }
+
 
     const { word, wordTranslate } = words[index];
     const wordsWithoutCurrentWord = words.filter((wordObj) => wordObj.word !== word);
-    const answers = [...this.get4RandomAnswers(wordsWithoutCurrentWord), wordTranslate];
+    const answers = [...this.get3RandomAnswers(wordsWithoutCurrentWord), wordTranslate];
     const shuffledAnswers = shuffle(answers);
 
     this.setState({
-      currentWord: word,
+      currentWord: { word, wordTranslate },
       answers: shuffledAnswers,
       index,
+      lifes: currentLifes,
     });
   };
 
-  get4RandomAnswers(wordsArray: Word[]): string[] {
+  get3RandomAnswers(wordsArray: Word[]): string[] {
     const shuffledWordsObj = shuffle(wordsArray);
     const shuffledWords = shuffledWordsObj.map((word) => word.wordTranslate);
-    return shuffledWords.slice(-4);
+    return shuffledWords.slice(-3);
   }
 
   render() {
-    const { currentWord, lifes, answers, index } = this.state;
+    const { currentWord, lifes, answers, index, gameOver } = this.state;
     return (
       <>
         <h1>Саванна</h1>
+
         <div className="game-container">
-          <Lifes lifesCounter={lifes} />
-          <WordComponent currentWord={currentWord} />
-          <Cases answers={answers} newRound={this.newRound} index={index} />
+          {gameOver ? (
+            <div className="game-result">
+              <div>GAME OVER</div>
+              <div>Popup with statistic</div>
+            </div>
+          ) : (
+            <>
+              <Lifes lifesCounter={lifes} />
+              <WordComponent currentWord={currentWord} />
+              <Cases currentWord={currentWord} answers={answers} newRound={this.newRound} index={index} />
+            </>
+          )}
         </div>
       </>
     );
