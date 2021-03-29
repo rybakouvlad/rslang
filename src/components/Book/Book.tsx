@@ -8,7 +8,6 @@ import { PaginationBook } from './PaginationBook';
 import { Panel } from './Panel';
 import { Spinner } from 'react-bootstrap';
 import Card from '../Card/Card';
-import './book.css';
 
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
@@ -59,13 +58,13 @@ export const Book: React.FC = () => {
       {loading ? (
         <Spinner animation="border" role="status" />
       ) : (
-        <ul className="cards-container">
+        <div className="cards-container">
           {words.map((elem) => {
             return wordsSettings.has(elem.id) && wordsSettings.get(elem.id).difficulty === 'delete' ? null : (
               <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
             );
           })}
-        </ul>
+        </div>
       )}
       <PaginationBook />
     </div>
