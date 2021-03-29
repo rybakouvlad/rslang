@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePageAndGroup, changeWords } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
@@ -25,16 +25,11 @@ export const Book: React.FC = () => {
 
     if (pageOfUrl || groupOfUrl) {
       dispatch(changePageAndGroup(+pageOfUrl, +groupOfUrl));
-    } else {
-      changeWordsState();
     }
   }, []);
 
   useEffect(() => {
     changeWordsState();
-  }, [page, group]);
-
-  useEffect(() => {
     history.push(`/book?page=${page}&group=${group}`);
   }, [page, group]);
 
@@ -44,13 +39,13 @@ export const Book: React.FC = () => {
     return json;
   };
 
-  const changeWordsState = (): void => {
+  const changeWordsState = useCallback(() => {
     setLoading(true);
     getData().then((res) => {
       dispatch(changeWords(res));
       setLoading(false);
     });
-  };
+  }, [setLoading, getData, setLoading, dispatch]);
 
   return (
     <div className="book">

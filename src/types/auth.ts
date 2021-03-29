@@ -1,8 +1,8 @@
 export interface IAuth {
   message?: string;
   token: string;
-  refreshToken?: string;
-  userId: string;
+  email?: string;
+  userID: string;
   name?: string;
   loading?: boolean;
   error?: string;

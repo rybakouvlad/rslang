@@ -17,7 +17,10 @@ export const sendPostAuth = (email: string, password: string) => {
       const result = await data.json();
 
       login(result.userId, result.token);
-      dispatch({ type: AuthActionsTypes.FETCH_AUTH_SUCCESS, payload: result });
+      dispatch({
+        type: AuthActionsTypes.FETCH_AUTH_SUCCESS,
+        payload: { userID: result.userId, name: result.name, token: result.token },
+      });
     } catch (error) {
       console.log(error);
 
@@ -70,10 +73,11 @@ export const checkLogin = () => {
           },
         });
         const result = await response.json();
+        console.log(result);
 
         dispatch({
           type: AuthActionsTypes.FETCH_AUTH_SUCCESS,
-          payload: { ...result, token: data.token, userId: data.userId },
+          payload: { ...result, userID: result.id, token: data.token },
         });
       } catch (error) {
         logout();

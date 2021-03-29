@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getAggregatedWords } from '../../store/actions/aggregatedWords';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import Card from './../../components/Card/Card';
 
 export const DictionaryLearn: React.FC = () => {
-  const { words } = useTypeSelector((state) => state.book);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const { wordsSettings } = useTypeSelector((state) => state.userWords);
+  const { token, userID } = useTypeSelector((state) => state.auth);
+  const { paginatedResults } = useTypeSelector((state) => state.aggregatedWords);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getAggregatedWords(userID, token, 'hard'));
+    }
+  }, []);
 
   return (
     <>
       <h1>Dictionary Learn</h1>
       <div className="dictionary-cards-wrapper">
-        {words.map((elem) => {
-          return (
-            wordsSettings.has(elem.id) &&
-            (wordsSettings.get(elem.id).difficulty === 'hard' || wordsSettings.get(elem.id).difficulty === 'learn') && (
-              <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
-            )
-          );
+        {paginatedResults.map((elem, i) => {
+          return <Card key={i} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />;
         })}
       </div>
     </>
