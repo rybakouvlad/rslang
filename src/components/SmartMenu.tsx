@@ -5,7 +5,8 @@ import { ReactComponent as HomeSvg } from '../assets/svg/home.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
-import {useTypeSelector} from '../hooks/useTypesSelector';
+import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
+import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
   const { page, group } = useTypeSelector((state) => state.book);
@@ -36,6 +37,11 @@ export const SmartMenu: React.FC = () => {
           <Link to="/audiocall">
             <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
               <AudioCallSvg />
+            </div>
+          </Link>
+          <Link to="/savana">
+            <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
+              <SavannahSvg />
             </div>
           </Link>
           <Link to="/games">
