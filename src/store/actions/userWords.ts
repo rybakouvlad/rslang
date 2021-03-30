@@ -22,40 +22,62 @@ export const FetchUserWords = () => {
   };
 };
 
-export const SetUserWord = (wordId: string, difficulty: string, userId: string, userToken: string) => {
-  const userID = JSON.parse(localStorage.getItem('userData')).userId;
-  console.log(userId);
+export const SetUserWord = (
+  wordId: string,
+  difficulty: string,
+  userID = JSON.parse(localStorage.getItem('userData')).userId,
+  userToken: string,
+  correct = 0,
+  incorrect = 0,
+) => {
   return async (dispatch: Dispatch<UserWordsAction>) => {
     try {
       await fetch(`https://server-team19-rsschool.herokuapp.com/users/${userID}/words/${wordId}`, {
         method: 'POST',
-        body: JSON.stringify({ difficulty: difficulty, optional: {} }),
+        body: JSON.stringify({ difficulty: difficulty, optional: { correct: correct, incorrect: incorrect } }),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${userToken}`,
         },
       });
-      dispatch({ type: UserWordsActionsTypes.SET_USER_WORD, payload: { wordId, difficulty } });
+      dispatch({ type: UserWordsActionsTypes.SET_USER_WORD, payload: { wordId, difficulty: difficulty } });
     } catch (error) {
       console.log('ERROR!!!!!!!!!!!!!!', error);
     }
   };
 };
 
-export const UpdateUserWord = (wordId: string, difficulty: string, userId: string, userToken: string) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const UpdateUserWord = (
+  wordId: string,
+  difficulty = '',
+  userId: string,
+  userToken: string,
+  correct = 0,
+  incorrect = 0,
+) => {
   const userID = JSON.parse(localStorage.getItem('userData')).userId;
-  console.log(userId);
+  let body: string = null;
+  if (difficulty) {
+    body = JSON.stringify({ difficulty: difficulty });
+  } else if (correct || incorrect) {
+    body = JSON.stringify({ optional: { correct: correct, incorrect: incorrect } });
+  }
+
   return async (dispatch: Dispatch<UserWordsAction>) => {
     try {
       await fetch(`https://server-team19-rsschool.herokuapp.com/users/${userID}/words/${wordId}`, {
         method: 'PUT',
-        body: JSON.stringify({ difficulty: difficulty, optional: {} }),
+        body: body,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${userToken}`,
         },
       });
-      dispatch({ type: UserWordsActionsTypes.UPDATE_USER_WORD, payload: { wordId, difficulty } });
+      dispatch({
+        type: UserWordsActionsTypes.UPDATE_DIFFICULTY_WORD,
+        payload: { wordId: wordId, difficulty: difficulty },
+      });
     } catch (error) {
       console.log('ERROR!!!!!!!!!!!!!!', error);
     }
@@ -64,7 +86,6 @@ export const UpdateUserWord = (wordId: string, difficulty: string, userId: strin
 
 export const DeleteUserWord = (wordId: string, userId: string, userToken: string) => {
   const userID = JSON.parse(localStorage.getItem('userData')).userId;
-  console.log(userId);
   return async (dispatch: Dispatch<UserWordsAction>) => {
     try {
       await fetch(`https://server-team19-rsschool.herokuapp.com/users/${userID}/words/${wordId}`, {
@@ -74,6 +95,7 @@ export const DeleteUserWord = (wordId: string, userId: string, userToken: string
           Authorization: `Bearer ${userToken}`,
         },
       });
+
       dispatch({ type: UserWordsActionsTypes.DELETE_USER_WORD, payload: wordId });
     } catch (error) {
       console.log('ERROR!!!!!!!!!!!!!!', error);
