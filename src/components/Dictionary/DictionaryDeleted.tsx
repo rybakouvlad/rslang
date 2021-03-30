@@ -12,8 +12,6 @@ export const DictionaryDeleted: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      console.log('kuku');
-
       dispatch(getAggregatedWords(userID, token, 'delete'));
     }
   }, []);

@@ -8,12 +8,12 @@ import { PaginationBook } from './PaginationBook';
 import { Panel } from './Panel';
 import { Spinner } from 'react-bootstrap';
 import Card from '../Card/Card';
+import { setStartGameStateBook } from '../../store/actions/startGameState';
 
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
   const { page, group, words } = useTypeSelector((state) => state.book);
   const { wordsSettings } = useTypeSelector((state) => state.userWords);
-
   const [loading, setLoading] = useState(true);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const query = useQuery();
@@ -26,6 +26,7 @@ export const Book: React.FC = () => {
     if (pageOfUrl || groupOfUrl) {
       dispatch(changePageAndGroup(+pageOfUrl, +groupOfUrl));
     }
+    dispatch(setStartGameStateBook());
   }, []);
 
   useEffect(() => {

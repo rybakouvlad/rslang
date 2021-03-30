@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getAggregatedWords } from '../../store/actions/aggregatedWords';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import Card from './../../components/Card/Card';
+import { setStartGameStateHard } from '../../store/actions/startGameState';
 
 export const DictionaryHard: React.FC = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -13,6 +14,7 @@ export const DictionaryHard: React.FC = () => {
   useEffect(() => {
     if (token) {
       dispatch(getAggregatedWords(userID, token, 'hard'));
+      dispatch(setStartGameStateHard());
     }
   }, []);
 

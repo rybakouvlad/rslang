@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAudioGame } from './audio.hook';
+import { useAudioGame } from './audioGame.hook';
 
 export const NextShowButtons: React.FC = () => {
   const { isShowResult, nextIndex, setIsShowResult } = useAudioGame();
