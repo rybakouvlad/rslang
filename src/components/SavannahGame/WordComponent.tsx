@@ -12,7 +12,7 @@ class WordComponent extends Component<WordComponentProps> {
 
     return (
       <>
-        <div className="game-word">{word}</div>
+        <div className="game-word contrast-color">{word}</div>
       </>
     );
   }

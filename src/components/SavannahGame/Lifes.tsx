@@ -12,7 +12,7 @@ class Lifes extends Component<LifesProps> {
     const { lifesCounter } = this.props;
     return (
       <>
-        <div className="game-lifes">
+        <div className="game-lifes contrast-color">
           <div>Lifes:</div>
           <div>{lifesCounter}/5</div>
         </div>
