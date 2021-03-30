@@ -106,6 +106,4 @@ dist
 package-lock.json
 
 .DS_Store
-package-lock.json
-
 .idea
