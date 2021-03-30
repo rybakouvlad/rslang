@@ -2,11 +2,15 @@ import { combineReducers } from 'redux';
 import authReducer from './auth';
 import bookReducer from './book';
 import userWordsReducer from './userWords';
+import aggregatedWordsReducer from './aggregatedWords';
+import setStartGameState from './startGameState';
 
 const allReducers = {
   auth: authReducer,
   book: bookReducer,
   userWords: userWordsReducer,
+  aggregatedWords: aggregatedWordsReducer,
+  setStartGameState: setStartGameState,
 };
 
 const rootReducer = combineReducers(allReducers);

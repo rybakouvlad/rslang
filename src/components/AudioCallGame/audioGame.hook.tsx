@@ -1,5 +1,4 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
-import { testWords } from './testWords';
 
 export interface IWord {
   id: string;
@@ -23,7 +22,8 @@ interface IContext {
   index: number;
   setIsShowResult: Dispatch<SetStateAction<boolean>>;
   nextIndex(): void;
-  words: IWord[];
+  randomGameWords: IWord[];
+  setWords: Dispatch<SetStateAction<IWord[]>>;
   gameArr: IWord[];
   hiddenWord: IWord;
   isEndGame: boolean;
@@ -46,17 +46,20 @@ function getRandomInt(min: number, max: number) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
-
+export const shuffle = (arr: Array<any>) => {
+  return arr.sort(() => Math.round(Math.random() * 100) - 50);
+};
 export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
   const [index, setIndex] = useState(0);
   const [isShowResult, setIsShowResult] = useState(false);
   const [words, setWords] = useState<IWord[]>();
+  const [randomGameWords, setrandomGameWords] = useState<IWord[]>();
   const [gameArr, setGameArr] = useState<IWord[]>([]);
   const [hiddenWord, setHiddenWord] = useState<IWord>();
   const [isEndGame, setIsEndGame] = useState(false);
 
   const nextIndex = () => {
-    if (index === words.length - 1) {
+    if (index === randomGameWords.length - 1) {
       setIsEndGame(true);
     } else {
       setIndex(index + 1);
@@ -65,12 +68,12 @@ export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
   };
 
   const getRandomWords = () => {
-    if (!words) return;
+    if (!randomGameWords) return;
     const arr = [];
     const randomArr = new Array<number>();
-    arr.push(words[index]);
+    arr.push(randomGameWords[index]);
     do {
-      const random = getRandomInt(0, words.length);
+      const random = getRandomInt(0, randomGameWords.length);
 
       if (
         random !== index &&
@@ -79,39 +82,38 @@ export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
         })
       ) {
         randomArr.push(random);
-        arr.push(words[random]);
+        arr.push(randomGameWords[random]);
       }
     } while (arr.length !== 5);
     return shuffle(arr);
   };
 
-  const shuffle = (arr: Array<any>) => {
-    return arr.sort(() => Math.round(Math.random() * 100) - 50);
-  };
-
   const playSound = () => {
-    const sound = new Audio(`https://server-team19-rsschool.herokuapp.com/${words[index].audio}`);
+    const sound = new Audio(`https://server-team19-rsschool.herokuapp.com/${randomGameWords[index].audio}`);
     sound.play();
   };
 
   const repeatGame = () => {
-    setWords(shuffle(testWords));
+    setrandomGameWords(shuffle(words));
     setIndex(0);
     setIsShowResult(false);
     setIsEndGame(false);
   };
 
   useEffect(() => {
-    setWords(shuffle(testWords));
-  }, []);
+    if (words) {
+      setrandomGameWords(shuffle(words));
+    }
+  }, [words]);
 
   useEffect(() => {
-    if (words && index < words.length) {
-      setHiddenWord(words[index]);
+    if (randomGameWords && index < randomGameWords.length) {
+      setHiddenWord(randomGameWords[index]);
       setGameArr(getRandomWords());
       playSound();
     }
-  }, [words, index]);
+  }, [randomGameWords, index]);
+
   return (
     <AudioCallGameContext.Provider
       value={{
@@ -119,12 +121,13 @@ export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
         index,
         setIsShowResult,
         nextIndex,
-        words,
+        randomGameWords,
         hiddenWord,
         gameArr,
         isEndGame,
         repeatGame,
         playSound,
+        setWords,
       }}
     >
       {children}

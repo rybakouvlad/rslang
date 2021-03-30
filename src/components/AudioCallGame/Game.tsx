@@ -1,15 +1,19 @@
-import React from 'react';
-import { useAudioGame } from './audio.hook';
+import React, { useEffect } from 'react';
+import { useAudioGame } from './audioGame.hook';
 import { AudioCard } from './AudioCard';
 import { NextShowButtons } from './NextShowButtons';
 import { EndGame } from './EndGame';
 import { Card } from 'react-bootstrap';
 import { RepeatButton } from './RepeatButton';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
 
 export const Game: React.FC = () => {
-  const { words, hiddenWord, gameArr, isEndGame } = useAudioGame();
-
-  if (!words || !gameArr || !hiddenWord) {
+  const { randomGameWords, hiddenWord, gameArr, isEndGame, setWords } = useAudioGame();
+  const { gameWords } = useCheckPosition();
+  useEffect(() => {
+    setWords(gameWords);
+  }, [randomGameWords]);
+  if (!randomGameWords || !gameArr || !hiddenWord) {
     return <h1>Loading</h1>;
   }
   return (

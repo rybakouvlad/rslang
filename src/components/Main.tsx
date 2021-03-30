@@ -7,18 +7,23 @@ import { Routes } from './Routes';
 
 import { SmartMenu } from './SmartMenu';
 import { FetchUserWords } from '../store/actions/userWords';
+import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const Main: React.FC = () => {
+  const { loading, token } = useTypeSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkLogin());
-    const data = JSON.parse(localStorage.getItem('userData'));
-
-    if (data && data.token) {
-      dispatch(FetchUserWords());
-    }
   }, [dispatch]);
 
+  useEffect(() => {
+    if (token) {
+      dispatch(FetchUserWords());
+    }
+  }, [token]);
+  if (loading) {
+    return <h1>LOADING</h1>;
+  }
   return (
     <div>
       <main className="body-wrapper">

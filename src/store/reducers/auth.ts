@@ -3,8 +3,8 @@ import { IAuth, AuthAction, AuthActionsTypes } from '../../types/auth';
 const initialState: IAuth = {
   message: '',
   token: '',
-  refreshToken: '',
-  userId: '',
+  email: '',
+  userID: '',
   name: '',
   loading: false,
   error: null,
@@ -42,7 +42,7 @@ export default function (state: IAuth = initialState, action: AuthAction): IAuth
       return {
         ...state,
         token: action.payload.token,
-        userId: action.payload.userId,
+        userID: action.payload.userId,
       };
     }
     default:
