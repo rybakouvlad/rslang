@@ -6,6 +6,7 @@ import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
 import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
+import { ReactComponent as PencilSvg } from '../assets/svg/Pencil.svg';
 import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
@@ -19,14 +20,14 @@ export const SmartMenu: React.FC = () => {
               <HomeSvg />
             </div>
           </Link>
-          <Link to={`book?page=${page}&group=${group}`}>
+          <Link to={`/book?page=${page}&group=${group}`}>
             <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
               <BookSvg />
             </div>
           </Link>
           <Link to="/dictionary">
             <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
-              <BookSvg />
+              <PencilSvg />
             </div>
           </Link>
           <Link to="/games">

@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AudioCallGame } from './AudioCallGame/AudioCallGame';
 import { Auth } from './Auth/Auth';
-import { Dictionary } from './Dictionary';
+import { Dictionary } from './Dictionary/Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
 import { Book } from './Book/Book';

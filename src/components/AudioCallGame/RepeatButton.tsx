@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as RepeatSvg } from '../../assets/svg/Repeat.svg';
-import { useAudioGame } from './audio.hook';
+import { useAudioGame } from './audioGame.hook';
 export const RepeatButton: React.FC = () => {
   const { playSound } = useAudioGame();
   return (
