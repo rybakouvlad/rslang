@@ -56,6 +56,7 @@ module.exports = (env, argv) => {
         config.modules.css,
         config.modules.font,
         config.modules.svg,
+        config.modules.audio,
       ],
     },
     plugins: [

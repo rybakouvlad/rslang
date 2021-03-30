@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './savannah.scss';
 import Lifes from './Lifes';
 import Cases from './Cases';
 import GameOver from './GameOver';
@@ -8,11 +7,8 @@ import { testWords } from './testWords';
 import { roundTimeLife } from './constants';
 import { Word } from '../../types/book';
 import { shuffle } from '../../utils/shuffleArray';
-// import wrong from '../../assets/sounds/wrong.mp3';
-// import correct from '../../assets/sounds/correct.mp3';
-
-// const soundCorrect = require('../../assets/sounds/correct.mp3');
-// const soundWrong = require('../../assets/sounds/wrong .mp3');
+import wrong from '../../assets/sounds/wrong.mp3';
+import correct from '../../assets/sounds/correct.mp3';
 
 interface SavannahState {
   currentWord: { word: string; wordTranslate: string };
@@ -73,13 +69,13 @@ class SavannahGame extends Component<{}, SavannahState> {
     gameContainer.style.backgroundPositionY = `${newPosition}%`;
   }
 
-  // playSound = (type: 'correct' | 'wrong'): void => {
-  //   if (type === 'correct') {
-  //     new Audio(correct).play();
-  //   } else {
-  //     new Audio(wrong).play();
-  //   }
-  // };
+  playSound = (type: 'correct' | 'wrong'): void => {
+    if (type === 'correct') {
+      new Audio(correct).play();
+    } else {
+      new Audio(wrong).play();
+    }
+  };
 
   newRound = (index: number, isAnswerCorrect: boolean): void => {
     const {
@@ -93,7 +89,7 @@ class SavannahGame extends Component<{}, SavannahState> {
 
     const currentLifes = isAnswerCorrect ? lifes : lifes - 1;
     const updatedStatistics = isAnswerCorrect ? { correct: correct + 1, wrong } : { correct, wrong: wrong + 1 };
-    // isAnswerCorrect ? this.playSound('correct') : this.playSound('wrong');
+    isAnswerCorrect ? this.playSound('correct') : this.playSound('wrong');
     const isGameOver = words.length < index + 1 || currentLifes === 0;
 
     if (isGameOver) {
@@ -189,8 +185,6 @@ class SavannahGame extends Component<{}, SavannahState> {
               {animation && <WordComponent currentWord={currentWord} />}
               {!animation && <WordComponent currentWord={currentWord} />}
               <Cases currentWord={currentWord} answers={answers} newRound={this.newRound} index={index} />
-              {/* <SoundWrong />
-              <SoundCorrect /> */}
             </>
           )}
         </div>
