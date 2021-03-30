@@ -51,7 +51,6 @@ export const OurGame: React.FC = () => {
     setCard(e);
   };
   const dragLeaveHandler = (e: any) => {
-    console.log(e);
     e.target.style.boxShadow = 'none';
   };
   const dragOverHandler = (e: any) => {
@@ -68,7 +67,7 @@ export const OurGame: React.FC = () => {
     const isRuMarkerWords = e.target.dataset.ru;
     const isWrongWord = e.target.dataset.wrong;
     if (currentCard === dropCard) {
-      console.log(currentCard, '--', dropCard);
+      // console.log(currentCard, '--', dropCard);
       setWords((words) =>
         words.filter((word) => {
           if (word.id === card.target.id && !isWrongWord) {
@@ -97,17 +96,10 @@ export const OurGame: React.FC = () => {
   useEffect(() => {
     const findWordsSet = new Set(findWords);
     localStorage.setItem('currectWords', JSON.stringify([...findWordsSet]));
-    console.log('find words', findWordsSet);
   }, [words]);
 
   const runNewGame = () => {
     localStorage.setItem('previousScore', score.toString());
-    words.map((el: any, index: number) => {
-      console.log(index);
-    });
-    const getGame = JSON.parse(localStorage.getItem('previousGame'));
-    console.log(getGame);
-    console.log(EngWordElement.current);
     removeMarkerWrongWordsEn();
     setScore(() => 0);
     setWords(() => [...newWords]);
