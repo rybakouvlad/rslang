@@ -2,9 +2,7 @@ import { AggregatedActions, AggregatedWordsTypes, IAggregatedWords } from '../..
 
 const initialState: IAggregatedWords = {
   paginatedResults: [],
-  totalCount: {
-    count: 0,
-  },
+  totalCount: 0,
 };
 
 export default function (state: IAggregatedWords = initialState, action: AggregatedActions): IAggregatedWords {

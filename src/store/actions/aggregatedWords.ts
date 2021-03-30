@@ -16,8 +16,16 @@ export const getAggregatedWords = (userID: string, userToken: string, difficulty
       );
 
       const result = await data.json();
-      console.log(result);
-      dispatch({ type: AggregatedWordsTypes.GET_AGGREGATED_WORDS, payload: { ...result[0] } });
+      if (!result) return;
+      dispatch({
+        type: AggregatedWordsTypes.GET_AGGREGATED_WORDS,
+        payload: {
+          totalCount: result[0].totalCount.count,
+          paginatedResults: result[0].paginatedResults.map((el: any) => {
+            return { ...el, id: el._id };
+          }),
+        },
+      });
     } catch (error) {
       console.log('ERROR!!!!!!!!!!!!!!', error);
     }

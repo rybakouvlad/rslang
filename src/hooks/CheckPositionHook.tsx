@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useTypeSelector } from '../../hooks/useTypesSelector';
-import { Word } from '../../types/book';
-
+import { useTypeSelector } from './useTypesSelector';
+import { Word } from '../types/book';
+import { testWords } from './testWords';
 export interface IContext {
   gameWords: Word[];
 }
@@ -30,14 +30,13 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
         setWords(words);
         break;
       case 'hard':
-        console.log(paginatedResults);
-
         setWords(paginatedResults);
         break;
       case 'easy':
         setWords(paginatedResults);
         break;
       default:
+        setWords(testWords);
         break;
     }
   };

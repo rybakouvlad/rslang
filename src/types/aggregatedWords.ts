@@ -2,9 +2,7 @@ import { Word } from './book';
 
 export interface IAggregatedWords {
   paginatedResults: Word[];
-  totalCount: {
-    count: number;
-  };
+  totalCount: number;
 }
 
 export enum AggregatedWordsTypes {
@@ -13,7 +11,7 @@ export enum AggregatedWordsTypes {
 
 interface GetAggregatedAction {
   type: AggregatedWordsTypes.GET_AGGREGATED_WORDS;
-  payload: IAggregatedWords;
+  payload: { paginatedResults: Word[]; totalCount: number };
 }
 
 export type AggregatedActions = GetAggregatedAction;

@@ -5,7 +5,7 @@ import { NextShowButtons } from './NextShowButtons';
 import { EndGame } from './EndGame';
 import { Card } from 'react-bootstrap';
 import { RepeatButton } from './RepeatButton';
-import { useCheckPosition } from './CheckPosition';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
 
 export const Game: React.FC = () => {
   const { randomGameWords, hiddenWord, gameArr, isEndGame, setWords } = useAudioGame();

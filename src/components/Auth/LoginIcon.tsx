@@ -1,10 +1,10 @@
 import React from 'react';
-import { ReactComponent as UserSvg } from '../../assets/svg/user.svg';
+import { ReactComponent as LogInSvg } from '../../assets/svg/Enter.svg';
 
 export const LoginIcon: React.FC = () => {
   return (
     <div className="auth-logo-wrapper">
-      <UserSvg />
+      <LogInSvg />
     </div>
   );
 };
