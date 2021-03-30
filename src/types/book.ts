@@ -16,6 +16,7 @@ export enum BookActionsTypes {
 
 export type Word = {
   id: string;
+  _id?: string;
   group: number;
   page: number;
   word: string;

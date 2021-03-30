@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { useAudioGame } from './audio.hook';
-import { IWord } from './audio.hook';
+import { useAudioGame } from './audioGame.hook';
+import { IWord } from './audioGame.hook';
 import questionSvg from '../../assets/svg/Question.svg';
 interface IProps {
   words: IWord[];

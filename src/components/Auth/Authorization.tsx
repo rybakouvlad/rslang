@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, Form, OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
-import { sendPostAuth } from '../../store/actions/auth';
+import { clearError, sendPostAuth } from '../../store/actions/auth';
+import validator from 'validator';
+import { ToastCopmponent } from 'Components/Toasts/ToastCopmponent';
 
 export const Authorization: React.FC = () => {
   const [form, setForm] = useState({
@@ -11,7 +13,9 @@ export const Authorization: React.FC = () => {
     password: '',
   });
   const history = useHistory();
-  const { token } = useTypeSelector((state) => state.auth);
+  const { token, error, loading } = useTypeSelector((state) => state.auth);
+  const [toastdMessage, setToastMessage] = useState(null);
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +24,17 @@ export const Authorization: React.FC = () => {
 
   const loginHandler = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
     event.preventDefault();
-    dispatch(sendPostAuth(form.email, form.password));
+    if (!validator.isEmail(form.email)) {
+      setToastMessage('Некоректная почта');
+      changeShow(true);
+      return;
+    }
+    if (validator.isStrongPassword(form.password)) {
+      dispatch(sendPostAuth(form.email, form.password));
+    } else {
+      setToastMessage('Некоректный пароль');
+      changeShow(true);
+    }
   };
 
   useEffect(() => {
@@ -29,8 +43,20 @@ export const Authorization: React.FC = () => {
     }
   }, [token]);
 
-  if (token) {
-    return <h1>Ураа</h1>;
+  useEffect(() => {
+    setToastMessage(error);
+    changeShow(true);
+    setTimeout(() => {
+      dispatch(clearError());
+    }, 3000);
+  }, [error]);
+
+  const changeShow = (status: boolean) => {
+    setShow(status);
+  };
+
+  if (loading) {
+    return <Spinner animation="border" role="status" />;
   }
   return (
     <Form>
@@ -44,7 +70,11 @@ export const Authorization: React.FC = () => {
         <OverlayTrigger
           key="top"
           placement="top"
-          overlay={<Tooltip id="tooltip-top">Enter more than 6 symbols.</Tooltip>}
+          overlay={
+            <Tooltip id="tooltip-top">
+              Пароль должен содеражать не менее 8 символов. Большая буква цифра и специальнй символ
+            </Tooltip>
+          }
         >
           <Form.Control
             type="password"
@@ -58,6 +88,7 @@ export const Authorization: React.FC = () => {
       <Button variant="primary" type="submit" onClick={loginHandler}>
         Login
       </Button>
+      {toastdMessage ? <ToastCopmponent message={toastdMessage} show={show} changeShow={changeShow} /> : null}
     </Form>
   );
 };

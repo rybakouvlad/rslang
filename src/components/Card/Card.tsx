@@ -1,7 +1,14 @@
 import React from 'react';
 import { Word } from '../../types/book';
 import { ReactComponent as AudioSvg } from '../../assets/svg/audio.svg';
-import './card.scss';
+import { useDispatch } from 'react-redux';
+import { DeleteUserWord, SetUserWord, UpdateUserWord } from '../../store/actions/userWords';
+import { useTypeSelector } from '../../hooks/useTypesSelector';
+import classNames from 'classnames';
+import { ReactComponent as DeleteSvg } from '../../assets/svg/delete.svg';
+import { ReactComponent as AddHardSvg } from '../../assets/svg/add_hard.svg';
+import { ReactComponent as HardAddedSvg } from '../../assets/svg/hard_added.svg';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 interface CardProps {
   data: Word;
@@ -10,6 +17,10 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
+  const dispatch = useDispatch();
+  const { wordsSettings } = useTypeSelector((state) => state.userWords);
+  const { userID, token } = useTypeSelector((state) => state.auth);
+  const id = props.data.id ? props.data.id : props.data._id;
   const {
     word,
     image,
@@ -49,9 +60,36 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       }
     };
   };
+  const hardWordHandler = () => {
+    if (!wordsSettings.has(id)) {
+      dispatch(SetUserWord(id, 'hard', userID, token));
+    }
+  };
+  const deleteWordHandler = () => {
+    if (!wordsSettings.has(id)) {
+      dispatch(SetUserWord(id, 'delete', userID, token));
+    } else {
+      if (wordsSettings.get(id).difficulty === 'delete') {
+        dispatch(DeleteUserWord(id, userID, token));
+      } else {
+        dispatch(UpdateUserWord(id, 'delete', userID, token));
+      }
+    }
+  };
+  const liClasses = classNames({
+    'card-book': true,
+    'hard-word': wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard',
+  });
+  const svgHardClasses = classNames({
+    'hard-added-svg': wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard',
+  });
+
+  const svgDeletedClasses = classNames({
+    'deleted-added-svg': wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'delete',
+  });
 
   return (
-    <li className="card-book">
+    <li className={liClasses}>
       <img className="card-book__image" src={`${SERVER_PATH}/${image}`} alt="imagine"></img>
       <div className="card-book__word">
         <div>{word}</div>
@@ -67,6 +105,38 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       <span className="card-book__example" dangerouslySetInnerHTML={{ __html: textExample }} />
       <span className="card-book__example-translate">{textExampleTranslate}</span>
       <span className="card-book__meaning-translate">{textMeaningTranslate}</span>
+      {((wordsSettings.has(id) && wordsSettings.get(id).difficulty !== 'delete') || !wordsSettings.has(id)) && (
+        <OverlayTrigger
+          overlay={
+            <Tooltip id="tooltip-disabled">
+              {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard'
+                ? 'Слово было отмечено как сложное'
+                : 'Отметить слово как сложное'}
+            </Tooltip>
+          }
+        >
+          <button className="add-hard-btn" onClick={() => hardWordHandler()}>
+            {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard' ? (
+              <HardAddedSvg className={svgHardClasses} />
+            ) : (
+              <AddHardSvg />
+            )}
+          </button>
+        </OverlayTrigger>
+      )}
+      <OverlayTrigger
+        overlay={
+          <Tooltip id="tooltip-disabled">
+            {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'delete'
+              ? 'Восстановить слово'
+              : 'Удалить слово'}
+          </Tooltip>
+        }
+      >
+        <button className="add-deleted-btn" onClick={() => deleteWordHandler()}>
+          <DeleteSvg className={svgDeletedClasses} />
+        </button>
+      </OverlayTrigger>
     </li>
   );
 };

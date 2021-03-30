@@ -47,6 +47,22 @@
   .card-book-audio:hover {
     cursor: pointer;
   }
+  button{
+    width: 47px;
+    background: no-repeat;
+    border: none;
+    .hard-added-svg, .deleted-added-svg{
+      fill: firebrick;
+    }
+    .deleted-added-svg{
+      fill: firebrick;
+    }
+    svg {
+      &:hover {
+        fill: skyblue;
+      }
+    }
+  }
 }
 
 .card-book > * {
@@ -61,4 +77,15 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, auto));
   gap: 10px;
   overflow-y: scroll;
+}
+
+.hard-word{
+  background-color: cadetblue;
+}
+
+.add-hard-btn{
+
+}
+.add-deleted-btn{
+
 }
