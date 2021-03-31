@@ -12,7 +12,7 @@ class GameOver extends Component<GameOverProps> {
   handleClick = (): void => {
     const { newGame } = this.props;
     newGame();
-  }
+  };
 
   render(): JSX.Element {
     const {

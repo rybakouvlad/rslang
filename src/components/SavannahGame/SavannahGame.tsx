@@ -123,8 +123,9 @@ class SavannahGame extends Component<{}, SavannahState> {
     return shuffledWords.slice(-3);
   }
 
-  handleKeyUp = (key: string): void => {
+  handleKeyUp = ({ key }: any): void => {
     const { index, currentWord, answers, gameOver } = this.state;
+
     if (gameOver) return;
 
     const correctKey = answers.indexOf(currentWord.wordTranslate) + 1;
@@ -151,12 +152,12 @@ class SavannahGame extends Component<{}, SavannahState> {
   };
 
   componentDidMount() {
-    window.addEventListener('keyup', ({ key }) => this.handleKeyUp(key));
+    window.addEventListener('keyup', this.handleKeyUp);
     this.roundTimeOut();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', ({ key }) => this.handleKeyUp(key));
+    window.removeEventListener('keyup', this.handleKeyUp);
   }
 
   componentDidUpdate() {
