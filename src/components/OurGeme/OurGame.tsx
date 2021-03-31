@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
-import { testWords } from '../AudioCallGame/testWords';
-import './OurGameStyle.css';
+import { testWords } from '../../hooks/testWords';
+import get from '../../assets/ourGameSounds/get.mp3';
+import success from '../../assets/ourGameSounds/success.mp3';
+import wrong from '../../assets/ourGameSounds/wrong.mp3';
+import { ToggleButton } from 'react-bootstrap';
+import { ToggleButtonGroup } from 'react-bootstrap';
 
 // export interface I_OurGame {
 //   id: string;
@@ -32,6 +36,15 @@ const removeMarkerWrongWordsEn = () => {
   });
 };
 
+const playSound = () => {
+  const sounds = {
+    getWord: new Audio(get),
+    successAnswer: new Audio(success),
+    wrongAnswer: new Audio(wrong),
+  };
+  return sounds;
+};
+
 export const OurGame: React.FC = () => {
   const [words, setWords] = useState(testWords);
   const newWords = testWords;
@@ -41,14 +54,36 @@ export const OurGame: React.FC = () => {
   const [notCurrentWords, setNotCurrentWords] = useState([]);
   const EngWordElement = useRef(null);
   const fullScreenGame = useRef(null);
-  // const Arr = [...words];
+  const [soundToggler, setSoundToggler] = useState(true);
+  const [saveRadioSoundActifeBtn_ON, setSaveRadioSoundActifeBtn_ON] = useState(1);
+  const [saveRadioSoundActifeBtn_OFF, setSaveRadioSoundActifeBtn_OFF] = useState(1);
 
+  useEffect(() => {
+    const IsSoundSettings = localStorage.getItem('soundSettingsOurGame');
+    if (!IsSoundSettings) {
+      localStorage.setItem('soundSettingsOurGame', 'true');
+      setSoundToggler(() => true);
+      setSaveRadioSoundActifeBtn_ON(() => 1);
+      setSaveRadioSoundActifeBtn_OFF(() => 2);
+    } else if (IsSoundSettings === 'false') {
+      setSoundToggler(() => false);
+      setSaveRadioSoundActifeBtn_ON(() => 2);
+      setSaveRadioSoundActifeBtn_OFF(() => 1);
+    } else if (IsSoundSettings === 'true') {
+      setSaveRadioSoundActifeBtn_ON(() => 1);
+      setSaveRadioSoundActifeBtn_OFF(() => 2);
+    }
+  }, []);
+  // const Arr = [...words];
+  // const pp = useRef(null);
   // const randomArr = useMemo(() => {
   //   return Arr.sort(randomArrSort);
   // }, [words]);
 
   const dragStartHandler = (e: any) => {
+    console.log(saveRadioSoundActifeBtn_ON, saveRadioSoundActifeBtn_OFF);
     setCard(e);
+    if (soundToggler) playSound().getWord.play();
   };
   const dragLeaveHandler = (e: any) => {
     e.target.style.boxShadow = 'none';
@@ -68,6 +103,7 @@ export const OurGame: React.FC = () => {
     const isWrongWord = e.target.dataset.wrong;
     if (currentCard === dropCard) {
       // console.log(currentCard, '--', dropCard);
+      if (soundToggler) playSound().successAnswer.play();
       setWords((words) =>
         words.filter((word) => {
           if (word.id === card.target.id && !isWrongWord) {
@@ -80,6 +116,7 @@ export const OurGame: React.FC = () => {
         }),
       );
     } else if (currentCard !== dropCard && !isRuMarkerWords) {
+      if (soundToggler) playSound().wrongAnswer.play();
       setScore((prev) => prev - 10);
       e.target.style.background = 'rgba(153, 46, 55, 0.39)';
       words.map((word) => {
@@ -116,8 +153,8 @@ export const OurGame: React.FC = () => {
         arrSet.push(element);
       });
       //////////////////////////////
-      localStorage.setItem('WrongAnswers', JSON.stringify(arrSet)); // отправить на сервер как НЕ изученные слова
-      localStorage.setItem('RightAnswers', JSON.stringify(findWords)); // отправить на сервер как изученные слова
+      localStorage.setItem('WrongAnswers', JSON.stringify(arrSet)); // //////////////// НЕ изученные слова
+      localStorage.setItem('RightAnswers', JSON.stringify(findWords)); // ///////////// изученные слова
       /////////////////////////////
       return (
         <div>
@@ -129,7 +166,7 @@ export const OurGame: React.FC = () => {
             <Modal.Body>
               <Row>
                 <Col>
-                  <ul>
+                  <ol>
                     {arrSet.map((el: any) => {
                       return (
                         <li key={Date.now() / Math.random()}>
@@ -137,10 +174,10 @@ export const OurGame: React.FC = () => {
                         </li>
                       );
                     })}
-                  </ul>
+                  </ol>
                 </Col>
                 <Col>
-                  <ul>
+                  <ol>
                     {findWords.map((el) => {
                       return (
                         <li key={Date.now() / Math.random()}>
@@ -148,11 +185,12 @@ export const OurGame: React.FC = () => {
                         </li>
                       );
                     })}
-                  </ul>
+                  </ol>
                 </Col>
               </Row>
             </Modal.Body>
             <Modal.Footer>
+              <p>Score: {score}</p>
               <Button variant="light" onClick={runNewGame}>
                 New Game
               </Button>
@@ -171,15 +209,33 @@ export const OurGame: React.FC = () => {
     } else document.exitFullscreen();
   };
 
+  const changeSoundTogglerTrue = () => {
+    localStorage.setItem('soundSettingsOurGame', 'true');
+    setSoundToggler(() => true);
+  };
+  const changeSoundTogglerFalse = () => {
+    localStorage.setItem('soundSettingsOurGame', 'false');
+    setSoundToggler(() => false);
+  };
+
   return (
     <Container ref={fullScreenGame} className="ourGame_wrapper">
       <div className="head_game">
+        <h2>Drag and drop</h2>
         <h4>Score: {score}</h4>
       </div>
       <div className="our_game_btn__wrapper">
         <Button variant="outline-info" onClick={runNewGame}>
           New Game
         </Button>
+        <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+          <ToggleButton onClick={changeSoundTogglerTrue} variant="info" value={saveRadioSoundActifeBtn_ON}>
+            Sound ON
+          </ToggleButton>
+          <ToggleButton onClick={changeSoundTogglerFalse} variant="info" value={saveRadioSoundActifeBtn_OFF}>
+            Sound OFF
+          </ToggleButton>
+        </ToggleButtonGroup>
         <Button variant="outline-info" onClick={showFullScreen}>
           Full Screen
         </Button>
