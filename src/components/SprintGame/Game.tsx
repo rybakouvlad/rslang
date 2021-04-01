@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TimerGame } from './TimerGame';
 import { Score } from './Score';
 import { testWords } from './../AudioCallGame/testWords';
-import {useHotkeys} from 'react-hotkeys-hook';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 function getRandomNumber(num: number): number {
   return Math.floor(Math.random() * num);
@@ -36,36 +36,48 @@ export const Game: React.FC = () => {
   const [arr] = useState<Array<any>>(getNewArray());
   const [index, setIndex] = useState<number>(0);
   const currentTranslation = getTranslation(arr[index]);
+  const [trueTimes, setTrueTimes] = useState(0);
+  const [score, setScore] = useState(0);
+  const sumScore = () => {
+    console.log('trueTimes', trueTimes);
+    const newScore = score + Math.ceil(trueTimes / 3) * 6;
+    console.log(newScore);
+    setScore(newScore);
+  };
+  const rightAnswer = () => {
+    document.querySelector('.game-card').classList.add('correct-answer');
+    setTimeout(() => {
+      document.querySelector('.game-card').classList.remove('correct-answer');
+    }, 500);
+    setTrueTimes(trueTimes + 1);
+    sumScore();
+  };
+  const wrongAnswer = () => {
+    document.querySelector('.game-card').classList.add('wrong-answer');
+    setTimeout(() => {
+      document.querySelector('.game-card').classList.remove('wrong-answer');
+    }, 500);
+    setTrueTimes(0);
+    sumScore();
+  };
   const yesHandler = () => {
     if (getWordObj(arr[index]).wordTranslate === currentTranslation) {
       console.log('yesHandler true');
-      document.querySelector('.game-card').classList.add('correct-answer');
-      setTimeout(() => {
-        document.querySelector('.game-card').classList.remove('correct-answer');
-      }, 500);
+      rightAnswer();
     } else {
       console.log('yesHandler false');
-      document.querySelector('.game-card').classList.add('wrong-answer');
-      setTimeout(() => {
-        document.querySelector('.game-card').classList.remove('wrong-answer');
-      }, 500);
+      wrongAnswer();
     }
     setIndex(index + 1);
   };
   const noHandler = () => {
-    console.log(currentTranslation)
+    console.log(currentTranslation);
     if (getWordObj(arr[index]).wordTranslate === currentTranslation) {
       console.log('noHandler false');
-      document.querySelector('.game-card').classList.add('wrong-answer');
-      setTimeout(() => {
-        document.querySelector('.game-card').classList.remove('wrong-answer');
-      }, 1000);
+      wrongAnswer();
     } else {
       console.log('noHandler true');
-      document.querySelector('.game-card').classList.add('correct-answer');
-      setTimeout(() => {
-        document.querySelector('.game-card').classList.remove('correct-answer');
-      }, 1000);
+      rightAnswer();
     }
     setIndex(index + 1);
   };
@@ -78,15 +90,19 @@ export const Game: React.FC = () => {
   return (
     <div className="game-card">
       <TimerGame />
-      <Score />
+      <Score scoreNumber={score} />
       <div className="sprint-card">
         <div className="sprint-card-header">
           <p>{getWordObj(arr[index]).word}</p>
           <p>{currentTranslation}</p>
         </div>
         <div className="sprint-card-footer">
-          <button className="yes-btn" onClick={() => yesHandler()}>да</button>
-          <button className="no-btn" onClick={() => noHandler()}>нет</button>
+          <button className="yes-btn" onClick={() => yesHandler()}>
+            да
+          </button>
+          <button className="no-btn" onClick={() => noHandler()}>
+            нет
+          </button>
         </div>
       </div>
     </div>

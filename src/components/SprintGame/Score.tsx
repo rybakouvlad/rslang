@@ -1,5 +1,7 @@
 import React from 'react';
-
-export const Score: React.FC = () => {
-  return <div>Score</div>;
+interface ScoreProps {
+  scoreNumber: number;
+}
+export const Score = ({ scoreNumber }: ScoreProps) => {
+  return <div>{scoreNumber}</div>;
 };
