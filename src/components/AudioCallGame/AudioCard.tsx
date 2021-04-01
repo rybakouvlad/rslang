@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import { useAudioGame } from './audioGame.hook';
 import { IWord } from './audioGame.hook';
 import questionSvg from '../../assets/svg/Question.svg';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
 interface IProps {
   words: IWord[];
   hiddenWord: IWord;
@@ -10,9 +11,13 @@ interface IProps {
 
 export const AudioCard: React.FC<IProps> = (props: IProps) => {
   const { setIsShowResult, isShowResult } = useAudioGame();
+  const { checkWords } = useCheckPosition();
 
-  const checkHandler = () => {
+  const checkHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsShowResult(true);
+    // console.log(checkWords);
+    checkWords(props.hiddenWord, (event.target as HTMLButtonElement).dataset.id === props.hiddenWord.id);
+    // console.log((event.target as HTMLButtonElement).dataset.id);
   };
 
   return (
