@@ -6,7 +6,8 @@
   'mean mean'
   'mean-tr mean-tr'
   'ex ex'
-  'ex-tr ex-tr';
+  'ex-tr ex-tr'
+  'difficult delete';
   border: 1px solid black;
   border-radius: 10px;
 
@@ -84,8 +85,8 @@
 }
 
 .add-hard-btn{
-
+  grid-area: difficult;
 }
 .add-deleted-btn{
-
+  grid-area: delete;
 }
