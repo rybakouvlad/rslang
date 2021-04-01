@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AudioCallGame } from './AudioCallGame/AudioCallGame';
+import { Settings } from './AppSettings/Settings';
 import { Auth } from './Auth/Auth';
 import { Dictionary } from './Dictionary/Dictionary';
 import { Games } from './Games';
@@ -28,6 +29,9 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/audiocall">
           <AudioCallGame />
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
       </Switch>
     </>
