@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAggregatedWords } from '../../store/actions/aggregatedWords';
+import { getAggregateLearndWords } from '../../store/actions/aggregatedWords';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import Card from './../../components/Card/Card';
 import { setStartGameStateEasy } from '../../store/actions/startGameState';
@@ -13,7 +13,7 @@ export const DictionaryLearn: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(getAggregatedWords(userID, token, 'hard'));
+      dispatch(getAggregateLearndWords(userID, token));
       dispatch(setStartGameStateEasy());
     }
   }, []);
