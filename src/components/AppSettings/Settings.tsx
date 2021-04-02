@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setTranslateSettings, setButtonsSettings } from '../../store/actions/settings';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
-// import { SetTranslateAction, SetButtonsAction } from '../../types/settings';
+
 import './settings.scss';
 
 // interface SettingsProps {

@@ -1,6 +1,7 @@
 import { SettingsActions, SettingsActionsType, SettingsState } from '../../types/settings';
+import { load } from 'redux-localstorage-simple';
 
-const initState = {
+const initState = load({ namespace: 'rslang_settings' }) || {
   translateChecked: true,
   buttonsChecked: true,
 };

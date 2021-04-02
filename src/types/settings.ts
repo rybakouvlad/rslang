@@ -14,8 +14,8 @@ export interface SetButtonsAction {
 }
 
 export interface SettingsState {
-  translateChecked: boolean;
-  buttonsChecked: boolean;
+  translateChecked?: boolean;
+  buttonsChecked?: boolean;
 }
 
 export type SettingsActions = SetTranslateAction | SetButtonsAction;
