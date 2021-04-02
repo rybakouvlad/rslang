@@ -46,7 +46,7 @@ export const SmartMenu: React.FC = () => {
           </Link>
         </div>
         <div className="smart-menu-footer">
-          <Link to="/games">
+          <Link to="/settings">
             <div className="svg-wrapper" style={{ backgroundColor: '#9B88A3' }}>
               <SeatingSvg />
             </div>
