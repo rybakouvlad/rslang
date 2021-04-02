@@ -1,12 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useTypeSelector } from './useTypesSelector';
 import { Word } from '../types/book';
-import { testWords } from './testWords';
 import { useDispatch } from 'react-redux';
 import { SetUserWord, UpdateUserWord } from '../store/actions/userWords';
+import { useQuery } from './useQuery';
+import { useSetWordsState } from './useGetBookWords';
+import { getRandomInt } from '../utils/getRandomInt';
 export interface IContext {
   gameWords: Word[];
   checkWords(word: Word, result: boolean): void;
+  getPosition(): string;
+  changeDifficulty(value: string): void;
 }
 
 interface IProps {
@@ -21,12 +25,21 @@ export const useCheckPosition = () => {
 
 export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   const [gameWords, setWords] = useState<Word[]>([]);
-  const { position } = useTypeSelector((state) => state.setStartGameState);
   const { words } = useTypeSelector((state) => state.book);
   const { userID, token } = useTypeSelector((state) => state.auth);
   const { paginatedResults } = useTypeSelector((state) => state.aggregatedWords);
   const { wordsSettings } = useTypeSelector((state) => state.userWords);
+  const { setFetch, bookRandomWord } = useSetWordsState();
+  const [lastPage, setLastPage] = useState(0);
   const dispatch = useDispatch();
+  const query = useQuery();
+
+  const changeDifficulty = (value: string) => {
+    const page = getRandomInt(0, 30);
+    setLastPage(page);
+    console.log(lastPage);
+    setFetch(Number(value), page);
+  };
 
   const checkWords = (word: Word, result: boolean): void => {
     if (wordsSettings.has(word.id)) {
@@ -62,10 +75,21 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
     }
   };
 
-  const getWords = (): void => {
-    console.log(position);
+  const getPosition = (): string => {
+    switch (query.get('path')) {
+      case 'book':
+        return 'из учебника';
+      case 'hard':
+        return 'из "сложного" словаря';
+      case 'learn':
+        return 'из "изучаемого" словаря';
+      default:
+        return null;
+    }
+  };
 
-    switch (position) {
+  const getWords = (): void => {
+    switch (query.get('path')) {
       case 'book':
         setWords(words);
         break;
@@ -76,13 +100,17 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
         setWords(paginatedResults);
         break;
       default:
-        setWords(testWords);
+        setWords(bookRandomWord);
         break;
     }
   };
 
   useEffect(() => {
     getWords();
-  }, []);
-  return <CheckPositionContext.Provider value={{ gameWords, checkWords }}>{children}</CheckPositionContext.Provider>;
+  }, [bookRandomWord]);
+  return (
+    <CheckPositionContext.Provider value={{ gameWords, checkWords, getPosition, changeDifficulty }}>
+      {children}
+    </CheckPositionContext.Provider>
+  );
 };

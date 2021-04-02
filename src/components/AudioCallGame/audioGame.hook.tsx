@@ -1,5 +1,6 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
-
+import { getRandomInt } from '../../utils/getRandomInt';
+import { shuffle } from '../../utils/getShuffle';
 export interface IWord {
   id: string;
   group: number;
@@ -41,14 +42,6 @@ export const useAudioGame = () => {
   return useContext(AudioCallGameContext);
 };
 
-function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-export const shuffle = (arr: Array<any>) => {
-  return arr.sort(() => Math.round(Math.random() * 100) - 50);
-};
 export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
   const [index, setIndex] = useState(0);
   const [isShowResult, setIsShowResult] = useState(false);
