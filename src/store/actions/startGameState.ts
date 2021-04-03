@@ -18,3 +18,8 @@ export const setStartGameStateEasy = () => {
     dispatch({ type: StartGameStateTypes.SET_START_GAME_EASY });
   };
 };
+export const setStartGameStateNone = () => {
+  return (dispatch: Dispatch<SetStartGameStateActions>) => {
+    dispatch({ type: StartGameStateTypes.SET_START_GAME_NONE });
+  };
+};

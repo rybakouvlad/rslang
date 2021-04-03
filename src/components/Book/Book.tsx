@@ -9,6 +9,7 @@ import { Panel } from './Panel';
 import { Spinner } from 'react-bootstrap';
 import Card from '../Card/Card';
 import { setStartGameStateBook } from '../../store/actions/startGameState';
+import { ChoiceGameTopMenu } from '../ChoiceGameTopMenu';
 
 export const Book: React.FC = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ export const Book: React.FC = () => {
   return (
     <div className="book">
       <Panel />
+      <ChoiceGameTopMenu pathWords={'book'} />
       {loading ? (
         <Spinner animation="border" role="status" />
       ) : (
