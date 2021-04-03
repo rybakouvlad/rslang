@@ -45,8 +45,10 @@ export const Game: React.FC = () => {
       ) : (
         <Card className="audiocall-game-card">
           <AudioCard words={gameArr} hiddenWord={hiddenWord} results={results} setResults={setResults} />
-          <RepeatButton />
-          <NextShowButtons />
+          <div className="audiocall-controls-btn">
+            <RepeatButton />
+            <NextShowButtons hiddenWord={hiddenWord} results={results} setResults={setResults} />
+          </div>
         </Card>
       )}
     </div>

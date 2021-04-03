@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { getAggregateLearndWords } from '../../store/actions/aggregatedWords';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import Card from './../../components/Card/Card';
-import { setStartGameStateEasy } from '../../store/actions/startGameState';
 import { ChoiceGameTopMenu } from '../ChoiceGameTopMenu';
 import { Pagination } from 'react-bootstrap';
 import { useQuery } from '../../hooks/useQuery';
@@ -22,7 +21,6 @@ export const DictionaryLearn: React.FC = () => {
   useEffect(() => {
     if (token) {
       dispatch(getAggregateLearndWords(userID, token, Number(query.get('page'))));
-      dispatch(setStartGameStateEasy());
     }
   }, [query.get('page')]);
 

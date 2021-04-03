@@ -5,20 +5,25 @@
   flex-direction: column;
   //   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .audiocall-game {
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 70vh;
   background-color: white;
+  min-width: 700px;
+  border-radius: 30px;
 }
 
 .audiocall-game-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 500px;
+  height: 100%;
   padding: 1rem;
+  background: none;
+  border: none;
 }
 .audiocall-img {
   width: 200px;
@@ -27,7 +32,21 @@
 }
 
 .audiocall-body {
-  height: 250px;
+  height: 200px;
+  .audiocall-text-block {
+    height: 100px;
+    text-align: center;
+  }
+  button {
+    margin: 0 3px;
+  }
+}
+.audiocall-controls-btn {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .audiocall-repeat-btn {
@@ -38,10 +57,53 @@
   svg {
     g {
       stroke: white;
-     
     }
-    &:hover g{
-        stroke: red;
-      }
+    &:hover g {
+      stroke: red;
+    }
   }
+}
+
+.audiocall-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .audiocall-result {
+    display: flex;
+    overflow-y: scroll;
+    height: 410px;
+    margin: 10px;
+    .audiocall-result-row {
+      min-width: 200px;
+      display: flex;
+      justify-content: center;
+      justify-content: center;
+      // border: 1px solid;
+    }
+    .audiocall-true {
+      color: rgba(120, 203, 100, 1);
+    }
+    .audiocall-false {
+      color: rgba(235, 85, 82, 1);
+    }
+  }
+}
+
+.audiocall-progress {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.audiocall-progress-correct {
+  background-color: rgba(120, 203, 100, 1);
+  left: 20px;
+}
+.audiocall-progress-incorrect {
+  background-color: rgba(235, 85, 82, 1);
+  right: 20px;
 }

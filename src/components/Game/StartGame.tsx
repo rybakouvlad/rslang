@@ -11,10 +11,10 @@ export const StartGame: React.FC<IProps> = (props: IProps) => {
   const { getPosition } = useCheckPosition();
 
   return (
-    <div>
+    <div className="start-game">
       {getPosition() ? (
-        <div>
-          <div>Вы перишли {getPosition()}</div>
+        <>
+          <h2>Вы перишли {getPosition()}</h2>
           <Button
             onClick={() => {
               props.setIsStart(false);
@@ -22,10 +22,10 @@ export const StartGame: React.FC<IProps> = (props: IProps) => {
           >
             Начать игру
           </Button>
-        </div>
+        </>
       ) : (
         <>
-          <h1>Выберете сложность</h1>
+          <h2>Выберете сложность</h2>
           <DifficultySelection setIsStart={props.setIsStart} />
         </>
       )}

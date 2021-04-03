@@ -28,7 +28,7 @@ export const DifficultySelection: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <Select
-        className="lan_selector"
+        className="choice-selector"
         defaultValue={{ value: '1', label: 'сложность 1' }}
         onChange={changeHandler}
         options={options}
