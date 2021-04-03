@@ -3,10 +3,12 @@
   flex-direction: column;
   align-items: center;
   .game-card{
+    position: relative;
     display: flex;
     width: 50%;
+    height: 310px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
     padding: 10px;
     background-color: white;
@@ -21,6 +23,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 20px;
     }
     .sprint-card-footer{
       display: flex;
@@ -69,4 +72,56 @@
   &:active{
     transform: scale(0.8);
   }
+}
+
+.sprint-timer{
+  .countdown-svg{
+    position: absolute;
+    top: 30px;
+    left: 35px;
+  }
+  span{
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    font-size: x-large;
+    font-weight: 700;
+  }
+}
+.sprint-score{
+  position: absolute;
+  top: 31px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 130px;
+  background-color: lightgoldenrodyellow;
+  border-radius: 20px;
+}
+
+.sprint-sound{
+  margin-bottom: 20px;
+}
+
+.sprint-full-screen{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1500;
+  background: $background-main;
+  height: 100%;
+  width: 100%;
+}
+
+.sprint-game-settings{
+display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 360px;
+  //.full-screen-btn{
+  //
+  //}
 }

@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
 import { TimerGame } from './TimerGame';
 import { Score } from './Score';
-import { testWords } from './../AudioCallGame/testWords';
-import { useHotkeys } from 'react-hotkeys-hook';
+// import { useHotkeys } from 'react-hotkeys-hook';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
+import { useSprintGame } from 'Components/SprintGame/sprintGame.hook';
+import { SoundToggle } from 'Components/SprintGame/SoundToggle';
+import { EndGame } from './EndGame';
+import { Button } from 'react-bootstrap';
 
 function getRandomNumber(num: number): number {
   return Math.floor(Math.random() * num);
 }
-function getNewArray(): Array<any> {
-  const newSet = new Set<string>();
-  while (newSet.size !== testWords.length) {
-    newSet.add(testWords[getRandomNumber(testWords.length)].id);
-  }
-  return [...newSet];
-}
-function getWordObj(id: string) {
-  return testWords.find((el) => el.id === id);
-}
 
-function getTranslation(id: string) {
-  const variant = getRandomNumber(2);
-  const trueTranslate = getWordObj(id).wordTranslate;
-  if (variant) {
-    return trueTranslate;
-  } else {
-    let wrongTranslate: string;
-    do {
-      wrongTranslate = testWords[getRandomNumber(testWords.length)].wordTranslate;
-    } while (wrongTranslate === trueTranslate);
-    return wrongTranslate;
-  }
-}
-// const words = [['yes', 'да'], ['no', 'нет'], ['wool', 'шерсть'], ['yellow', 'жёлтый'], ['red', 'красный'], ['blue', 'голубой'], ['black', 'чёрный'], ['green', 'зелёный'], ['usually', 'обычно'], ['be', 'быть']];
 export const Game: React.FC = () => {
-  const [arr] = useState<Array<any>>(getNewArray());
+  const { isPlaySound, playSound, timer, score, setScore, isFullScreen, setIsFullScreen } = useSprintGame();
+  const { gameWords } = useCheckPosition();
+  const [arr] = useState<Array<string>>(getNewArray());
   const [index, setIndex] = useState<number>(0);
-  const currentTranslation = getTranslation(arr[index]);
+  const [currentTranslation, setCurrentTranslation] = useState(getTranslation(arr[index]));
   const [trueTimes, setTrueTimes] = useState(0);
-  const [score, setScore] = useState(0);
+  function getNewArray(): Array<string> {
+    const newSet = new Set<string>();
+    while (newSet.size !== gameWords.length) {
+      newSet.add(gameWords[getRandomNumber(gameWords.length)].id);
+    }
+    return [...newSet];
+  }
+
+  function getWordObj(id: string) {
+    return gameWords.find((el) => el.id === id);
+  }
+
+  function getTranslation(id: string) {
+    const variant = getRandomNumber(2);
+    const trueTranslate = getWordObj(id).wordTranslate;
+    if (variant) {
+      return trueTranslate;
+    } else {
+      let wrongTranslate: string;
+      do {
+        wrongTranslate = gameWords[getRandomNumber(gameWords.length)].wordTranslate;
+      } while (wrongTranslate === trueTranslate);
+      return wrongTranslate;
+    }
+  }
+
   const sumScore = () => {
-    console.log('trueTimes', trueTimes);
-    const newScore = score + Math.ceil(trueTimes / 3) * 6;
-    console.log(newScore);
+    const newTrueTimes = trueTimes + 1;
+    const newScore = score + Math.ceil(newTrueTimes / 3) * 6;
     setScore(newScore);
   };
   const rightAnswer = () => {
@@ -49,6 +55,7 @@ export const Game: React.FC = () => {
     setTimeout(() => {
       document.querySelector('.game-card').classList.remove('correct-answer');
     }, 500);
+    isPlaySound && playSound('correct');
     setTrueTimes(trueTimes + 1);
     sumScore();
   };
@@ -57,54 +64,53 @@ export const Game: React.FC = () => {
     setTimeout(() => {
       document.querySelector('.game-card').classList.remove('wrong-answer');
     }, 500);
+    isPlaySound && playSound('wrong');
     setTrueTimes(0);
-    sumScore();
   };
   const yesHandler = () => {
-    if (getWordObj(arr[index]).wordTranslate === currentTranslation) {
-      console.log('yesHandler true');
-      rightAnswer();
-    } else {
-      console.log('yesHandler false');
-      wrongAnswer();
-    }
+    getWordObj(arr[index]).wordTranslate === currentTranslation ? rightAnswer() : wrongAnswer();
     setIndex(index + 1);
+    setCurrentTranslation(getTranslation(arr[index + 1]));
   };
   const noHandler = () => {
-    console.log(currentTranslation);
-    if (getWordObj(arr[index]).wordTranslate === currentTranslation) {
-      console.log('noHandler false');
-      wrongAnswer();
-    } else {
-      console.log('noHandler true');
-      rightAnswer();
-    }
+    getWordObj(arr[index]).wordTranslate === currentTranslation ? wrongAnswer() : rightAnswer();
+
     setIndex(index + 1);
+    setCurrentTranslation(getTranslation(arr[index + 1]));
   };
-  useHotkeys('left', () => {
-    yesHandler();
-  });
-  useHotkeys('right', () => {
-    noHandler();
-  });
+
   return (
-    <div className="game-card">
-      <TimerGame />
-      <Score scoreNumber={score} />
-      <div className="sprint-card">
-        <div className="sprint-card-header">
-          <p>{getWordObj(arr[index]).word}</p>
-          <p>{currentTranslation}</p>
-        </div>
-        <div className="sprint-card-footer">
-          <button className="yes-btn" onClick={() => yesHandler()}>
-            да
-          </button>
-          <button className="no-btn" onClick={() => noHandler()}>
-            нет
-          </button>
-        </div>
-      </div>
-    </div>
+    <>
+      {timer ? (
+        <>
+          <div className="sprint-game-settings">
+            <SoundToggle />
+            <Button className="full-screen-btn" variant="info" onClick={() => setIsFullScreen(!isFullScreen)}>
+              {isFullScreen ? 'выйти из полноэкранного режима' : 'на весь экран'}
+            </Button>
+          </div>
+          <div className="game-card">
+            <TimerGame />
+            <Score scoreNumber={score} />
+            <div className="sprint-card">
+              <div className="sprint-card-header">
+                <p>{getWordObj(arr[index]).word}</p>
+                <p>{currentTranslation}</p>
+              </div>
+              <div className="sprint-card-footer">
+                <button className="yes-btn" onClick={yesHandler}>
+                  да
+                </button>
+                <button className="no-btn" onClick={noHandler}>
+                  нет
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <EndGame />
+      )}
+    </>
   );
 };

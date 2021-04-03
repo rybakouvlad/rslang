@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SVGCircle } from './SVGCircle';
+import { useSprintGame } from 'Components/SprintGame/sprintGame.hook';
 
 export const TimerGame: React.FC = () => {
-  const [timer, setTimer] = useState(60);
+  // const [timer, setTimer] = useState(60);
+  const { timer, setTimer } = useSprintGame();
 
   function mapNumber(number: number, in_min: number, in_max: number, out_min: number, out_max: number) {
     return ((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
@@ -20,10 +22,9 @@ export const TimerGame: React.FC = () => {
   });
   return (
     <div>
-      <div>
-        {' '}
+      <div className="sprint-timer">
         <SVGCircle radius={secondsRadius} />
-        {timer}
+        <span>{timer}</span>
       </div>
     </div>
   );

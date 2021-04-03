@@ -7,7 +7,7 @@ import { Dictionary } from './Dictionary/Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
 import { Book } from './Book/Book';
-import { SprintGame } from './SprintGame/index';
+import { SprintGameWrapper } from './SprintGame/SprintGameWrapper';
 
 export const Routes: React.FC = () => {
   return (
@@ -29,7 +29,7 @@ export const Routes: React.FC = () => {
           <Dictionary />
         </Route>
         <Route path="/sprint">
-          <SprintGame />
+          <SprintGameWrapper />
         </Route>
         <Route path="/audiocall">
           <AudioCallGame />

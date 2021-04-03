@@ -1,11 +1,11 @@
 import React from 'react';
-import { SprintGame } from './SprintGame';
+import { SprintGameWrapper } from './SprintGame/SprintGameWrapper';
 
 export const Games: React.FC = () => {
   return (
     <div>
       <h1>games</h1>
-      <SprintGame />
+      <SprintGameWrapper />
     </div>
   );
 };
