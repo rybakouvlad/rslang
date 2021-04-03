@@ -5,8 +5,10 @@ import wrong from '../../assets/sounds/wrong.mp3';
 interface IContext {
   isPlaySound: boolean;
   setIsPlaySound: Dispatch<SetStateAction<boolean>>;
-  timer: number;
-  setTimer: Dispatch<SetStateAction<number>>;
+  isTimer: boolean;
+  setIsTimer: Dispatch<SetStateAction<boolean>>;
+  // timer: number;
+  // setTimer: Dispatch<SetStateAction<number>>;
   score: number;
   setScore: Dispatch<SetStateAction<number>>;
   isFullScreen: boolean;
@@ -26,7 +28,8 @@ export const useSprintGame = () => {
 
 export const SprintGameProvider: React.FC = ({ children }: IProps) => {
   const [isPlaySound, setIsPlaySound] = useState(true);
-  const [timer, setTimer] = useState(60);
+  const [isTimer, setIsTimer] = useState(true);
+  // const [timer, setTimer] = useState(60);
   const [score, setScore] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -42,8 +45,10 @@ export const SprintGameProvider: React.FC = ({ children }: IProps) => {
       value={{
         isPlaySound,
         setIsPlaySound,
-        timer,
-        setTimer,
+        isTimer,
+        setIsTimer,
+        // timer,
+        // setTimer,
         score,
         setScore,
         isFullScreen,

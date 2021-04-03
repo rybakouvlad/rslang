@@ -16,7 +16,7 @@ export const EndGame: React.FC<iProps> = (props: iProps) => {
           {props.results.correctWords.map((el) => {
             return (
               <div className="audiocall-result-row audiocall-true" key={el.id}>
-                {el.word}
+                {`${el.word} - ${el.wordTranslate}`}
               </div>
             );
           })}
@@ -26,7 +26,7 @@ export const EndGame: React.FC<iProps> = (props: iProps) => {
           {props.results.incorrectWords.map((el) => {
             return (
               <div className="audiocall-result-row audiocall-false" key={el.id}>
-                {el.word}
+                {`${el.word} - ${el.wordTranslate}`}
               </div>
             );
           })}

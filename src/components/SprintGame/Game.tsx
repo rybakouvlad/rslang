@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import { TimerGame } from './TimerGame';
 import { Score } from './Score';
-// import { useHotkeys } from 'react-hotkeys-hook';
 import { useCheckPosition } from '../../hooks/CheckPositionHook';
 import { useSprintGame } from 'Components/SprintGame/sprintGame.hook';
 import { SoundToggle } from 'Components/SprintGame/SoundToggle';
 import { EndGame } from './EndGame';
 import { Button } from 'react-bootstrap';
+import { Word } from '../../types/book';
 
+export interface IResults {
+  correctWords: Word[];
+  incorrectWords: Word[];
+}
 function getRandomNumber(num: number): number {
   return Math.floor(Math.random() * num);
 }
 
 export const Game: React.FC = () => {
-  const { isPlaySound, playSound, timer, score, setScore, isFullScreen, setIsFullScreen } = useSprintGame();
-  const { gameWords } = useCheckPosition();
+  const { isPlaySound, playSound, isTimer, score, setScore, isFullScreen, setIsFullScreen } = useSprintGame();
+  const { gameWords, checkWords } = useCheckPosition();
   const [arr] = useState<Array<string>>(getNewArray());
   const [index, setIndex] = useState<number>(0);
-  const [currentTranslation, setCurrentTranslation] = useState(getTranslation(arr[index]));
+  const [currentTranslation, setCurrentTranslation] = useState(( gameWords.length !== index) && getTranslation(arr[index]));
   const [trueTimes, setTrueTimes] = useState(0);
+  const [results, setResults] = useState<IResults>({
+    correctWords: [],
+    incorrectWords: [],
+  });
   function getNewArray(): Array<string> {
     const newSet = new Set<string>();
     while (newSet.size !== gameWords.length) {
@@ -50,11 +58,24 @@ export const Game: React.FC = () => {
     const newScore = score + Math.ceil(newTrueTimes / 3) * 6;
     setScore(newScore);
   };
+  const preparationNextWord = () => {
+    setIndex(index + 1);
+    console.log('1', gameWords.length - 1);
+    console.log('2', index);
+    (gameWords.length - 1 !== index) && setCurrentTranslation(getTranslation(arr[index + 1]));
+    console.log('2', index);
+  };
   const rightAnswer = () => {
     document.querySelector('.game-card').classList.add('correct-answer');
     setTimeout(() => {
       document.querySelector('.game-card').classList.remove('correct-answer');
     }, 500);
+    setResults({
+      ...results,
+      correctWords: [...results.correctWords, getWordObj(arr[index])],
+    });
+    checkWords(getWordObj(arr[index]), true);
+    preparationNextWord();
     isPlaySound && playSound('correct');
     setTrueTimes(trueTimes + 1);
     sumScore();
@@ -64,24 +85,25 @@ export const Game: React.FC = () => {
     setTimeout(() => {
       document.querySelector('.game-card').classList.remove('wrong-answer');
     }, 500);
+    setResults({
+      ...results,
+      incorrectWords: [...results.incorrectWords, getWordObj(arr[index])],
+    });
+    checkWords(getWordObj(arr[index]), false);
+    preparationNextWord();
     isPlaySound && playSound('wrong');
     setTrueTimes(0);
   };
   const yesHandler = () => {
     getWordObj(arr[index]).wordTranslate === currentTranslation ? rightAnswer() : wrongAnswer();
-    setIndex(index + 1);
-    setCurrentTranslation(getTranslation(arr[index + 1]));
   };
   const noHandler = () => {
     getWordObj(arr[index]).wordTranslate === currentTranslation ? wrongAnswer() : rightAnswer();
-
-    setIndex(index + 1);
-    setCurrentTranslation(getTranslation(arr[index + 1]));
   };
 
   return (
     <>
-      {timer ? (
+      {isTimer && gameWords.length !== index ? (
         <>
           <div className="sprint-game-settings">
             <SoundToggle />
@@ -109,7 +131,7 @@ export const Game: React.FC = () => {
           </div>
         </>
       ) : (
-        <EndGame />
+        <EndGame results={results} />
       )}
     </>
   );

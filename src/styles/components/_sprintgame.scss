@@ -1,8 +1,9 @@
-.sprint-game{
+.sprint-game {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .game-card{
+
+  .game-card {
     position: relative;
     display: flex;
     width: 50%;
@@ -13,74 +14,85 @@
     padding: 10px;
     background-color: white;
     border-radius: 16px;
-    .sprint-card{
+
+    .sprint-card {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .sprint-card-header{
+
+    .sprint-card-header {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
     }
-    .sprint-card-footer{
+
+    .sprint-card-footer {
       display: flex;
       width: 100%;
       justify-content: space-around;
     }
-    p{
+
+    p {
       font-size: 26px;
       margin: 0;
       align-items: center;
     }
-    button{
+
+    button {
       width: 125px;
       height: 50px;
       border: none;
       border-radius: 10px;
       font-weight: bold;
-      &:active{
+
+      &:active {
         transform: scale(0.8);
       }
     }
-    .no-btn{
+
+    .no-btn {
       background-color: rgba(255, 0, 0, 0.5);
     }
-    .yes-btn{
+
+    .yes-btn {
       background-color: rgba(0, 128, 0, 0.5);
     }
   }
 
 }
 
-.wrong-answer{
-  background-color: rgba(255, 0, 0, 0.2)!important;
-}
-.correct-answer{
-  background-color: rgba(0, 128, 0, 0.2)!important;
+.wrong-answer {
+  background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
-.start-sprint-btn{
+.correct-answer {
+  background-color: rgba(0, 128, 0, 0.2) !important;
+}
+
+.start-sprint-btn {
   width: 125px;
   height: 50px;
   background-color: skyblue;
   border: none;
   border-radius: 10px;
   font-weight: bold;
-  &:active{
+
+  &:active {
     transform: scale(0.8);
   }
 }
 
-.sprint-timer{
-  .countdown-svg{
+.sprint-timer {
+  .countdown-svg {
     position: absolute;
     top: 30px;
     left: 35px;
   }
-  span{
+
+  span {
     position: absolute;
     top: 60px;
     left: 70px;
@@ -88,7 +100,8 @@
     font-weight: 700;
   }
 }
-.sprint-score{
+
+.sprint-score {
   position: absolute;
   top: 31px;
   right: 48px;
@@ -102,11 +115,11 @@
   border-radius: 20px;
 }
 
-.sprint-sound{
+.sprint-sound {
   margin-bottom: 20px;
 }
 
-.sprint-full-screen{
+.sprint-full-screen {
   position: fixed;
   left: 0;
   top: 0;
@@ -114,14 +127,13 @@
   background: $background-main;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.sprint-game-settings{
-display: flex;
+.sprint-game-settings {
+  display: flex;
   align-items: baseline;
   justify-content: space-between;
-  width: 360px;
-  //.full-screen-btn{
-  //
-  //}
+  width: 500px;
 }
