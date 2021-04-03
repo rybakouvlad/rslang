@@ -7,6 +7,13 @@ import { useQuery } from './useQuery';
 import { useSetWordsState } from './useGetBookWords';
 import { getRandomInt } from '../utils/getRandomInt';
 import { getAggregatedWords, getAggregateLearndWords } from '../store/actions/aggregatedWords';
+import {
+  statisticSetCorrect,
+  statisticSetIncorrect,
+  statisticSetLern,
+  statisticSetSeries,
+} from '../store/actions/statistic';
+import { useLocation } from 'react-router-dom';
 
 export interface IContext {
   gameWords: Word[];
@@ -34,6 +41,7 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   const query = useQuery();
   const [gameWords, setWords] = useState<Word[]>([]);
   const { words } = useTypeSelector((state) => state.book);
+  const statistic = useTypeSelector((state) => state.statistic);
   const { userID, token } = useTypeSelector((state) => state.auth);
   const { paginatedResults } = useTypeSelector((state) => state.aggregatedWords);
   const { wordsSettings } = useTypeSelector((state) => state.userWords);
@@ -41,11 +49,18 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   const [lastPage, setLastPage] = useState(Number.parseInt(query.get('page')));
   const [lastGroup, setLastGroup] = useState(Number.parseInt(query.get('group')));
   const dispatch = useDispatch();
+  const [series, setSeries] = useState(1);
+  const [countSeries, setSountSeries] = useState(1);
+
+  const location = useLocation();
+  const gameName = /\w+/.exec(location.pathname)[0];
+
   useEffect(() => {
     if (bookRandomWord.length) {
       setWords(bookRandomWord);
     }
   }, [bookRandomWord]);
+
   const changeDifficulty = (group: string) => {
     const page = getRandomInt(0, 30);
     setLastPage(page);
@@ -76,6 +91,16 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
       return false;
     }
   };
+
+  const checkSeries = () => {
+    setSountSeries(countSeries + 1);
+
+    if (countSeries > series) {
+      setSeries(countSeries);
+      dispatch(statisticSetSeries(userID, token, statistic, gameName, series));
+    }
+  };
+
   const checkWords = (word: Word, result: boolean): void => {
     if (wordsSettings.has(word.id)) {
       if (result) {
@@ -89,6 +114,8 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
             wordsSettings.get(word.id).optional.incorrect,
           ),
         );
+        dispatch(statisticSetCorrect(userID, token, statistic, gameName));
+        checkSeries();
       } else {
         dispatch(
           UpdateUserWord(
@@ -100,12 +127,20 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
             wordsSettings.get(word.id).optional.incorrect + 1,
           ),
         );
+        dispatch(statisticSetIncorrect(userID, token, statistic, gameName));
+        setSountSeries(0);
       }
     } else {
       if (result) {
         dispatch(SetUserWord(word.id, 'learn', userID, token, 1));
+        dispatch(statisticSetCorrect(userID, token, statistic, gameName));
+        dispatch(statisticSetLern(userID, token, statistic, gameName));
+        checkSeries();
       } else {
         dispatch(SetUserWord(word.id, 'learn', userID, token, 0, 1));
+        dispatch(statisticSetIncorrect(userID, token, statistic, gameName));
+        dispatch(statisticSetLern(userID, token, statistic, gameName));
+        setSountSeries(0);
       }
     }
   };
