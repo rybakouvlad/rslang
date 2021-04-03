@@ -39,7 +39,6 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
   createInitState(): SavannahState {
     const { words } = this.props;
-    console.log(words);
     const wordsArray = shuffle(words);
     const { word: initWord, wordTranslate: initWordTranslate } = wordsArray[0];
     const wordsArrayWithoutInitWord = wordsArray.filter(({ word }) => word !== initWord);

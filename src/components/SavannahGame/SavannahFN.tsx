@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SavannahGame from './SavannahGame';
 import { StartGame } from '../Game/StartGame';
 
@@ -17,7 +17,23 @@ function SavannahFN() {
 function SavannahWrap() {
   const { gameWords } = useCheckPosition();
   const [isStart, setIsStart] = useState(true);
-  return <>{isStart ? <StartGame setIsStart={setIsStart} /> : <SavannahGame words={gameWords} />}</>;
+  const [isLoading, setLoading] = useState(true);
+  useEffect(() => {
+    if (gameWords.length !== 0) {
+      setLoading(false);
+    }
+  }, [gameWords]);
+  return (
+    <>
+      {isStart ? (
+        <StartGame setIsStart={setIsStart} />
+      ) : isLoading ? (
+        <div>Загружаем игру...</div>
+      ) : (
+        <SavannahGame words={gameWords} />
+      )}
+    </>
+  );
 }
 
 export default SavannahFN;
