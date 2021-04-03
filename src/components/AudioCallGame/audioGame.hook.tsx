@@ -1,31 +1,16 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
-
-export interface IWord {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  textExampleTranslate: string;
-  textMeaningTranslate: string;
-  wordTranslate: string;
-}
-
+import { getRandomInt } from '../../utils/getRandomInt';
+import { shuffle } from '../../utils/getShuffle';
+import { Word } from '../../types/book';
 interface IContext {
   isShowResult: boolean;
   index: number;
   setIsShowResult: Dispatch<SetStateAction<boolean>>;
   nextIndex(): void;
-  randomGameWords: IWord[];
-  setWords: Dispatch<SetStateAction<IWord[]>>;
-  gameArr: IWord[];
-  hiddenWord: IWord;
+  randomGameWords: Word[];
+  setWords: Dispatch<SetStateAction<Word[]>>;
+  gameArr: Word[];
+  hiddenWord: Word;
   isEndGame: boolean;
   repeatGame(): void;
   playSound(): void;
@@ -41,21 +26,13 @@ export const useAudioGame = () => {
   return useContext(AudioCallGameContext);
 };
 
-function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-export const shuffle = (arr: Array<any>) => {
-  return arr.sort(() => Math.round(Math.random() * 100) - 50);
-};
 export const AudioCallGameProvider: React.FC = ({ children }: IProps) => {
   const [index, setIndex] = useState(0);
   const [isShowResult, setIsShowResult] = useState(false);
-  const [words, setWords] = useState<IWord[]>();
-  const [randomGameWords, setrandomGameWords] = useState<IWord[]>();
-  const [gameArr, setGameArr] = useState<IWord[]>([]);
-  const [hiddenWord, setHiddenWord] = useState<IWord>();
+  const [words, setWords] = useState<Word[]>();
+  const [randomGameWords, setrandomGameWords] = useState<Word[]>();
+  const [gameArr, setGameArr] = useState<Word[]>([]);
+  const [hiddenWord, setHiddenWord] = useState<Word>();
   const [isEndGame, setIsEndGame] = useState(false);
 
   const nextIndex = () => {

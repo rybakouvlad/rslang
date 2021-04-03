@@ -12,7 +12,8 @@ export default function (state: IStatGameState = initialState, action: SetStartG
       return { ...state, position: 'hard' };
     case StartGameStateTypes.SET_START_GAME_EASY:
       return { ...state, position: 'learn' };
-
+    case StartGameStateTypes.SET_START_GAME_NONE:
+      return { ...state, position: null };
     default:
       return { ...state };
   }
