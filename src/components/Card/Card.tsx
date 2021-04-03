@@ -19,6 +19,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = (props: CardProps) => {
   const dispatch = useDispatch();
   const { wordsSettings } = useTypeSelector((state) => state.userWords);
+  const { translateChecked, buttonsChecked } = useTypeSelector((state) => state.settings);
   const { userID, token } = useTypeSelector((state) => state.auth);
   const id = props.data.id ? props.data.id : props.data._id;
   const {
@@ -99,44 +100,47 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             <AudioSvg />
           </div>
         </div>
-        <div>{wordTranslate}</div>
+        {translateChecked && <div>{wordTranslate}</div>}
       </div>
       <span className="card-book__meaning" dangerouslySetInnerHTML={{ __html: textMeaning }} />
       <span className="card-book__example" dangerouslySetInnerHTML={{ __html: textExample }} />
-      <span className="card-book__example-translate">{textExampleTranslate}</span>
-      <span className="card-book__meaning-translate">{textMeaningTranslate}</span>
-      {((wordsSettings.has(id) && wordsSettings.get(id).difficulty !== 'delete') || !wordsSettings.has(id)) && (
+      {translateChecked && <span className="card-book__example-translate">{textExampleTranslate}</span>}
+      {translateChecked && <span className="card-book__meaning-translate">{textMeaningTranslate}</span>}
+      {buttonsChecked &&
+        ((wordsSettings.has(id) && wordsSettings.get(id).difficulty !== 'delete') || !wordsSettings.has(id)) && (
+          <OverlayTrigger
+            overlay={
+              <Tooltip id="tooltip-disabled">
+                {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard'
+                  ? 'Слово было отмечено как сложное'
+                  : 'Отметить слово как сложное'}
+              </Tooltip>
+            }
+          >
+            <button className="add-hard-btn" onClick={() => hardWordHandler()}>
+              {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard' ? (
+                <HardAddedSvg className={svgHardClasses} />
+              ) : (
+                <AddHardSvg />
+              )}
+            </button>
+          </OverlayTrigger>
+        )}
+      {buttonsChecked && (
         <OverlayTrigger
           overlay={
             <Tooltip id="tooltip-disabled">
-              {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard'
-                ? 'Слово было отмечено как сложное'
-                : 'Отметить слово как сложное'}
+              {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'delete'
+                ? 'Восстановить слово'
+                : 'Удалить слово'}
             </Tooltip>
           }
         >
-          <button className="add-hard-btn" onClick={() => hardWordHandler()}>
-            {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'hard' ? (
-              <HardAddedSvg className={svgHardClasses} />
-            ) : (
-              <AddHardSvg />
-            )}
+          <button className="add-deleted-btn" onClick={() => deleteWordHandler()}>
+            <DeleteSvg className={svgDeletedClasses} />
           </button>
         </OverlayTrigger>
       )}
-      <OverlayTrigger
-        overlay={
-          <Tooltip id="tooltip-disabled">
-            {wordsSettings.has(id) && wordsSettings.get(id).difficulty === 'delete'
-              ? 'Восстановить слово'
-              : 'Удалить слово'}
-          </Tooltip>
-        }
-      >
-        <button className="add-deleted-btn" onClick={() => deleteWordHandler()}>
-          <DeleteSvg className={svgDeletedClasses} />
-        </button>
-      </OverlayTrigger>
     </li>
   );
 };
