@@ -33,6 +33,7 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/savana">
           <SavanaGame />
+        </Route>
         <Route path="/settings">
           <Settings />
         </Route>
