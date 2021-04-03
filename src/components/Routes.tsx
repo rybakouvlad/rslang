@@ -7,7 +7,8 @@ import { Dictionary } from './Dictionary/Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
 import { Book } from './Book/Book';
-import SavanaGame from './SavannahGame/SavannahGame';
+// import SavanaGame from './SavannahGame/SavannahGame';
+import Savannah from '../components/SavannahGame/SavannahFN';
 
 export const Routes: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ export const Routes: React.FC = () => {
           <AudioCallGame />
         </Route>
         <Route path="/savana">
-          <SavanaGame />
+          <Savannah />
         </Route>
         <Route path="/settings">
           <Settings />

@@ -3,12 +3,16 @@ import Lifes from './Lifes';
 import Cases from './Cases';
 import GameOver from './GameOver';
 import WordComponent from './WordComponent';
-import { testWords } from './testWords';
+// import { testWords } from './testWords';
 import { roundTimeLife } from './constants';
 import { Word } from '../../types/book';
 import { shuffle } from '../../utils/shuffleArray';
 import wrong from '../../assets/sounds/wrong.mp3';
 import correct from '../../assets/sounds/correct.mp3';
+
+interface SavannahProps {
+  words: Word[];
+}
 
 interface SavannahState {
   currentWord: { word: string; wordTranslate: string };
@@ -25,16 +29,18 @@ interface SavannahState {
   };
 }
 
-class SavannahGame extends Component<{}, SavannahState> {
+class SavannahGame extends Component<SavannahProps, SavannahState> {
   private gameContainer: React.RefObject<HTMLDivElement>;
-  constructor({}) {
-    super({});
+  constructor(props: SavannahProps) {
+    super(props);
     this.gameContainer = React.createRef();
   }
   state = this.createInitState();
 
   createInitState(): SavannahState {
-    const wordsArray = shuffle(testWords);
+    const { words } = this.props;
+    console.log(words);
+    const wordsArray = shuffle(words);
     const { word: initWord, wordTranslate: initWordTranslate } = wordsArray[0];
     const wordsArrayWithoutInitWord = wordsArray.filter(({ word }) => word !== initWord);
     const answers = [...this.get3RandomAnswers(wordsArrayWithoutInitWord), initWordTranslate];
