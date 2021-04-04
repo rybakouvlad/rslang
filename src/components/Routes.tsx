@@ -31,7 +31,7 @@ export const Routes: React.FC = () => {
         <Route path="/audiocall">
           <AudioCallGame />
         </Route>
-        <Route path="/stats">
+        <Route path="/statistics">
           <Statistics />
         </Route>
         <Route path="/settings">
