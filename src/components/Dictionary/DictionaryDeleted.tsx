@@ -26,7 +26,7 @@ export const DictionaryDeleted: React.FC = () => {
     <>
       <h1>Dictionary Deleted</h1>
 
-      <div className="dictionary-cards-wrapper">
+      <div className="dictionary-cards-wrapper cards-container">
         {paginatedResults.map((elem, i) => {
           return <Card key={i} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />;
         })}
