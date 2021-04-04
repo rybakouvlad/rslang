@@ -50,6 +50,7 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
     const page = getRandomInt(0, 30);
     setLastPage(page);
     console.log(lastPage);
+
     setFetch(Number(value), page);
   };
 
