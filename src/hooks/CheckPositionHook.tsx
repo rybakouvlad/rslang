@@ -6,11 +6,18 @@ import { SetUserWord, UpdateUserWord } from '../store/actions/userWords';
 import { useQuery } from './useQuery';
 import { useSetWordsState } from './useGetBookWords';
 import { getRandomInt } from '../utils/getRandomInt';
+import { getAggregatedWords, getAggregateLearndWords } from '../store/actions/aggregatedWords';
+
 export interface IContext {
   gameWords: Word[];
+
   checkWords(word: Word, result: boolean): void;
+
   getPosition(): string;
+
   changeDifficulty(value: string): void;
+
+  getPrevPageWords(): boolean;
 }
 
 interface IProps {
@@ -24,23 +31,51 @@ export const useCheckPosition = () => {
 };
 
 export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
+  const query = useQuery();
   const [gameWords, setWords] = useState<Word[]>([]);
   const { words } = useTypeSelector((state) => state.book);
   const { userID, token } = useTypeSelector((state) => state.auth);
   const { paginatedResults } = useTypeSelector((state) => state.aggregatedWords);
   const { wordsSettings } = useTypeSelector((state) => state.userWords);
   const { setFetch, bookRandomWord } = useSetWordsState();
-  const [lastPage, setLastPage] = useState(0);
+  const [lastPage, setLastPage] = useState(Number.parseInt(query.get('page')));
+  const [lastGroup, setLastGroup] = useState(Number.parseInt(query.get('group')));
   const dispatch = useDispatch();
-  const query = useQuery();
-
-  const changeDifficulty = (value: string) => {
+  useEffect(() => {
+    if (bookRandomWord.length) {
+      setWords(bookRandomWord);
+    }
+  }, [bookRandomWord]);
+  const changeDifficulty = (group: string) => {
     const page = getRandomInt(0, 30);
     setLastPage(page);
-    console.log(lastPage);
-    setFetch(Number(value), page);
+    setLastGroup(Number(group));
+    setFetch(Number(group), page);
   };
-
+  const getPrevPageWords = () => {
+    if (lastPage !== 0) {
+      switch (query.get('path')) {
+        case 'book':
+          setFetch(lastGroup, lastPage - 1);
+          break;
+        case 'hard':
+          dispatch(getAggregatedWords(userID, token, 'hard', lastPage - 1));
+          setWords(paginatedResults);
+          break;
+        case 'learn':
+          dispatch(getAggregateLearndWords(userID, token, lastPage - 1));
+          setWords(paginatedResults);
+          break;
+        default:
+          setFetch(lastGroup, lastPage - 1);
+          break;
+      }
+      setLastPage(lastPage - 1);
+      return true;
+    } else {
+      return false;
+    }
+  };
   const checkWords = (word: Word, result: boolean): void => {
     if (wordsSettings.has(word.id)) {
       if (result) {
@@ -107,9 +142,9 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
 
   useEffect(() => {
     getWords();
-  }, [bookRandomWord]);
+  }, []);
   return (
-    <CheckPositionContext.Provider value={{ gameWords, checkWords, getPosition, changeDifficulty }}>
+    <CheckPositionContext.Provider value={{ gameWords, checkWords, getPosition, changeDifficulty, getPrevPageWords }}>
       {children}
     </CheckPositionContext.Provider>
   );

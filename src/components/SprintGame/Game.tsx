@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TimerGame } from './TimerGame';
 import { Score } from './Score';
 import { useCheckPosition } from '../../hooks/CheckPositionHook';
@@ -17,11 +17,21 @@ function getRandomNumber(num: number): number {
 }
 
 export const Game: React.FC = () => {
-  const { isPlaySound, playSound, isTimer, score, setScore, isFullScreen, setIsFullScreen } = useSprintGame();
-  const { gameWords, checkWords } = useCheckPosition();
-  const [arr] = useState<Array<string>>(getNewArray());
-  const [index, setIndex] = useState<number>(0);
-  const [currentTranslation, setCurrentTranslation] = useState(( gameWords.length !== index) && getTranslation(arr[index]));
+  const {
+    isPlaySound,
+    playSound,
+    isTimer,
+    setIsTimer,
+    score,
+    setScore,
+    isFullScreen,
+    setIsFullScreen,
+  } = useSprintGame();
+  const { gameWords, checkWords, getPrevPageWords } = useCheckPosition();
+  const [arr, setArr] = useState<Array<string>>();
+  const [index, setIndex] = useState<number>();
+  const [currentTranslation, setCurrentTranslation] = useState<string>();
+  const [currentWord, setCurrentWord] = useState<string>();
   const [trueTimes, setTrueTimes] = useState(0);
   const [results, setResults] = useState<IResults>({
     correctWords: [],
@@ -59,11 +69,13 @@ export const Game: React.FC = () => {
     setScore(newScore);
   };
   const preparationNextWord = () => {
-    setIndex(index + 1);
-    console.log('1', gameWords.length - 1);
-    console.log('2', index);
-    (gameWords.length - 1 !== index) && setCurrentTranslation(getTranslation(arr[index + 1]));
-    console.log('2', index);
+    if (gameWords.length - 1 !== index) {
+      setCurrentWord(getWordObj(arr[index + 1]).word);
+      setCurrentTranslation(getTranslation(arr[index + 1]));
+      setIndex(index + 1);
+    } else {
+      !getPrevPageWords() && setIsTimer(false);
+    }
   };
   const rightAnswer = () => {
     document.querySelector('.game-card').classList.add('correct-answer');
@@ -100,10 +112,29 @@ export const Game: React.FC = () => {
   const noHandler = () => {
     getWordObj(arr[index]).wordTranslate === currentTranslation ? wrongAnswer() : rightAnswer();
   };
-
+  const handlerHotKeys = ({ key }: any): void => {
+    if (key === 'ArrowLeft') {
+      yesHandler();
+    } else if (key === 'ArrowRight') {
+      noHandler();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('keyup', handlerHotKeys);
+    return () => {
+      window.removeEventListener('keyup', handlerHotKeys);
+    };
+  });
+  useEffect(() => {
+    const newArr = getNewArray();
+    setArr(newArr);
+    setIndex(0);
+    setCurrentWord(getWordObj(newArr[0]).word);
+    setCurrentTranslation(getTranslation(newArr[0]));
+  }, [gameWords]);
   return (
     <>
-      {isTimer && gameWords.length !== index ? (
+      {isTimer && gameWords.length !== index && arr ? (
         <>
           <div className="sprint-game-settings">
             <SoundToggle />
@@ -116,15 +147,15 @@ export const Game: React.FC = () => {
             <Score scoreNumber={score} />
             <div className="sprint-card">
               <div className="sprint-card-header">
-                <p>{getWordObj(arr[index]).word}</p>
+                <p>{currentWord}</p>
                 <p>{currentTranslation}</p>
               </div>
               <div className="sprint-card-footer">
                 <button className="yes-btn" onClick={yesHandler}>
-                  да
+                  &larr; да
                 </button>
                 <button className="no-btn" onClick={noHandler}>
-                  нет
+                  нет &rarr;
                 </button>
               </div>
             </div>

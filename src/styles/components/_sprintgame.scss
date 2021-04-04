@@ -137,3 +137,24 @@
   justify-content: space-between;
   width: 500px;
 }
+
+.sprint-game-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg-wrapper {
+  background-color: cyan;
+  border-radius: 50%;
+  margin-left: 10px;
+  svg {
+    fill: #92BBE0;
+
+    &:hover {
+      cursor: pointer;
+      fill: deepskyblue;
+    }
+  }
+
+}

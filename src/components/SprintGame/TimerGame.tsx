@@ -11,17 +11,19 @@ export const TimerGame: React.FC = () => {
   }
   const secondsRadius = mapNumber(60 - timer, 60, 0, 0, 360);
   useEffect(() => {
-    const interval = setTimeout(() => {
-      if (timer) {
-        setTimer(timer - 1);
+    let flag = 0;
+    const interval = setInterval(() => {
+      if (flag !== 60) {
+        setTimer((timer) => timer - 1);
+        flag++;
       } else {
         setIsTimer(false);
       }
     }, 1000);
     return () => {
-      clearTimeout(interval);
+      clearInterval(interval);
     };
-  });
+  }, []);
   return (
     <div>
       <div className="sprint-timer">

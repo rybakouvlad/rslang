@@ -5,6 +5,8 @@ import { ReactComponent as SprintSvg } from '../assets/svg/sprint.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 interface IProps {
   pathWords: string;
+  page?: string;
+  group?: string;
 }
 
 export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
@@ -15,7 +17,7 @@ export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
           <AudioCallSvg />
         </div>
       </Link>
-      <Link to={`/sprint?path=${props.pathWords}`}>
+      <Link to={`/sprint?path=${props.pathWords}&page=${props.page}&group=${props.group}`}>
         <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
           <SprintSvg />
         </div>

@@ -29,7 +29,6 @@ export const useSprintGame = () => {
 export const SprintGameProvider: React.FC = ({ children }: IProps) => {
   const [isPlaySound, setIsPlaySound] = useState(true);
   const [isTimer, setIsTimer] = useState(true);
-  // const [timer, setTimer] = useState(60);
   const [score, setScore] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -40,6 +39,7 @@ export const SprintGameProvider: React.FC = ({ children }: IProps) => {
       new Audio(wrong).play();
     }
   };
+
   return (
     <SprintGameContext.Provider
       value={{
@@ -47,8 +47,6 @@ export const SprintGameProvider: React.FC = ({ children }: IProps) => {
         setIsPlaySound,
         isTimer,
         setIsTimer,
-        // timer,
-        // setTimer,
         score,
         setScore,
         isFullScreen,
