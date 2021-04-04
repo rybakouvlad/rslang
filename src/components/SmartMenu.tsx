@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as BookSvg } from '../assets/svg/book.svg';
 import { ReactComponent as HomeSvg } from '../assets/svg/home.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
+import { ReactComponent as SprintSvg } from '../assets/svg/sprint.svg';
 import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
 import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
@@ -26,13 +27,13 @@ export const SmartMenu: React.FC = () => {
             </div>
           </Link>
           <Link to="/dictionary">
-            <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
+            <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
               <PencilSvg />
             </div>
           </Link>
-          <Link to="/games">
+          <Link to="/sprint">
             <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
-              <GameSvg />
+              <SprintSvg />
             </div>
           </Link>
           <Link to="/audiocall">
