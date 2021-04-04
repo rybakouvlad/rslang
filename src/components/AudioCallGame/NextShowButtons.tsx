@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useAudioGame } from './audioGame.hook';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
+import { Word } from '../../types/book';
+import { IResults } from './Game';
+import { Button } from 'react-bootstrap';
 
-export const NextShowButtons: React.FC = () => {
+interface IProps {
+  hiddenWord: Word;
+  setResults: Dispatch<SetStateAction<IResults>>;
+  results: IResults;
+}
+
+export const NextShowButtons: React.FC<IProps> = (props: IProps) => {
   const { isShowResult, nextIndex, setIsShowResult } = useAudioGame();
+  const { checkWords } = useCheckPosition();
+  const checkHandler = () => {
+    checkWords(props.hiddenWord, false);
+    props.setResults({
+      ...props.results,
+      incorrect: props.results.incorrect + 1,
+      incorrectWords: [...props.results.incorrectWords, props.hiddenWord],
+    });
+  };
   return (
     <div>
       {isShowResult ? (
-        <button onClick={nextIndex}>Следущие</button>
+        <Button onClick={nextIndex}>Следущие</Button>
       ) : (
-        <button
+        <Button
           onClick={() => {
             setIsShowResult(true);
+            checkHandler();
           }}
         >
           Не знаю
-        </button>
+        </Button>
       )}
     </div>
   );
