@@ -14,6 +14,7 @@ interface CardProps {
   data: Word;
   isAudioPlaying: boolean;
   setIsAudioPlaying: (param: boolean) => void;
+  level?: number;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
@@ -36,8 +37,19 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     wordTranslate,
   } = props.data;
   const { isAudioPlaying, setIsAudioPlaying } = props;
+  const level = props.level || 6;
 
   const SERVER_PATH = 'https://server-team19-rsschool.herokuapp.com';
+
+  const colors = [
+    'rgba(12, 226, 0, 0.2)',
+    'rgba(198, 214, 97, 0.2)',
+    'rgba(245, 198, 97, 0.2)',
+    'rgba(241, 156, 97, 0.2)',
+    'rgba(241, 102, 74, 0.2)',
+    'rgba(241, 31, 49, 0.2)',
+    'none',
+  ];
 
   const playAudioSequence = () => {
     if (isAudioPlaying) return;
@@ -90,7 +102,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   });
 
   return (
-    <li className={liClasses}>
+    <li className={liClasses} style={{ backgroundColor: colors[level], borderColor: colors[level] }}>
       <img className="card-book__image" src={`${SERVER_PATH}/${image}`} alt="imagine"></img>
       <div className="card-book__word">
         <div>{word}</div>
