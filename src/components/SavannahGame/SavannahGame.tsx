@@ -12,6 +12,7 @@ import correct from '../../assets/sounds/correct.mp3';
 
 interface SavannahProps {
   words: Word[];
+  checkWords(word: Word, result: boolean): void;
 }
 
 interface SavannahState {
@@ -93,12 +94,19 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
       animation,
       gameOver,
     } = this.state;
+
     if (gameOver) return;
 
+    const { checkWords } = this.props;
+    const prevWord = words[index - 1];
+
     const currentLifes = isAnswerCorrect ? lifes : lifes - 1;
+
+    isAnswerCorrect ? checkWords(prevWord, true) : checkWords(prevWord, false);
+
     const updatedStatistics = isAnswerCorrect
-      ? { correct: [...correct, words[index - 1]], wrong }
-      : { correct, wrong: [...wrong, words[index - 1]] };
+      ? { correct: [...correct, prevWord], wrong }
+      : { correct, wrong: [...wrong, prevWord] };
     isAnswerCorrect ? this.playSound('correct') : this.playSound('wrong');
     const isGameOver = words.length < index + 1 || currentLifes === 0;
 

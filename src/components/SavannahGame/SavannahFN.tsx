@@ -16,6 +16,7 @@ function SavannahFN() {
 
 function SavannahWrap() {
   const { gameWords } = useCheckPosition();
+  const { checkWords } = useCheckPosition();
   const [isStart, setIsStart] = useState(true);
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
@@ -30,7 +31,7 @@ function SavannahWrap() {
       ) : isLoading ? (
         <div>Загружаем игру...</div>
       ) : (
-        <SavannahGame words={gameWords} />
+        <SavannahGame words={gameWords} checkWords={checkWords} />
       )}
     </>
   );

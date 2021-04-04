@@ -54,14 +54,18 @@
   animation-timing-function: linear;
 }
 
-.game-result {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
+// .game-result {
+//   width: 500px;
+//   height: 500px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 50px;
+// }
+
+.game-over-wrapper {
+  background-color: white;
 }
 
 .new-game-btn {

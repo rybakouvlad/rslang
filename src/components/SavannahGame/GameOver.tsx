@@ -30,63 +30,36 @@ class GameOver extends Component<GameOverProps> {
       //     Начать игру заново
       //   </button>
       // </div>
-      <div className="audiocall-end">
-        <h1>Конец игры</h1>
-        <div className="audiocall-result">
-          <div className="audiocall-result-col">
-            <div className="audiocall-result-row audiocall-true">Правильно:{correct.length}</div>
-            {correct.map((el) => {
-              return (
-                <div className="audiocall-result-row audiocall-true" key={el.id}>
-                  {el.word}-{el.wordTranslate}
-                </div>
-              );
-            })}
+      <div className="game-over-wrapper">
+        <div className="audiocall-end">
+          <h1>Конец игры</h1>
+          <div className="audiocall-result">
+            <div className="audiocall-result-col">
+              <div className="audiocall-result-row audiocall-true">Правильно:{correct.length}</div>
+              {correct.map((el) => {
+                return (
+                  <div className="audiocall-result-row audiocall-true" key={el.id}>
+                    {el.word}-{el.wordTranslate}
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              <div className="audiocall-result-row audiocall-false">Неправильно:{wrong.length}</div>
+              {wrong.map((el) => {
+                return (
+                  <div className="audiocall-result-row audiocall-false" key={el.id}>
+                    {el.word}-{el.wordTranslate}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div>
-            <div className="audiocall-result-row audiocall-false">Неправильно:{wrong.length}</div>
-            {wrong.map((el) => {
-              return (
-                <div className="audiocall-result-row audiocall-false" key={el.id}>
-                  {el.word}-{el.wordTranslate}
-                </div>
-              );
-            })}
-          </div>
+          <Button onClick={this.handleClick}>Повторить игру</Button>
         </div>
-        <Button onClick={this.handleClick}>Повторить игру</Button>
       </div>
     );
   }
 }
 
 export default GameOver;
-
-{
-  /* <div className="audiocall-end">
-      <h1>Конец игры</h1>
-      <div className="audiocall-result">
-        <div className="audiocall-result-col">
-          <div className="audiocall-result-row audiocall-true">Правильно:{props.results.correct}</div>
-          {props.results.correctWords.map((el) => {
-            return (
-              <div className="audiocall-result-row audiocall-true" key={el.id}>
-                {el.word}
-              </div>
-            );
-          })}
-        </div>
-        <div>
-          <div className="audiocall-result-row audiocall-false">Неправильно:{props.results.incorrect}</div>
-          {props.results.incorrectWords.map((el) => {
-            return (
-              <div className="audiocall-result-row audiocall-false" key={el.id}>
-                {el.word}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <Button onClick={repeatGame}>Повторить игру</Button>
-    </div> */
-}
