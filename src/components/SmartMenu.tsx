@@ -32,7 +32,6 @@ export const SmartMenu: React.FC = () => {
               <PencilSvg />
             </div>
           </Link>
-
           <Link to="/statistic">
             <div className="svg-wrapper" style={{ backgroundColor: '#FC983A' }}>
               <StatsSvg />

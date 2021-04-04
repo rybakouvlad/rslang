@@ -30,7 +30,6 @@ export const Routes: React.FC = () => {
         <Route path="/dictionary">
           <Dictionary />
         </Route>
-
         <Route path="/sprint">
           <SprintGameWrapper />
         </Route>

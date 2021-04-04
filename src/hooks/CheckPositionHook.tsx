@@ -7,6 +7,7 @@ import { useQuery } from './useQuery';
 import { useSetWordsState } from './useGetBookWords';
 import { getRandomInt } from '../utils/getRandomInt';
 import { getAggregatedWords, getAggregateLearndWords } from '../store/actions/aggregatedWords';
+
 import {
   statisticSetCorrect,
   statisticSetIncorrect,
@@ -49,6 +50,7 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   const [lastPage, setLastPage] = useState(Number.parseInt(query.get('page')));
   const [lastGroup, setLastGroup] = useState(Number.parseInt(query.get('group')));
   const dispatch = useDispatch();
+
   const [series, setSeries] = useState(1);
   const [countSeries, setSountSeries] = useState(1);
 
