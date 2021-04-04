@@ -38,7 +38,7 @@ export const SmartMenu: React.FC = () => {
               <StatsSvg />
             </div>
           </Link>
-          <Link to="/games">
+          <Link to="/sprint">
             <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
               <SprintSvg />
             </div>

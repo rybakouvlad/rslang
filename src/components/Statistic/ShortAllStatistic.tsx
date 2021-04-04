@@ -18,14 +18,19 @@ export const ShortAllStatistic: React.FC<IProps> = (props: IProps) => {
       );
       return;
     }
-    const sumLearn = props.results.games.reduce((sum, value: any) => {
-      return sum.learn + value.learn;
+    let sumLearn = 0;
+    props.results.games.forEach((el) => {
+      sumLearn += el.learn;
     });
-    const correct = props.results.games.reduce((sum, value: any) => {
-      return sum.correct + value.correct;
+
+    let correct = 0;
+    props.results.games.forEach((el) => {
+      correct += el.correct;
     });
-    const incorrect = props.results.games.reduce((sum, value: any) => {
-      return sum.incorrect + value.incorrect;
+
+    let incorrect = 0;
+    props.results.games.forEach((el) => {
+      incorrect += el.incorrect;
     });
 
     setLearnWords(+sumLearn);
@@ -34,7 +39,7 @@ export const ShortAllStatistic: React.FC<IProps> = (props: IProps) => {
 
   useEffect(() => {
     setStatisticData();
-  }, []);
+  }, [props]);
   return (
     <>
       <h2>Сегодня изучено: {learnWords}</h2>

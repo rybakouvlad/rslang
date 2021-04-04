@@ -19,14 +19,11 @@ export const StatisticGraphs: React.FC = () => {
       if (el.games.length === 1) {
         masLabel.push(el.games[0].learn);
       } else {
-        masLabel.push(
-          el.games.reduce((sum, value: any) => {
-            if (!value.learn) {
-              return sum;
-            }
-            return sum.learn + value.learn;
-          }),
-        );
+        let sum = 0;
+        el.games.forEach((value) => {
+          sum += value.learn;
+        }),
+          masLabel.push(sum);
       }
     });
     setEveryData(masLabel);
@@ -35,17 +32,18 @@ export const StatisticGraphs: React.FC = () => {
 
   const getIncreaseValue = () => {
     let increase = 0;
+
     const masData: any = [];
     optional.statistic.forEach((el) => {
       if (el.games.length === 1) {
         increase += el.games[0].learn;
         masData.push(increase);
       } else {
-        increase += +el.games.reduce((sum, value: any) => {
-          const results = sum.learn + value.learn + increase;
-          increase += value.learn;
-          return results;
+        let sum = 0;
+        el.games.forEach((value) => {
+          sum += value.learn;
         });
+        increase += sum;
         masData.push(increase);
       }
     });

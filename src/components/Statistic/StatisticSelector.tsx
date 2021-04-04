@@ -10,6 +10,7 @@ interface IProps {
 const options: OptionType[] = [
   { value: 'audiocall', label: 'Аудиовызов' },
   { value: 'sprint', label: 'Спринт' },
+  { value: 'savana', label: 'Савана' },
 ];
 
 export const StatisticSelector: React.FC<IProps> = (props: IProps) => {
