@@ -30,8 +30,6 @@ export const statisticSetCorrect = (userID: string, token: string, statistic: IG
   return async (dispatch: Dispatch<SetGameStatisticActions>) => {
     dispatch({ type: GamesStatisticTypes.SET_GAME_STATISTIC_LOADING });
     try {
-      console.log(result);
-
       postStatistic(userID, token, result)
         .then((data) => {
           dispatch({
@@ -45,9 +43,7 @@ export const statisticSetCorrect = (userID: string, token: string, statistic: IG
             payload: 'Авторизация неудалась, проверьте почту или пароль',
           });
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -73,8 +69,6 @@ export const statisticSetIncorrect = (userID: string, token: string, statistic: 
   return async (dispatch: Dispatch<SetGameStatisticActions>) => {
     dispatch({ type: GamesStatisticTypes.SET_GAME_STATISTIC_LOADING });
     try {
-      console.log(result);
-
       postStatistic(userID, token, result)
         .then((data) => {
           dispatch({
@@ -88,9 +82,7 @@ export const statisticSetIncorrect = (userID: string, token: string, statistic: 
             payload: 'Авторизация неудалась, проверьте почту или пароль',
           });
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -116,8 +108,6 @@ export const statisticSetLern = (userID: string, token: string, statistic: IGame
   return async (dispatch: Dispatch<SetGameStatisticActions>) => {
     dispatch({ type: GamesStatisticTypes.SET_GAME_STATISTIC_LOADING });
     try {
-      console.log(result);
-
       postStatistic(userID, token, result)
         .then((data) => {
           dispatch({
@@ -131,9 +121,7 @@ export const statisticSetLern = (userID: string, token: string, statistic: IGame
             payload: 'Авторизация неудалась, проверьте почту или пароль',
           });
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -165,8 +153,6 @@ export const statisticSetSeries = (
   return async (dispatch: Dispatch<SetGameStatisticActions>) => {
     dispatch({ type: GamesStatisticTypes.SET_GAME_STATISTIC_LOADING });
     try {
-      console.log(result);
-
       postStatistic(userID, token, result)
         .then((data) => {
           dispatch({
@@ -180,9 +166,7 @@ export const statisticSetSeries = (
             payload: 'Авторизация неудалась, проверьте почту или пароль',
           });
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -228,9 +212,7 @@ export const getAllStatistic = (userID: string, token: string) => {
         payload: result,
       });
       return result;
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -258,19 +240,7 @@ const checkData = (statistic: IGameAllStatic) => {
 
 const checkGame = (statistic: IGameAllStatic, name: string) => {
   const date = new Date();
-  console.log(
-    '!!!!!!',
-    statistic.optional.statistic.some(
-      (el: IDayStat) =>
-        el.date.getFullYear() === date.getFullYear() &&
-        el.date.getMonth() === date.getMonth() &&
-        el.date.getDay() === date.getDay() &&
-        el.games.some((element) => {
-          console.log('first:', el.date, 'date:', date);
-          return element.name === name;
-        }),
-    ),
-  );
+
   if (
     statistic.optional.statistic.some(
       (el: IDayStat) =>
@@ -278,8 +248,6 @@ const checkGame = (statistic: IGameAllStatic, name: string) => {
         el.date.getMonth() === date.getMonth() &&
         el.date.getDay() === date.getDay() &&
         el.games.some((element) => {
-          console.log('SDASD', el);
-
           return element.name === name;
         }),
     )

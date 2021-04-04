@@ -8,6 +8,7 @@ import { ReactComponent as SeatingSvg } from '../assets/svg/seating.svg';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
 import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
 import { ReactComponent as PencilSvg } from '../assets/svg/Pencil.svg';
+import { ReactComponent as StatsSvg } from '../assets/svg/stats.svg';
 import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
@@ -31,7 +32,13 @@ export const SmartMenu: React.FC = () => {
               <PencilSvg />
             </div>
           </Link>
-          <Link to="/sprint">
+
+          <Link to="/statistic">
+            <div className="svg-wrapper" style={{ backgroundColor: '#E07BD0' }}>
+              <StatsSvg />
+            </div>
+          </Link>
+          <Link to="/games">
             <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
               <SprintSvg />
             </div>

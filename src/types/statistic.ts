@@ -1,4 +1,4 @@
-interface IGameStat {
+export interface IGameStat {
   name: string;
   correct: number;
   incorrect: number;

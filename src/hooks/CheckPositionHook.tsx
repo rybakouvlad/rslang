@@ -67,6 +67,7 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
     setLastGroup(Number(group));
     setFetch(Number(group), page);
   };
+
   const getPrevPageWords = () => {
     if (lastPage !== 0) {
       switch (query.get('path')) {
