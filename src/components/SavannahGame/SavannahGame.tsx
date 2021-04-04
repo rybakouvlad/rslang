@@ -24,8 +24,8 @@ interface SavannahState {
   animation: boolean;
   roundExpired: number;
   statistics: {
-    correct: number;
-    wrong: number;
+    correct: Word[];
+    wrong: Word[];
   };
 }
 
@@ -55,8 +55,8 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
       animation: true,
       roundExpired: new Date().getTime() + roundTimeLife,
       statistics: {
-        correct: 0,
-        wrong: 0,
+        correct: [],
+        wrong: [],
       },
     };
   }
@@ -83,6 +83,9 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   };
 
   newRound = (index: number, isAnswerCorrect: boolean): void => {
+    const isSavanaGameOpened = window.location.pathname.includes('savana');
+    if (!isSavanaGameOpened) return;
+
     const {
       words,
       lifes,
@@ -93,7 +96,9 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
     if (gameOver) return;
 
     const currentLifes = isAnswerCorrect ? lifes : lifes - 1;
-    const updatedStatistics = isAnswerCorrect ? { correct: correct + 1, wrong } : { correct, wrong: wrong + 1 };
+    const updatedStatistics = isAnswerCorrect
+      ? { correct: [...correct, words[index - 1]], wrong }
+      : { correct, wrong: [...wrong, words[index - 1]] };
     isAnswerCorrect ? this.playSound('correct') : this.playSound('wrong');
     const isGameOver = words.length < index + 1 || currentLifes === 0;
 
