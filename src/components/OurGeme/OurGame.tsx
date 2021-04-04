@@ -1,28 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
-import { testWords } from '../../hooks/testWords';
+// import { testWords } from '../../hooks/testWords';
 import get from '../../assets/ourGameSounds/get.mp3';
 import success from '../../assets/ourGameSounds/success.mp3';
 import wrong from '../../assets/ourGameSounds/wrong.mp3';
 import { ToggleButton } from 'react-bootstrap';
 import { ToggleButtonGroup } from 'react-bootstrap';
+// import { IWord } from 'Components/AudioCallGame/audioGame.hook';
+// import { useCheckPosition } from '../../hooks/CheckPositionHook';
 
-// export interface I_OurGame {
-//   id: string;
-//   group: number;
-//   page: number;
-//   word: string;
-//   image: string;
-//   audio: string;
-//   audioMeaning: string;
-//   audioExample: string;
-//   textMeaning: string;
-//   textExample: string;
-//   transcription: string;
-//   textExampleTranslate: string;
-//   textMeaningTranslate: string;
-//   wordTranslate: string;
-// }
+export interface I_OurGame {
+  id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  textExampleTranslate: string;
+  textMeaningTranslate: string;
+  wordTranslate: string;
+}
 
 // function randomArrSort(): number {
 //   return Math.random() - 0.5;
@@ -44,10 +46,15 @@ const playSound = () => {
   };
   return sounds;
 };
+interface I_qq {
+  words: I_OurGame[];
+}
 
-export const OurGame: React.FC = () => {
-  const [words, setWords] = useState(testWords);
-  const newWords = testWords;
+export const OurGame: React.FC<I_qq> = (props: I_qq) => {
+  // const { gameWords } = useCheckPosition();
+  const [words, setWords] = useState(null);
+  const [isLoad, setLoad] = useState(false);
+  const newWords = props.words;
   const [card, setCard] = useState(null);
   const [score, setScore] = useState(0);
   const [findWords, setFindWords] = useState([]);
@@ -57,6 +64,14 @@ export const OurGame: React.FC = () => {
   const [soundToggler, setSoundToggler] = useState(true);
   const [saveRadioSoundActifeBtn_ON, setSaveRadioSoundActifeBtn_ON] = useState(1);
   const [saveRadioSoundActifeBtn_OFF, setSaveRadioSoundActifeBtn_OFF] = useState(1);
+  // setTimeout(() => {
+  //   console.log(gameWords);
+  // }, 5000);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log(gameWords);
+  //   }, 5000);
+  // });
 
   useEffect(() => {
     const IsSoundSettings = localStorage.getItem('soundSettingsOurGame');
@@ -81,7 +96,6 @@ export const OurGame: React.FC = () => {
   // }, [words]);
 
   const dragStartHandler = (e: any) => {
-    console.log(saveRadioSoundActifeBtn_ON, saveRadioSoundActifeBtn_OFF);
     setCard(e);
     if (soundToggler) playSound().getWord.play();
   };
@@ -104,8 +118,8 @@ export const OurGame: React.FC = () => {
     if (currentCard === dropCard) {
       // console.log(currentCard, '--', dropCard);
       if (soundToggler) playSound().successAnswer.play();
-      setWords((words) =>
-        words.filter((word) => {
+      setWords((words: any) =>
+        words.filter((word: any) => {
           if (word.id === card.target.id && !isWrongWord) {
             setScore((prev) => prev + 10);
             setFindWords((prev) => {
@@ -119,7 +133,7 @@ export const OurGame: React.FC = () => {
       if (soundToggler) playSound().wrongAnswer.play();
       setScore((prev) => prev - 10);
       e.target.style.background = 'rgba(153, 46, 55, 0.39)';
-      words.map((word) => {
+      words.map((word: any) => {
         if (word.id + '_EN' === dropCard) {
           e.target.dataset.wrong = 'wrong';
           setNotCurrentWords((prev) => {
@@ -131,9 +145,14 @@ export const OurGame: React.FC = () => {
   };
 
   useEffect(() => {
+    setLoad(() => true);
     const findWordsSet = new Set(findWords);
     localStorage.setItem('currectWords', JSON.stringify([...findWordsSet]));
   }, [words]);
+
+  useEffect(() => {
+    setWords(() => props.words);
+  }, [isLoad]);
 
   const runNewGame = () => {
     localStorage.setItem('previousScore', score.toString());
@@ -145,7 +164,7 @@ export const OurGame: React.FC = () => {
   };
 
   const showResultGeme = () => {
-    if (!words.length) {
+    if (!words.length && isLoad) {
       const notCurrentWordsSet: any = new Set([...notCurrentWords]);
       const arrSet: any[] = [];
 
@@ -240,53 +259,55 @@ export const OurGame: React.FC = () => {
           Full Screen
         </Button>
       </div>
+      {isLoad && (
+        <div className="ourGame_inner">
+          <Row ref={EngWordElement}>
+            <Col className="col_wrapper">
+              {words.map((el: any) => {
+                return (
+                  <Col
+                    md={4}
+                    id={el.id}
+                    data-ru="ru"
+                    className="drag_word"
+                    key={el.id}
+                    onDrag={(e: any) => (e.target.style.cursor = 'grab')}
+                    onDragStart={(e: any) => dragStartHandler(e)}
+                    onDragLeave={(e: any) => dragLeaveHandler(e)}
+                    onDrop={(e: any) => dropHandeler(e)}
+                    draggable={true}
+                    xs={6}
+                  >
+                    {el.wordTranslate}
+                  </Col>
+                );
+              })}
+            </Col>
+            <Col className="col_wrapper">
+              {words.map((el: any) => {
+                return (
+                  <Col
+                    style={{ userSelect: 'none' }}
+                    key={el.id}
+                    md={{ span: 4, offset: 4 }}
+                    id={el.id + '_EN'}
+                    className="word"
+                    onDragStart={(e: any) => dragStartHandler(e)}
+                    onDragLeave={(e: any) => dragLeaveHandler(e)}
+                    onDragOver={(e: any) => dragOverHandler(e)}
+                    onDrop={(e: any) => dropHandeler(e)}
+                    xs={6}
+                  >
+                    {el.word}
+                  </Col>
+                );
+              })}
+            </Col>
+          </Row>
+        </div>
+      )}
 
-      <div className="ourGame_inner">
-        <Row ref={EngWordElement}>
-          <Col className="col_wrapper">
-            {words.map((el) => {
-              return (
-                <Col
-                  md={4}
-                  id={el.id}
-                  data-ru="ru"
-                  className="drag_word"
-                  key={el.id}
-                  onDrag={(e: any) => (e.target.style.cursor = 'grab')}
-                  onDragStart={(e: any) => dragStartHandler(e)}
-                  onDragLeave={(e: any) => dragLeaveHandler(e)}
-                  onDrop={(e: any) => dropHandeler(e)}
-                  draggable={true}
-                  xs={6}
-                >
-                  {el.wordTranslate}
-                </Col>
-              );
-            })}
-          </Col>
-          <Col className="col_wrapper">
-            {words.map((el: any) => {
-              return (
-                <Col
-                  style={{ userSelect: 'none' }}
-                  key={el.id}
-                  md={{ span: 4, offset: 4 }}
-                  id={el.id + '_EN'}
-                  className="word"
-                  onDragStart={(e: any) => dragStartHandler(e)}
-                  onDragLeave={(e: any) => dragLeaveHandler(e)}
-                  onDragOver={(e: any) => dragOverHandler(e)}
-                  onDrop={(e: any) => dropHandeler(e)}
-                  xs={6}
-                >
-                  {el.word}
-                </Col>
-              );
-            })}
-          </Col>
-        </Row>
-      </div>
-      {showResultGeme()}
+      {isLoad ? showResultGeme() : <div></div>}
     </Container>
   );
 };
