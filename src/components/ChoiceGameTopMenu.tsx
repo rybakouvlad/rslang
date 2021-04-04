@@ -15,14 +15,14 @@ export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
           <AudioCallSvg />
         </div>
       </Link>
-      <Link to={`/savana?path=${props.pathWords}`}>
-        <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
-          <SavannahSvg />
-        </div>
-      </Link>
       <Link to="/games">
         <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
           <GameSvg />
+        </div>
+      </Link>
+      <Link to={`/savana?path=${props.pathWords}`}>
+        <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
+          <SavannahSvg />
         </div>
       </Link>
       <Link to="/games">

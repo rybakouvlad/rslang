@@ -26,7 +26,7 @@ export const DictionaryHard: React.FC = () => {
     <>
       <h1>Dictionary Hard</h1>
       <ChoiceGameTopMenu pathWords={'hard'} />
-      <div className="dictionary-cards-wrapper">
+      <div className="dictionary-cards-wrapper cards-container">
         {paginatedResults.map((elem, i) => {
           return <Card key={i} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />;
         })}

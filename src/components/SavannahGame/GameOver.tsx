@@ -22,14 +22,6 @@ class GameOver extends Component<GameOverProps> {
     } = this.props;
 
     return (
-      // <div className="game-result contrast-color">
-      //   <div>GAME OVER</div>
-      //   <div>Correct: {correct.length}</div>
-      //   <div>Wrong: {wrong.length}</div>
-      //   <button className="new-game-btn" onClick={this.handleClick}>
-      //     Начать игру заново
-      //   </button>
-      // </div>
       <div className="game-over-wrapper">
         <div className="audiocall-end">
           <h1>Конец игры</h1>

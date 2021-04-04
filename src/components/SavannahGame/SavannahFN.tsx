@@ -3,7 +3,6 @@ import SavannahGame from './SavannahGame';
 import { StartGame } from '../Game/StartGame';
 
 import { useCheckPosition } from '../../hooks/CheckPositionHook';
-// import { testWords } from './testWords';
 import { CheckPositionProvider } from '../../hooks/CheckPositionHook';
 
 function SavannahFN() {

@@ -3,12 +3,13 @@ import Lifes from './Lifes';
 import Cases from './Cases';
 import GameOver from './GameOver';
 import WordComponent from './WordComponent';
-// import { testWords } from './testWords';
+import { Button } from 'react-bootstrap';
 import { roundTimeLife } from './constants';
 import { Word } from '../../types/book';
 import { shuffle } from '../../utils/shuffleArray';
 import wrong from '../../assets/sounds/wrong.mp3';
 import correct from '../../assets/sounds/correct.mp3';
+import { SoundToggle } from './SoundToggle';
 
 interface SavannahProps {
   words: Word[];
@@ -17,6 +18,8 @@ interface SavannahProps {
 
 interface SavannahState {
   currentWord: { word: string; wordTranslate: string };
+  isPlaySound: boolean;
+  isFullScreen: boolean;
   answers: string[];
   lifes: number;
   words: Word[];
@@ -48,6 +51,8 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
     return {
       currentWord: { word: initWord, wordTranslate: initWordTranslate },
+      isPlaySound: true,
+      isFullScreen: false,
       answers: shuffledAnswers,
       lifes: 5,
       words: wordsArray,
@@ -76,6 +81,10 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   }
 
   playSound = (type: 'correct' | 'wrong'): void => {
+    const { isPlaySound } = this.state;
+    console.log(isPlaySound);
+    if (!isPlaySound) return;
+
     if (type === 'correct') {
       new Audio(correct).play();
     } else {
@@ -188,14 +197,28 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
     this.setState(initState);
   };
 
+  setIsPlaySound = (flag: boolean) => {
+    this.setState({ isPlaySound: flag });
+  };
+
   render() {
-    const { currentWord, lifes, answers, index, gameOver, statistics, animation } = this.state;
+    const { currentWord, lifes, answers, index, gameOver, statistics, animation, isFullScreen } = this.state;
 
     return (
       <>
         <h1>Саванна</h1>
 
-        <div className="game-container" ref={this.gameContainer}>
+        <div className={`game-container ${isFullScreen ? 'full-screen' : ''}`} ref={this.gameContainer}>
+          <div>
+            <SoundToggle setIsPlaySound={this.setIsPlaySound} />
+            <Button
+              className="full-screen-btn"
+              variant="info"
+              onClick={() => this.setState({ isFullScreen: !isFullScreen })}
+            >
+              {isFullScreen ? 'выйти из полноэкранного режима' : 'на весь экран'}
+            </Button>
+          </div>
           {gameOver ? (
             <GameOver newGame={this.newGame} statistics={statistics} />
           ) : (
