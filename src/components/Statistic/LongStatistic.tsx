@@ -1,5 +1,6 @@
 import React from 'react';
+import { StatisticGraphs } from './StatisticGraphs';
 
 export const LongStatistic: React.FC = () => {
-  return <h1>Long</h1>;
+  return <StatisticGraphs />;
 };

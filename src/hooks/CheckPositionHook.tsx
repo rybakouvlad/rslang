@@ -96,7 +96,7 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   const checkSeries = () => {
     setSountSeries(countSeries + 1);
 
-    if (countSeries > series) {
+    if (countSeries >= series) {
       setSeries(countSeries);
       dispatch(statisticSetSeries(userID, token, statistic, gameName, series));
     }

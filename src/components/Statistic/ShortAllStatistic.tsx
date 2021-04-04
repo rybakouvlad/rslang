@@ -9,6 +9,15 @@ export const ShortAllStatistic: React.FC<IProps> = (props: IProps) => {
   const [perCent, setPerCent] = useState(0);
 
   const setStatisticData = () => {
+    if (props.results.games.length === 1) {
+      setLearnWords(props.results.games[0].learn);
+      setPerCent(
+        Math.trunc(
+          (props.results.games[0].correct / (props.results.games[0].correct + +props.results.games[0].incorrect)) * 100,
+        ),
+      );
+      return;
+    }
     const sumLearn = props.results.games.reduce((sum, value: any) => {
       return sum.learn + value.learn;
     });
