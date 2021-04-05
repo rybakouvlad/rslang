@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
-// import { testWords } from '../../hooks/testWords';
 import get from '../../assets/ourGameSounds/get.mp3';
 import success from '../../assets/ourGameSounds/success.mp3';
 import wrong from '../../assets/ourGameSounds/wrong.mp3';
 import { ToggleButton } from 'react-bootstrap';
 import { ToggleButtonGroup } from 'react-bootstrap';
-// import { IWord } from 'Components/AudioCallGame/audioGame.hook';
-// import { useCheckPosition } from '../../hooks/CheckPositionHook';
+import { SpinnerZ } from './SpinnerZ';
 
 export interface I_OurGame {
+  length: any;
   id: string;
   group: number;
   page: number;
@@ -26,9 +25,9 @@ export interface I_OurGame {
   wordTranslate: string;
 }
 
-// function randomArrSort(): number {
-//   return Math.random() - 0.5;
-// }
+function randomArrSort(): number {
+  return Math.random() - 0.5;
+}
 
 const removeMarkerWrongWordsEn = () => {
   const wordsEn = document.querySelectorAll('.word');
@@ -51,9 +50,15 @@ interface I_qq {
 }
 
 export const OurGame: React.FC<I_qq> = (props: I_qq) => {
-  // const { gameWords } = useCheckPosition();
+  const isPropsReady = props.words;
+  // console.log('isPropsReady', isPropsReady);
+  if (!isPropsReady) {
+    return <h1>Загрузка</h1>;
+  }
   const [words, setWords] = useState(null);
-  const [isLoad, setLoad] = useState(false);
+  const [engWords, SetEngWords] = useState(null);
+
+  const [isLoad, setLoad]: any = useState(false);
   const newWords = props.words;
   const [card, setCard] = useState(null);
   const [score, setScore] = useState(0);
@@ -64,14 +69,6 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
   const [soundToggler, setSoundToggler] = useState(true);
   const [saveRadioSoundActifeBtn_ON, setSaveRadioSoundActifeBtn_ON] = useState(1);
   const [saveRadioSoundActifeBtn_OFF, setSaveRadioSoundActifeBtn_OFF] = useState(1);
-  // setTimeout(() => {
-  //   console.log(gameWords);
-  // }, 5000);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log(gameWords);
-  //   }, 5000);
-  // });
 
   useEffect(() => {
     const IsSoundSettings = localStorage.getItem('soundSettingsOurGame');
@@ -89,11 +86,6 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
       setSaveRadioSoundActifeBtn_OFF(() => 2);
     }
   }, []);
-  // const Arr = [...words];
-  // const pp = useRef(null);
-  // const randomArr = useMemo(() => {
-  //   return Arr.sort(randomArrSort);
-  // }, [words]);
 
   const dragStartHandler = (e: any) => {
     setCard(e);
@@ -150,10 +142,6 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
     localStorage.setItem('currectWords', JSON.stringify([...findWordsSet]));
   }, [words]);
 
-  useEffect(() => {
-    setWords(() => props.words);
-  }, [isLoad]);
-
   const runNewGame = () => {
     localStorage.setItem('previousScore', score.toString());
     removeMarkerWrongWordsEn();
@@ -163,8 +151,28 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
     setNotCurrentWords(() => []);
   };
 
+  useEffect(() => {
+    const oo: any = [...isPropsReady];
+    const tt: any = oo.sort(() => 5);
+    SetEngWords(() => tt);
+    setWords(() => isPropsReady);
+  }, [isPropsReady]);
+
+  const randomArr: any = useMemo(() => {
+    if (words) {
+      const Arr = [...words];
+      return Arr.sort(() => randomArrSort());
+    }
+  }, [words]);
+
+  useEffect(() => {
+    if (words) {
+      SetEngWords(() => randomArr);
+    }
+  });
+
   const showResultGeme = () => {
-    if (!words.length && isLoad) {
+    if (!words.length && isLoad && isPropsReady.length) {
       const notCurrentWordsSet: any = new Set([...notCurrentWords]);
       const arrSet: any[] = [];
 
@@ -259,7 +267,8 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
           Full Screen
         </Button>
       </div>
-      {isLoad && (
+
+      {isPropsReady.length && isLoad && words ? (
         <div className="ourGame_inner">
           <Row ref={EngWordElement}>
             <Col className="col_wrapper">
@@ -284,7 +293,7 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
               })}
             </Col>
             <Col className="col_wrapper">
-              {words.map((el: any) => {
+              {engWords.map((el: any) => {
                 return (
                   <Col
                     style={{ userSelect: 'none' }}
@@ -305,6 +314,8 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
             </Col>
           </Row>
         </div>
+      ) : (
+        <SpinnerZ />
       )}
 
       {isLoad ? showResultGeme() : <div></div>}
