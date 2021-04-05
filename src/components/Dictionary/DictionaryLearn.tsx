@@ -36,8 +36,8 @@ export const DictionaryLearn: React.FC = () => {
   return (
     <>
       <h1>Dictionary Learn</h1>
-      <ChoiceGameTopMenu pathWords={'learn'} />
-      <div className="dictionary-cards-wrapper">
+      <ChoiceGameTopMenu pathWords={'learn'} page={query.get('page')} group={'0'} />
+      <div className="dictionary-cards-wrapper cards-container">
         {paginatedResults.map((elem, i) => {
           return <Card key={i} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />;
         })}

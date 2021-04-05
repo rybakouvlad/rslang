@@ -52,7 +52,7 @@ export const Book: React.FC = () => {
   return (
     <div className="book">
       <Panel />
-      <ChoiceGameTopMenu pathWords={'book'} />
+      <ChoiceGameTopMenu pathWords={'book'} page={query.get('page')} group={query.get('group')} />
       {loading ? (
         <Spinner animation="border" role="status" />
       ) : (

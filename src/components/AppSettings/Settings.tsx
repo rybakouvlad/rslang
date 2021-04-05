@@ -5,11 +5,6 @@ import { useTypeSelector } from '../../hooks/useTypesSelector';
 
 import './settings.scss';
 
-// interface SettingsProps {
-//   setTranslateSettings: (value: boolean) => SetTranslateAction;
-//   setButtonsSettings: (value: boolean) => SetButtonsAction;
-// }
-
 export function Settings() {
   const dispatch = useDispatch();
   const { translateChecked, buttonsChecked } = useTypeSelector((state) => state.settings);

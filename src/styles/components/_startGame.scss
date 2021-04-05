@@ -2,9 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   height: 500px;
+  width: 700px;
   justify-content: space-between;
   padding: 20px;
+  background-color: white;
+  border-radius: 30px;
   .choice-selector{
       width: 300px;
   }

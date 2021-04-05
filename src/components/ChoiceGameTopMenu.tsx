@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
+import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
+import { ReactComponent as SprintSvg } from '../assets/svg/sprint.svg';
 import { ReactComponent as GameSvg } from '../assets/svg/games.svg';
 interface IProps {
   pathWords: string;
+  page?: string;
+  group?: string;
 }
 
 export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
@@ -14,14 +18,14 @@ export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
           <AudioCallSvg />
         </div>
       </Link>
-      <Link to="/games">
-        <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
-          <GameSvg />
+      <Link to={`/sprint?path=${props.pathWords}&page=${props.page}&group=${props.group}`}>
+        <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
+          <SprintSvg />
         </div>
       </Link>
-      <Link to="/games">
+      <Link to={`/savana?path=${props.pathWords}`}>
         <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
-          <GameSvg />
+          <SavannahSvg />
         </div>
       </Link>
       <Link to={`/our-game?path=${props.pathWords}`}>
