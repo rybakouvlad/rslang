@@ -6,6 +6,7 @@ import wrong from '../../assets/ourGameSounds/wrong.mp3';
 import { ToggleButton } from 'react-bootstrap';
 import { ToggleButtonGroup } from 'react-bootstrap';
 import { SpinnerZ } from './SpinnerZ';
+import { useCheckPosition } from '../../hooks/CheckPositionHook';
 
 export interface I_OurGame {
   length: any;
@@ -57,7 +58,7 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
   }
   const [words, setWords] = useState(null);
   const [engWords, SetEngWords] = useState(null);
-
+  const { checkWords } = useCheckPosition();
   const [isLoad, setLoad]: any = useState(false);
   const newWords = props.words;
   const [card, setCard] = useState(null);
@@ -113,6 +114,7 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
       setWords((words: any) =>
         words.filter((word: any) => {
           if (word.id === card.target.id && !isWrongWord) {
+            checkWords(word, true);
             setScore((prev) => prev + 10);
             setFindWords((prev) => {
               return [...prev.concat([word])];
@@ -127,6 +129,8 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
       e.target.style.background = 'rgba(153, 46, 55, 0.39)';
       words.map((word: any) => {
         if (word.id + '_EN' === dropCard) {
+          checkWords(word, false);
+
           e.target.dataset.wrong = 'wrong';
           setNotCurrentWords((prev) => {
             return [...prev.concat([word])];
