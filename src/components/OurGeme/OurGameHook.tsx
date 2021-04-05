@@ -13,5 +13,16 @@ export const OurGameHook: React.FC = () => {
       setWords(gameWords);
     }
   }, [isStart, gameWords]);
-  return <div>{isStart ? <StartGame setIsStart={setIsStart} /> : <OurGame words={words}></OurGame>}</div>;
+  return (
+    <>
+      {isStart ? (
+        <>
+          <h1 className="our_game_name">Перетаскивание</h1>
+          <StartGame setIsStart={setIsStart} />
+        </>
+      ) : (
+        <OurGame words={words}></OurGame>
+      )}
+    </>
+  );
 };

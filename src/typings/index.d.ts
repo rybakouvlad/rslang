@@ -6,6 +6,6 @@ declare module '*.svg' {
 }
 
 declare module '*.mp3' {
-  const src: string;
-  export default src;
+  const value: any;
+  export default value;
 }

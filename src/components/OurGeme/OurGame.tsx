@@ -2,11 +2,12 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
 import get from '../../assets/ourGameSounds/get.mp3';
 import success from '../../assets/ourGameSounds/success.mp3';
-import wrong from '../../assets/ourGameSounds/wrong.mp3';
+import wrong from '../../assets/ourGameSounds/wrong2.mp3';
 import { ToggleButton } from 'react-bootstrap';
 import { ToggleButtonGroup } from 'react-bootstrap';
 import { SpinnerZ } from './SpinnerZ';
 import { useCheckPosition } from '../../hooks/CheckPositionHook';
+import { OurGameInfo } from './OurGameInfo';
 
 export interface I_OurGame {
   length: any;
@@ -52,7 +53,6 @@ interface I_qq {
 
 export const OurGame: React.FC<I_qq> = (props: I_qq) => {
   const isPropsReady = props.words;
-  // console.log('isPropsReady', isPropsReady);
   if (!isPropsReady) {
     return <h1>Загрузка</h1>;
   }
@@ -109,7 +109,6 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
     const isRuMarkerWords = e.target.dataset.ru;
     const isWrongWord = e.target.dataset.wrong;
     if (currentCard === dropCard) {
-      // console.log(currentCard, '--', dropCard);
       if (soundToggler) playSound().successAnswer.play();
       setWords((words: any) =>
         words.filter((word: any) => {
@@ -183,10 +182,8 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
       notCurrentWordsSet.forEach((element: any) => {
         arrSet.push(element);
       });
-      //////////////////////////////
       localStorage.setItem('WrongAnswers', JSON.stringify(arrSet)); // //////////////// НЕ изученные слова
       localStorage.setItem('RightAnswers', JSON.stringify(findWords)); // ///////////// изученные слова
-      /////////////////////////////
       return (
         <div>
           <Modal.Dialog centered={true} scrollable={true} className="our_game_result_modal">
@@ -252,8 +249,11 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
   return (
     <Container ref={fullScreenGame} className="ourGame_wrapper">
       <div className="head_game">
-        <h2>Drag and drop</h2>
-        <h4>Score: {score}</h4>
+        <h2>Перетаскивание</h2>
+        <h4>
+          Score: {score}
+          <OurGameInfo />
+        </h4>
       </div>
       <div className="our_game_btn__wrapper">
         <Button variant="outline-info" onClick={runNewGame}>

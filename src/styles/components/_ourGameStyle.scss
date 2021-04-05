@@ -1,3 +1,7 @@
+.our_game_name {
+    margin: 0 auto;
+}
+
 .ourGame_wrapper {
     position     : relative;
     height       : 74vh;
@@ -6,7 +10,15 @@
     background   : linear-gradient(97deg, rgba(250, 254, 255, 0.15449929971988796) 4%, rgba(165, 236, 247, 0.12088585434173671) 50%, rgba(0, 255, 244, 0.1292892156862745) 77%);
     border-radius: 0 1em 4.5rem 0;
 }
+#popover-basic {
+    margin-left: -12rem;
+    width: 10rem;
+    background: rgba(125, 173, 187, 0.39);
 
+}
+.our_game_info__btn {
+    margin-left: 1rem;
+}
 .ourGame_inner {
     align-self           : stretch;
     margin-top           : 10px;
