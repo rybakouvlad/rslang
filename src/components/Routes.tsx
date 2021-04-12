@@ -7,6 +7,7 @@ import { Dictionary } from './Dictionary/Dictionary';
 import { Games } from './Games';
 import { Home } from './Home';
 import { Book } from './Book/Book';
+import { OurGameProvider } from './OurGeme/OurGameProvider';
 import Savannah from '../components/SavannahGame/SavannahFN';
 import { SprintGameWrapper } from './SprintGame/SprintGameWrapper';
 
@@ -34,6 +35,9 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/audiocall">
           <AudioCallGame />
+        </Route>
+        <Route path="/our-game">
+          <OurGameProvider />
         </Route>
         <Route path="/savana">
           <Savannah />

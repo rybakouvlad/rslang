@@ -50,7 +50,7 @@ export const SmartMenu: React.FC = () => {
               <SavannahSvg />
             </div>
           </Link>
-          <Link to="/games">
+          <Link to="/our-game">
             <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
               <GameSvg />
             </div>
