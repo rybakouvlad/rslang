@@ -9,6 +9,7 @@ import { ReactComponent as AudioCallSvg } from '../assets/svg/audiocall.svg';
 import { ReactComponent as SavannahSvg } from '../assets/svg/savannah.svg';
 import { ReactComponent as PencilSvg } from '../assets/svg/Pencil.svg';
 import { useTypeSelector } from '../hooks/useTypesSelector';
+import teamImg from '../assets/img/team.svg';
 
 export const SmartMenu: React.FC = () => {
   const { page, group } = useTypeSelector((state) => state.book);
@@ -28,13 +29,13 @@ export const SmartMenu: React.FC = () => {
               <BookSvg />
             </div>
           </Link>
-          {token &&
-          <Link to="/dictionary">
-            <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
-              <PencilSvg />
-            </div>
-          </Link>
-          }
+          {token && (
+            <Link to="/dictionary">
+              <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
+                <PencilSvg />
+              </div>
+            </Link>
+          )}
           <Link to="/sprint">
             <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
               <SprintSvg />
@@ -57,6 +58,9 @@ export const SmartMenu: React.FC = () => {
           </Link>
         </div>
         <div className="smart-menu-footer">
+          <Link className="our_team_link" to="/team">
+            <img src={teamImg} alt="TEAM" />
+          </Link>
           <Link to="/settings">
             <div className="svg-wrapper" style={{ backgroundColor: '#9B88A3' }}>
               <SeatingSvg />

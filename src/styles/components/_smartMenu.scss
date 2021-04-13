@@ -16,6 +16,7 @@
   .svg-wrapper {
     display: flex;
     justify-content: center;
+    margin: 0 auto;
     align-items: center;
     width: 60px;
     height: 60px;
@@ -31,5 +32,16 @@
     }
   }
   .smart-menu-footer {
+  }
+  .our_team_link {
+    margin: 0.5rem;
+    opacity: 0.8;
+    transition: ease-in-out 0.2s;
+    img {
+      margin-bottom: 1rem;
+    }
+    &:hover {
+      opacity: 1;
+    }
   }
 }

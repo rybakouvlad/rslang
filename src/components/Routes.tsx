@@ -10,6 +10,7 @@ import { Book } from './Book/Book';
 import { OurGameProvider } from './OurGeme/OurGameProvider';
 import Savannah from '../components/SavannahGame/SavannahFN';
 import { SprintGameWrapper } from './SprintGame/SprintGameWrapper';
+import { AboutTeam } from './AboutTeam/AboutTeam';
 
 export const Routes: React.FC = () => {
   return (
@@ -44,6 +45,9 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/settings">
           <Settings />
+        </Route>
+        <Route path="/team">
+          <AboutTeam />
         </Route>
       </Switch>
     </>
