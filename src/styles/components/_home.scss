@@ -1,0 +1,16 @@
+.main_home__wrapper {
+    position     : relative;
+    height       : 74vh;
+    overflow-y   : auto;
+    background   : rgb(250, 254, 255);
+    background   : linear-gradient(97deg, rgba(250, 254, 255, 0.15449929971988796) 4%, rgba(165, 236, 247, 0.12088585434173671) 50%, rgba(0, 255, 244, 0.1292892156862745) 77%);
+    border-radius: 0 1em 4.5rem 0;
+}
+.home_title {
+    color: black;
+    text-shadow: 2px 1px 3px rgba(21, 88, 97, 0.473);
+    &:hover {
+        color: rgb(21, 87, 107);
+        text-shadow: 2px 2px 3px rgba(136, 180, 185, 0.781);
+    }
+}
