@@ -9,6 +9,7 @@ import { SmartMenu } from './SmartMenu';
 import { FetchUserWords } from '../store/actions/userWords';
 import { useTypeSelector } from '../hooks/useTypesSelector';
 import { useLocation } from 'react-router-dom';
+import { gameAdress } from '../utils/gameAdress';
 
 export const Main: React.FC = () => {
   const { loading, token } = useTypeSelector((state) => state.auth);
@@ -36,7 +37,7 @@ export const Main: React.FC = () => {
         <section className="main-wrapper">
           <Header />
           <Routes />
-          {location.pathname === '/' ? <Footer /> : null}
+          {!gameAdress.includes(location.pathname) ? <Footer /> : null}
         </section>
       </main>
     </div>
