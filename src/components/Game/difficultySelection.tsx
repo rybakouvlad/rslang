@@ -10,12 +10,12 @@ interface IProps {
 }
 
 const options: OptionType[] = [
-  { value: '1', label: 'сложность 1' },
-  { value: '2', label: 'сложность 2' },
-  { value: '3', label: 'сложность 3' },
-  { value: '4', label: 'сложность 4' },
-  { value: '5', label: 'сложность 5' },
-  { value: '6', label: 'сложность 6' },
+  { value: '0', label: 'сложность 1' },
+  { value: '1', label: 'сложность 2' },
+  { value: '2', label: 'сложность 3' },
+  { value: '3', label: 'сложность 4' },
+  { value: '4', label: 'сложность 5' },
+  { value: '5', label: 'сложность 6' },
 ];
 
 export const DifficultySelection: React.FC<IProps> = (props: IProps) => {
@@ -29,7 +29,7 @@ export const DifficultySelection: React.FC<IProps> = (props: IProps) => {
     <>
       <Select
         className="choice-selector"
-        defaultValue={{ value: '1', label: 'сложность 1' }}
+        defaultValue={{ value: '0', label: 'сложность 1' }}
         onChange={changeHandler}
         options={options}
       />

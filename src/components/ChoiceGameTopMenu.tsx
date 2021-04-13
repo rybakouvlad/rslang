@@ -28,7 +28,7 @@ export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
           <SavannahSvg />
         </div>
       </Link>
-      <Link to="/games">
+      <Link to={`/our-game?path=${props.pathWords}`}>
         <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
           <GameSvg />
         </div>

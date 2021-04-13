@@ -1,0 +1,114 @@
+.our_game_name {
+    margin: 0 auto;
+}
+
+.ourGame_wrapper {
+    position     : relative;
+    height       : 74vh;
+    overflow-y   : auto;
+    background   : rgb(250, 254, 255);
+    background   : linear-gradient(97deg, rgba(250, 254, 255, 0.15449929971988796) 4%, rgba(165, 236, 247, 0.12088585434173671) 50%, rgba(0, 255, 244, 0.1292892156862745) 77%);
+    border-radius: 0 1em 4.5rem 0;
+}
+#popover-basic {
+    margin-left: -12rem;
+    width: 10rem;
+    background: rgba(125, 173, 187, 0.39);
+
+}
+.our_game_info__btn {
+    margin-left: 1rem;
+}
+.ourGame_inner {
+    align-self           : stretch;
+    margin-top           : 10px;
+    padding              : 0 5px;
+    display              : grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, auto));
+    gap                  : 0.4rem;
+}
+
+.col_wrapper {
+    padding   : 0;
+    transition: ease-in-out .2s;
+}
+
+.head_game {
+    display        : flex;
+    justify-content: space-between;
+}
+
+.drag_word {
+    transition     : ease-in-out .3s;
+    cursor         : grab;
+    border         : 1px solid rgb(5, 135, 158);
+    border-radius  : 1em;
+    margin         : 0 auto;
+    margin-bottom  : 2px;
+    min-width      : max-content;
+    max-width      : 45%;
+    justify-content: space-around;
+    text-align     : center;
+    font-weight    : 600;
+}
+
+.drag_word:hover {
+    background-color: rgba(93, 154, 179, 0.445);
+    border-style    : solid;
+    border-width    : 4px 10px 4px 10px;
+    border-color    : transparent #007bff9a transparent #007bff9a;
+    border-radius   : 1.2em;
+}
+
+.word {
+    transition     : ease-in-out .3s;
+    border         : 1px solid rgb(5, 135, 158);
+    border-radius  : 1em;
+    margin         : 0 auto;
+    margin-bottom  : 2px;
+    min-width      : max-content;
+    max-width      : 45%;
+    justify-content: space-around;
+    text-align     : center;
+    font-weight    : 600;
+}
+
+.our_game_btn__wrapper {
+    width          : 100%;
+    display        : flex;
+    justify-content: space-between;
+}
+
+.our_game_result_modal {
+    position: fixed;
+    left    : 1%;
+    right   : 1%;
+    top     : 4.5rem;
+    z-index : 95;
+}
+.spinner_our_game {
+    position: fixed;
+    left    : 50%;
+    right   : 50%;
+    top     : 50vh;
+}
+
+
+
+@media (max-width: 768px) {
+    .word {
+        min-width: 80%;
+    }
+
+    .drag_word {
+        min-width: 80%;
+    }
+}
+
+.ourGame_wrapper:fullscreen {
+    background-color: rgba(19, 0, 41, 0.226);
+    color           : rgb(5, 135, 158);
+    height          : 150vh;
+    margin-bottom   : 15px;
+    padding         : 1rem;
+}
