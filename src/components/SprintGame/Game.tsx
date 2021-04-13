@@ -119,10 +119,15 @@ export const Game: React.FC = () => {
       noHandler();
     }
   };
+  const isFullScreenHandler = () => {
+    setIsFullScreen(!isFullScreen);
+  };
   useEffect(() => {
-    window.addEventListener('keyup', handlerHotKeys);
+    document.addEventListener('keyup', handlerHotKeys);
+    document.addEventListener('fullscreenchange', isFullScreenHandler);
     return () => {
-      window.removeEventListener('keyup', handlerHotKeys);
+      document.removeEventListener('keyup', handlerHotKeys);
+      document.removeEventListener('fullscreenchange', isFullScreenHandler);
     };
   });
   useEffect(() => {
@@ -132,13 +137,20 @@ export const Game: React.FC = () => {
     setCurrentWord(getWordObj(newArr[0]).word);
     setCurrentTranslation(getTranslation(newArr[0]));
   }, [gameWords]);
+  const fullScreenHandler = () => {
+    if(!isFullScreen){
+    document.querySelector('.sprint-game').requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
   return (
     <>
       {isTimer && gameWords.length !== index && arr ? (
         <>
           <div className="sprint-game-settings">
             <SoundToggle />
-            <Button className="full-screen-btn" variant="info" onClick={() => setIsFullScreen(!isFullScreen)}>
+            <Button className="full-screen-btn" variant="info" onClick={fullScreenHandler}>
               {isFullScreen ? 'выйти из полноэкранного режима' : 'на весь экран'}
             </Button>
           </div>
