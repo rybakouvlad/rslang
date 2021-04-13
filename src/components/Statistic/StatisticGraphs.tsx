@@ -13,7 +13,7 @@ export const StatisticGraphs: React.FC = () => {
   const getEveryDay = () => {
     const masData: any = [];
     const masLabel: any = [];
-    optional.statistic.forEach((el) => masData.push(`${el.date.getDate() + 1}.${el.date.getMonth() + 1}`));
+    optional.statistic.forEach((el) => masData.push(`${el.date.getDate()}.${el.date.getMonth() + 1}`));
 
     optional.statistic.forEach((el) => {
       if (el.games.length === 1) {
