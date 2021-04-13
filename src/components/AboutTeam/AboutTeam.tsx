@@ -1,13 +1,20 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { CardDev } from './CardDev';
+import { data } from './dataTeam';
 
 export const AboutTeam: React.FC = () => {
-  return (
-    <Container>
-      <Row>
-        <Col xs>First, but unordered</Col>
-        <Col xs={{ order: 1 }}>Third, but second</Col>
-      </Row>
-    </Container>
-  );
+  const dataMap = data.map((element) => {
+    return (
+      <CardDev
+        key={element.id}
+        avatar={element.avatar}
+        name={element.name}
+        position={element.position}
+        discription={element.discription}
+        linkToGitHub={element.linkToGitHub}
+      />
+    );
+  });
+
+  return <div className="about-team-container">{dataMap}</div>;
 };
