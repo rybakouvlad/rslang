@@ -138,12 +138,12 @@ export const Game: React.FC = () => {
     setCurrentTranslation(getTranslation(newArr[0]));
   }, [gameWords]);
   const fullScreenHandler = () => {
-    if(!isFullScreen){
-    document.querySelector('.sprint-game').requestFullscreen();
+    if (!isFullScreen) {
+      document.querySelector('.sprint-game').requestFullscreen();
     } else {
       document.exitFullscreen();
     }
-  }
+  };
   return (
     <>
       {isTimer && gameWords.length !== index && arr ? (

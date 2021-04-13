@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useAudioGame } from './audioGame.hook';
 import { Word } from '../../types/book';
@@ -17,23 +17,45 @@ interface IProps {
 export const AudioCard: React.FC<IProps> = (props: IProps) => {
   const { setIsShowResult, isShowResult } = useAudioGame();
   const { checkWords } = useCheckPosition();
-
+  const handlerHotKeys = ({ key }: any): void => {
+    if (parseInt(key[key.length - 1]) > 0 && parseInt(key[key.length - 1]) < 6) {
+      const number = Number(key[key.length - 1]);
+      setIsShowResult(true);
+      if (props.words[number - 1].id === props.hiddenWord.id) {
+        rightAnswer();
+      } else {
+        wrongAnswer();
+      }
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keyup', handlerHotKeys);
+    return () => {
+      document.removeEventListener('keyup', handlerHotKeys);
+    };
+  });
+  const rightAnswer = () => {
+    checkWords(props.hiddenWord, true);
+    props.setResults({
+      ...props.results,
+      correct: props.results.correct + 1,
+      correctWords: [...props.results.correctWords, props.hiddenWord],
+    });
+  };
+  const wrongAnswer = () => {
+    checkWords(props.hiddenWord, false);
+    props.setResults({
+      ...props.results,
+      incorrect: props.results.incorrect + 1,
+      incorrectWords: [...props.results.incorrectWords, props.hiddenWord],
+    });
+  };
   const checkHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsShowResult(true);
     if ((event.target as HTMLButtonElement).dataset.id === props.hiddenWord.id) {
-      checkWords(props.hiddenWord, true);
-      props.setResults({
-        ...props.results,
-        correct: props.results.correct + 1,
-        correctWords: [...props.results.correctWords, props.hiddenWord],
-      });
+      rightAnswer();
     } else {
-      checkWords(props.hiddenWord, false);
-      props.setResults({
-        ...props.results,
-        incorrect: props.results.incorrect + 1,
-        incorrectWords: [...props.results.incorrectWords, props.hiddenWord],
-      });
+      wrongAnswer();
     }
   };
 
@@ -65,7 +87,7 @@ export const AudioCard: React.FC<IProps> = (props: IProps) => {
               onClick={checkHandler}
               active={isShowResult}
             >
-              {el.wordTranslate}
+              {`${i + 1} ${el.wordTranslate}`}
             </Button>
           );
         })}

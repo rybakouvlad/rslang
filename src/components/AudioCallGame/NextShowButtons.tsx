@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useAudioGame } from './audioGame.hook';
 import { useCheckPosition } from '../../hooks/CheckPositionHook';
 import { Word } from '../../types/book';
@@ -14,6 +14,21 @@ interface IProps {
 export const NextShowButtons: React.FC<IProps> = (props: IProps) => {
   const { isShowResult, nextIndex, setIsShowResult } = useAudioGame();
   const { checkWords } = useCheckPosition();
+  const handlerHotKeys = ({ key }: any): void => {
+    if (key === 'Enter') {
+      nextIndex();
+    }
+    if (key === 'ArrowRight') {
+      setIsShowResult(true);
+      checkHandler();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keyup', handlerHotKeys);
+    return () => {
+      document.removeEventListener('keyup', handlerHotKeys);
+    };
+  });
   const checkHandler = () => {
     checkWords(props.hiddenWord, false);
     props.setResults({
@@ -25,7 +40,7 @@ export const NextShowButtons: React.FC<IProps> = (props: IProps) => {
   return (
     <div>
       {isShowResult ? (
-        <Button onClick={nextIndex}>Следущие</Button>
+        <Button onClick={nextIndex}> Следующее &#9094;</Button>
       ) : (
         <Button
           onClick={() => {
@@ -33,7 +48,7 @@ export const NextShowButtons: React.FC<IProps> = (props: IProps) => {
             checkHandler();
           }}
         >
-          Не знаю
+          Не знаю &rarr;
         </Button>
       )}
     </div>
