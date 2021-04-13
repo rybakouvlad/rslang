@@ -1,41 +1,92 @@
 .main_home__wrapper {
-    position     : relative;
-    height       : 74vh;
-    overflow-y   : auto;
-    background   : rgb(250, 254, 255);
-    background   : linear-gradient(67deg, rgba(18, 175, 136, 0.288) 4%, rgba(209, 247, 165, 0.315) 50%, rgba(18, 175, 136, 0.288) 77%);
-    border-radius: 0 1em 4.5rem 0;
-    display: flex;
-    flex-direction: column;
+    position       : relative;
+    height         : 74vh;
+    overflow-y     : auto;
+    background     : rgb(250, 254, 255);
+    background     : linear-gradient(67deg, rgba(18, 175, 136, 0.288) 4%, rgba(209, 247, 165, 0.315) 50%, rgba(18, 175, 136, 0.288) 77%);
+    border-radius  : 0 1em 4.5rem 0;
+    display        : flex;
+    flex-direction : column;
     justify-content: space-around;
-    box-shadow: inset 10px 5px 10px 5px rgba(6, 169, 190, 0.226);
-    box-shadow:  10px 10px 10px 5px rgba(6, 169, 190, 0.158);
+    box-shadow     : inset 10px 5px 10px 5px rgba(6, 169, 190, 0.226);
+    box-shadow     : 10px 10px 10px 5px rgba(6, 169, 190, 0.158);
     background-size: 500% 500%;
-    animation: bgAnim 15s ease infinite;
-    margin-right: 1rem;
+    animation      : bgAnim 15s ease infinite;
+    margin-right   : 1rem;
 }
+
 .home_title {
-    color: black;
+    user-select: none;
+    color      : black;
     text-shadow: 2px 1px 3px rgba(21, 88, 97, 0.473);
+
     &:hover {
-        color: rgb(21, 87, 107);
+        color      : rgb(21, 87, 107);
         text-shadow: 2px 2px 3px rgba(136, 180, 185, 0.781);
     }
 }
 
-.video_container { 
-    display: flex;
-    justify-content: start;
+.home_text {
+    font-size: 1.5rem;
+}
+
+.video_container {
+    display        : flex;
+    justify-content: space-between;
+
+    &:hover {
+        color      : rgb(21, 87, 107);
+        text-shadow: 2px 2px 3px rgba(136, 180, 185, 0.781);
+    }
+}
+
+.english_png {
+    margin-left: 1rem;
+    opacity    : 0.8;
+    width      : 350px;
+    height     : 300px;
+    text-align : end;
+}
+
+.english_png__link {
+    color: rgb(2, 19, 34);
+
 }
 
 @keyframes bgAnim {
     0% {
         background-position: 0 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0 50%;
+    }
+}
+
+@media (max-width: 1130px) {
+    .english_png {
+        width : 180px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 720px) {
+    .video_container {
+
+        flex-direction: column;
+
+    }
+
+    .home_text {
+        font-size : 0.9rem;
+        margin-top: 2rem;
+    }
+
+    .english_png {
+        margin: 0 auto;
     }
 }
