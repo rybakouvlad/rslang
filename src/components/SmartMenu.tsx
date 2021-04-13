@@ -29,17 +29,20 @@ export const SmartMenu: React.FC = () => {
               <BookSvg />
             </div>
           </Link>
-          {token &&
-          <Link to="/dictionary">
-            <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
-              <PencilSvg />
-            </div>
-          </Link>
-          <Link to="/statistic">
-            <div className="svg-wrapper" style={{ backgroundColor: '#FC983A' }}>
-              <StatsSvg />
-            </div>
-          </Link>
+          {token && (
+            <>
+              <Link to="/dictionary">
+                <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
+                  <PencilSvg />
+                </div>
+              </Link>
+              <Link to="/statistic">
+                <div className="svg-wrapper" style={{ backgroundColor: '#FC983A' }}>
+                  <StatsSvg />
+                </div>
+              </Link>
+            </>
+          )}
           <Link to="/sprint">
             <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
               <SprintSvg />
