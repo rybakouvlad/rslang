@@ -13,6 +13,8 @@ import { useTypeSelector } from '../hooks/useTypesSelector';
 
 export const SmartMenu: React.FC = () => {
   const { page, group } = useTypeSelector((state) => state.book);
+  const { token } = useTypeSelector((state) => state.auth);
+
   return (
     <>
       <div className="smart-menu">
@@ -27,6 +29,7 @@ export const SmartMenu: React.FC = () => {
               <BookSvg />
             </div>
           </Link>
+          {token &&
           <Link to="/dictionary">
             <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
               <PencilSvg />
@@ -52,7 +55,7 @@ export const SmartMenu: React.FC = () => {
               <SavannahSvg />
             </div>
           </Link>
-          <Link to="/games">
+          <Link to="/our-game">
             <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
               <GameSvg />
             </div>
