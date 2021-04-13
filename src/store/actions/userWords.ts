@@ -16,9 +16,7 @@ export const FetchUserWords = () => {
       });
       const result = await data.json();
       dispatch({ type: UserWordsActionsTypes.FETCH_USER_WORDS, payload: result });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -41,9 +39,7 @@ export const SetUserWord = (
         },
       });
       dispatch({ type: UserWordsActionsTypes.SET_USER_WORD, payload: { wordId, difficulty: difficulty } });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -78,9 +74,7 @@ export const UpdateUserWord = (
         type: UserWordsActionsTypes.UPDATE_DIFFICULTY_WORD,
         payload: { wordId: wordId, difficulty: difficulty },
       });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -97,8 +91,6 @@ export const DeleteUserWord = (wordId: string, userId: string, userToken: string
       });
 
       dispatch({ type: UserWordsActionsTypes.DELETE_USER_WORD, payload: wordId });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };

@@ -10,6 +10,7 @@ import { Book } from './Book/Book';
 import { OurGameProvider } from './OurGeme/OurGameProvider';
 import Savannah from '../components/SavannahGame/SavannahFN';
 import { SprintGameWrapper } from './SprintGame/SprintGameWrapper';
+import { Statistic } from './Statistic/Statistic';
 
 export const Routes: React.FC = () => {
   return (
@@ -32,6 +33,9 @@ export const Routes: React.FC = () => {
         </Route>
         <Route path="/sprint">
           <SprintGameWrapper />
+        </Route>
+        <Route path="/statistic">
+          <Statistic />
         </Route>
         <Route path="/audiocall">
           <AudioCallGame />
