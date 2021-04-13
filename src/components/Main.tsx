@@ -8,9 +8,10 @@ import { Routes } from './Routes';
 import { SmartMenu } from './SmartMenu';
 import { FetchUserWords } from '../store/actions/userWords';
 import { useTypeSelector } from '../hooks/useTypesSelector';
+import { getAllStatistic } from '../store/actions/statistic';
 
 export const Main: React.FC = () => {
-  const { loading, token } = useTypeSelector((state) => state.auth);
+  const { loading, token, userID } = useTypeSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkLogin());
@@ -19,6 +20,7 @@ export const Main: React.FC = () => {
   useEffect(() => {
     if (token) {
       dispatch(FetchUserWords());
+      dispatch(getAllStatistic(userID, token));
     }
   }, [token]);
   if (loading) {

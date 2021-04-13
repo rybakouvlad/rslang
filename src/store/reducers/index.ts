@@ -5,6 +5,7 @@ import userWordsReducer from './userWords';
 import aggregatedWordsReducer from './aggregatedWords';
 import setStartGameState from './startGameState';
 import settingsReducer from './settingsReducer';
+import statiscticReducer from './statisctic';
 
 const allReducers = {
   auth: authReducer,
@@ -13,6 +14,7 @@ const allReducers = {
   aggregatedWords: aggregatedWordsReducer,
   setStartGameState: setStartGameState,
   settings: settingsReducer,
+  statistic: statiscticReducer,
 };
 
 const rootReducer = combineReducers(allReducers);

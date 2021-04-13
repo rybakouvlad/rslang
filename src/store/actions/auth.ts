@@ -22,8 +22,6 @@ export const sendPostAuth = (email: string, password: string) => {
         payload: { userID: result.userId, name: result.name, token: result.token },
       });
     } catch (error) {
-      console.log(error);
-
       dispatch({
         type: AuthActionsTypes.FETCH_AUTH_ERROR,
         payload: 'Авторизация неудалась, проверьте почту или пароль',
@@ -73,7 +71,6 @@ export const checkLogin = () => {
           },
         });
         const result = await response.json();
-        console.log(result);
 
         dispatch({
           type: AuthActionsTypes.FETCH_AUTH_SUCCESS,
@@ -93,27 +90,3 @@ export const clearError = () => {
     dispatch({ type: AuthActionsTypes.AUTH_CLEAR_ERROR });
   };
 };
-
-// const fetchGetUser = (id: string, token: string) => {
-//   return async (dispatch: Dispatch<AuthAction>) => {
-//     dispatch({ type: AuthActionsTypes.FETCH_AUTH_START });
-//     try {
-//       const data = await fetch(`https://server-team19-rsschool.herokuapp.com/users/${id}`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       const result = await data.json();
-//       console.log(data);
-
-//       login(result.userId, result.token);
-//       dispatch({ type: AuthActionsTypes.FETCH_AUTH_SUCCESS, payload: { ...result, token: token, userId: id } });
-//     } catch (error) {
-//       console.log(error);
-
-//       dispatch({ type: AuthActionsTypes.FETCH_AUTH_ERROR, payload: 'Авторизация неудалась' });
-//     }
-//   };
-// };
