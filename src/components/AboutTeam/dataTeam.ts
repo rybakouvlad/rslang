@@ -50,7 +50,7 @@ export const data: Array<IDev> = [
   },
   {
     id: 5,
-    avatar: 'https://i.imgur.com/5xC76Sq.jpg',
+    avatar: 'https://i.imgur.com/A4Z0ztC.jpg',
     name: 'Dima',
     position: 'Software Enginer',
     discription: `Реализовал заголовок главной страницы, уведомление и его функциональность, логику промо страницы «начать
