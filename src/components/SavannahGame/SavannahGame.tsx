@@ -82,7 +82,6 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
   playSound = (type: 'correct' | 'wrong'): void => {
     const { isPlaySound } = this.state;
-    console.log(isPlaySound);
     if (!isPlaySound) return;
 
     if (type === 'correct') {
