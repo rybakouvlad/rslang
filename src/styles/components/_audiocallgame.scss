@@ -76,6 +76,8 @@
     overflow-y: scroll;
     height: 410px;
     margin: 10px;
+    width: 100%;
+    justify-content: center;
     &::-webkit-scrollbar {
       width: 6px;
       margin-left: 3px;
