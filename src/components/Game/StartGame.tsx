@@ -15,7 +15,7 @@ export const StartGame: React.FC<IProps> = (props: IProps) => {
       {getPosition() ? (
         <>
           <h2>Вы перишли {getPosition()}</h2>
-          <Button
+          <Button variant="info"
             onClick={() => {
               props.setIsStart(false);
             }}
@@ -25,7 +25,7 @@ export const StartGame: React.FC<IProps> = (props: IProps) => {
         </>
       ) : (
         <>
-          <h2>Выберете сложность</h2>
+          <h2>Выберите сложность</h2>
           <DifficultySelection setIsStart={props.setIsStart} />
         </>
       )}

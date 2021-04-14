@@ -76,6 +76,19 @@
     overflow-y: scroll;
     height: 410px;
     margin: 10px;
+    &::-webkit-scrollbar {
+      width: 6px;
+      margin-left: 3px;
+      background-color: rgba(255, 255, 255, 0);
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgba(115, 175, 186, 0.5);
+    }
     .audiocall-result-row {
       min-width: 200px;
       display: flex;
@@ -84,10 +97,10 @@
       // border: 1px solid;
     }
     .audiocall-true {
-      color: rgba(120, 203, 100, 1);
+      color: yellowgreen;
     }
     .audiocall-false {
-      color: rgba(235, 85, 82, 1);
+      color: lightcoral;
     }
   }
 }
