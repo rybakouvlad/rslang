@@ -42,10 +42,10 @@ module.exports = (env, argv) => {
       hot: true,
       open: true,
       historyApiFallback: true,
-      // proxy: {
-      //   '/api': 'http://localhost:3333',
-      //   // '/api/streams': 'http://localhost:8080',
-      // },
+      proxy: {
+        '/users': 'http://localhost:3333',
+        // '/api/streams': 'http://localhost:8080',
+      },
     },
     resolve: config.resolve,
     module: {
