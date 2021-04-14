@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config webpack.client.js --mode production  && node server.js",
+    "start": "node server.js",
     "build": "webpack --config webpack.client.js --mode production",
     "dev": "webpack --config webpack.client.js --mode development",
     "lint": "eslint webdriver-msrc/ --ext .tsx --quiet ",
-    "lint-and-fix": "eslint src/**/*.ts src/**/*.tsx --fix"
+    "lint-and-fix": "eslint src/**/*.ts src/**/*.tsx --fix",
+    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
