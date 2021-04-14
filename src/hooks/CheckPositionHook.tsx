@@ -105,6 +105,8 @@ export const CheckPositionProvider: React.FC = ({ children }: IProps) => {
   };
 
   const checkWords = (word: Word, result: boolean): void => {
+    if (!token) return;
+
     if (wordsSettings.has(word.id)) {
       if (result) {
         dispatch(
