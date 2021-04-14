@@ -106,7 +106,8 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       <span className="card-book__example" dangerouslySetInnerHTML={{ __html: textExample }} />
       {translateChecked && <span className="card-book__example-translate">{textExampleTranslate}</span>}
       {translateChecked && <span className="card-book__meaning-translate">{textMeaningTranslate}</span>}
-      {buttonsChecked && token &&
+      {buttonsChecked &&
+        token &&
         ((wordsSettings.has(id) && wordsSettings.get(id).difficulty !== 'delete') || !wordsSettings.has(id)) && (
           <OverlayTrigger
             overlay={
