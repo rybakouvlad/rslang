@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IDayStat } from '../../types/statistic';
+import { PieChart } from './PieChart';
 
 interface IProps {
   results: IDayStat;
@@ -43,6 +44,7 @@ export const ShortAllStatistic: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <h2>Сегодня изучено: {learnWords}</h2>
+      <PieChart data={[perCent, 100 - perCent]} />
       <h2>Процент правильных: {perCent}%</h2>
     </>
   );
