@@ -24,7 +24,7 @@ export const DictionaryHard: React.FC = () => {
   }
   return (
     <>
-      <h1>Dictionary Hard</h1>
+      <h1 className="dictionary-header">Словарь сложных слов</h1>
       <ChoiceGameTopMenu pathWords={'hard'} page={query.get('page')} group={'0'} />
       <div className="dictionary-cards-wrapper cards-container">
         {paginatedResults.map((elem, i) => {

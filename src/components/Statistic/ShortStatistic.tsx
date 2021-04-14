@@ -30,10 +30,10 @@ export const ShortStatistic: React.FC = () => {
     return <h1>Данных нету</h1>;
   }
   return (
-    <>
-      <h1>Statistic</h1>
+    <div className="dictionary-container">
+      <h1 className="dictionary-header" style={{ color: '#FC983A' }}>Краткосрочная статистика</h1>
       <ShortAllStatistic results={results} />
       <ShortDetailStatistic results={results} />
-    </>
+    </div>
   );
 };
