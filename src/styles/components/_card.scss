@@ -104,3 +104,27 @@
 .add-deleted-btn{
   grid-area: delete;
 }
+
+.played-count{
+  display: flex;
+  .played-count-true{
+    background-color: greenyellow;
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 700;
+    height: 22px;
+  }
+  .played-count-false{
+    background-color: lightcoral;
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 700;
+    height: 22px;
+  }
+}

@@ -16,6 +16,7 @@ interface CardProps {
   isAudioPlaying: boolean;
   setIsAudioPlaying: (param: boolean) => void;
   group?: number;
+  learnSection?: boolean;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
@@ -111,6 +112,12 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           </div>
         </div>
         {translateChecked && <div>{wordTranslate}</div>}
+        {props.learnSection && token && (
+          <div className="played-count">
+            <div className="played-count-true">{wordsSettings.get(id).optional.correct}</div>
+            <div className="played-count-false">{wordsSettings.get(id).optional.incorrect}</div>
+          </div>
+        )}
       </div>
       <span className="card-book__meaning" dangerouslySetInnerHTML={{ __html: textMeaning }} />
       <span className="card-book__example" dangerouslySetInnerHTML={{ __html: textExample }} />
