@@ -18,7 +18,7 @@ interface authToke {
 }
 
 export const ModalDonwloadImg: React.FC<IProps> = (props: IProps) => {
-  const { token } = useTypeSelector((state) => state.auth);
+  const { token, userID } = useTypeSelector((state) => state.auth);
   const [imgFile, setImgFile] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
@@ -38,7 +38,7 @@ export const ModalDonwloadImg: React.FC<IProps> = (props: IProps) => {
 
   const sendFile = (event: Event<HTMLInputElement>, header: authToke) => {
     superagent
-      .post('http://localhost:3333/users/60604a10a44cba001560d317/images')
+      .post(`https://server-team19-rsschool.herokuapp.com/users/${userID}/images`)
       .attach('file', event.target.files[0])
       .on('progress', (event) => {
         if (!isLoad) {
