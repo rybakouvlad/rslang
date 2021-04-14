@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { changeGroup } from '../../store/actions/book';
 import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import { colors } from '../../utils/colorsOfCards';
 
 export const Panel: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,22 +15,52 @@ export const Panel: React.FC = () => {
 
   return (
     <ButtonGroup aria-label="buttons" onClick={(e: any) => handlerRadioButton(e)}>
-      <Button variant="outline-primary" value="0" active={group === 0}>
+      <Button
+        style={{ backgroundColor: colors[0], borderColor: colors[0] }}
+        variant="outline-primary"
+        value="0"
+        active={group === 0}
+      >
         1
       </Button>
-      <Button variant="outline-primary" value="1" active={group === 1}>
+      <Button
+        style={{ backgroundColor: colors[1], borderColor: colors[1] }}
+        variant="outline-primary"
+        value="1"
+        active={group === 1}
+      >
         2
       </Button>
-      <Button variant="outline-primary" value="2" active={group === 2}>
+      <Button
+        style={{ backgroundColor: colors[2], borderColor: colors[2] }}
+        variant="outline-primary"
+        value="2"
+        active={group === 2}
+      >
         3
       </Button>
-      <Button variant="outline-primary" value="3" active={group === 3}>
+      <Button
+        style={{ backgroundColor: colors[3], borderColor: colors[3] }}
+        variant="outline-primary"
+        value="3"
+        active={group === 3}
+      >
         4
       </Button>
-      <Button variant="outline-primary" value="4" active={group === 4}>
+      <Button
+        style={{ backgroundColor: colors[4], borderColor: colors[4] }}
+        variant="outline-primary"
+        value="4"
+        active={group === 4}
+      >
         5
       </Button>
-      <Button variant="outline-primary" value="5" active={group === 5}>
+      <Button
+        style={{ backgroundColor: colors[5], borderColor: colors[5] }}
+        variant="outline-primary"
+        value="5"
+        active={group === 5}
+      >
         6
       </Button>
     </ButtonGroup>
