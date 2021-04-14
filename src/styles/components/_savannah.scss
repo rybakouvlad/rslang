@@ -3,7 +3,6 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
 .game-container {
   height: 70vh;
   margin: 0 10px;
-  // background-image: url('../../assets/img/savannah_bg.jpg');
   background-image: $savana-bg;
   background-position-x: 30%;
   background-position-y: 100%;
@@ -14,6 +13,24 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 10vh;
+}
+
+.savannah-wrapper {
+  align-self: center;
+  margin-bottom: 25vh;
+}
+
+.savannah-title {
+  text-align: center;
+}
+
+.btns-wrapper {
+  width: 400px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
 }
 
 .game-lifes {

@@ -206,10 +206,10 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
     return (
       <>
-        <h1>Саванна</h1>
+        <h1 className='savannah-title'>Саванна</h1>
 
         <div className={`game-container ${isFullScreen ? 'full-screen' : ''}`} ref={this.gameContainer}>
-          <div>
+          <div className='btns-wrapper'>
             <SoundToggle setIsPlaySound={this.setIsPlaySound} />
             <Button
               className="full-screen-btn"
