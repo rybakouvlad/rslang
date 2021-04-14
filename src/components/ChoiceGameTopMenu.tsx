@@ -13,18 +13,18 @@ interface IProps {
 export const ChoiceGameTopMenu: React.FC<IProps> = (props: IProps) => {
   return (
     <div className="small-menu-games">
-      <Link to={`/audiocall?path=${props.pathWords}`}>
-        <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
-          <AudioCallSvg />
-        </div>
-      </Link>
       <Link to={`/sprint?path=${props.pathWords}&page=${props.page}&group=${props.group}`}>
         <div className="svg-wrapper" style={{ backgroundColor: '#92BBE0' }}>
           <SprintSvg />
         </div>
       </Link>
+      <Link to={`/audiocall?path=${props.pathWords}`}>
+        <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
+          <AudioCallSvg />
+        </div>
+      </Link>
       <Link to={`/savana?path=${props.pathWords}`}>
-        <div className="svg-wrapper" style={{ backgroundColor: '#9CE087' }}>
+        <div className="svg-wrapper" style={{ backgroundColor: '#583EDE' }}>
           <SavannahSvg />
         </div>
       </Link>

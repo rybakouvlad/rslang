@@ -12,19 +12,25 @@
     justify-content: center;
     margin: 10px;
     border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 30px;
     &:hover{
       cursor:pointer;
       transform: scale(1.05);
     }
   }
   .learn-block{
-    background-color: mix($background-main, blue, $weight: 80%);
+    background-color: mix($background-main, #0000ff, $weight: 80%);
+    color: rgba(0,0,255, 0.6);
   }
   .hard-block{
-    background-color: mix($background-main, red, $weight: 70%);;
+    background-color: mix($background-main, #ff0000, $weight: 70%);
+    color: rgba(255,0,0, 0.6);
   }
   .delete-block{
-    background-color: mix($background-main, gray, $weight: 70%);;
+    background-color: mix($background-main, #808080, $weight: 70%);
+    color: rgba(128,128,128, 0.6);
   }
 }
 .dictionary-cards-wrapper{
@@ -43,4 +49,11 @@
     border-radius: 5px;
     background-color: rgba(115, 175, 186, 0.5);
   }
+}
+.dictionary-header{
+  text-align: center;
+  color: #A1C244;
+}
+.dictionary-container{
+height: 100%;
 }
