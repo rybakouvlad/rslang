@@ -5,6 +5,27 @@ import { useTypeSelector } from '../../hooks/useTypesSelector';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { colors } from '../../utils/colorsOfCards';
 
+const buttons = [
+  {
+    index: 0,
+  },
+  {
+    index: 1,
+  },
+  {
+    index: 2,
+  },
+  {
+    index: 3,
+  },
+  {
+    index: 4,
+  },
+  {
+    index: 5,
+  },
+];
+
 export const Panel: React.FC = () => {
   const dispatch = useDispatch();
   const { group } = useTypeSelector((state) => state.book);
@@ -12,10 +33,23 @@ export const Panel: React.FC = () => {
   const handlerRadioButton = (e: React.FormEvent<HTMLDivElement> | any): void => {
     dispatch(changeGroup(+e.target.value));
   };
+  const buttonsMap = buttons.map((element) => {
+    return (
+      <Button
+        key={element.index}
+        style={{ backgroundColor: colors[element.index], borderColor: colors[element.index] }}
+        variant="outline-primary"
+        value={element.index}
+        active={group === element.index}
+      >
+        {element.index}
+      </Button>
+    );
+  });
 
   return (
     <ButtonGroup aria-label="buttons" onClick={(e: any) => handlerRadioButton(e)}>
-      <Button
+      {/*<Button
         style={{ backgroundColor: colors[0], borderColor: colors[0] }}
         variant="outline-primary"
         value="0"
@@ -62,7 +96,8 @@ export const Panel: React.FC = () => {
         active={group === 5}
       >
         6
-      </Button>
+      </Button>*/}
+      {buttonsMap}
     </ButtonGroup>
   );
 };
