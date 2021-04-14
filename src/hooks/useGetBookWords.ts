@@ -6,7 +6,6 @@ export const useSetWordsState = () => {
     try {
       const response = await fetch(`https://server-team19-rsschool.herokuapp.com/words?group=${group}&page=${page}`);
       const json = await response.json();
-      console.log(json);
 
       setBookRandomWord(json);
     } catch (error) {}

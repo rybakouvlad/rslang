@@ -26,9 +26,7 @@ export const getAggregatedWords = (userID: string, userToken: string, difficulty
           }),
         },
       });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -57,8 +55,6 @@ export const getAggregateLearndWords = (userID: string, userToken: string, page 
           }),
         },
       });
-    } catch (error) {
-      console.log('ERROR!!!!!!!!!!!!!!', error);
-    }
+    } catch (error) {}
   };
 };

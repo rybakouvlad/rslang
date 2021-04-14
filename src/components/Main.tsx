@@ -10,9 +10,10 @@ import { FetchUserWords } from '../store/actions/userWords';
 import { useTypeSelector } from '../hooks/useTypesSelector';
 import { useLocation } from 'react-router-dom';
 import { gameAdress } from '../utils/gameAdress';
+import { getAllStatistic } from '../store/actions/statistic';
 
 export const Main: React.FC = () => {
-  const { loading, token } = useTypeSelector((state) => state.auth);
+  const { loading, token, userID } = useTypeSelector((state) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
   console.log(location);
@@ -23,6 +24,7 @@ export const Main: React.FC = () => {
   useEffect(() => {
     if (token) {
       dispatch(FetchUserWords());
+      dispatch(getAllStatistic(userID, token));
     }
   }, [token]);
   if (loading) {
