@@ -9,11 +9,13 @@ import { ReactComponent as DeleteSvg } from '../../assets/svg/delete.svg';
 import { ReactComponent as AddHardSvg } from '../../assets/svg/add_hard.svg';
 import { ReactComponent as HardAddedSvg } from '../../assets/svg/hard_added.svg';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { colors } from '../../utils/colorsOfCards';
 
 interface CardProps {
   data: Word;
   isAudioPlaying: boolean;
   setIsAudioPlaying: (param: boolean) => void;
+  group?: number;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
@@ -36,6 +38,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     wordTranslate,
   } = props.data;
   const { isAudioPlaying, setIsAudioPlaying } = props;
+  const group = props.group >= 0 ? props.group : 6;
 
   const SERVER_PATH = 'https://server-team19-rsschool.herokuapp.com';
 
@@ -90,7 +93,14 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   });
 
   return (
-    <li className={liClasses}>
+    <li
+      className={liClasses}
+      style={{
+        backgroundColor: colors[group],
+        borderColor: colors[group],
+        boxShadow: `0 3px 6px ${colors[group]}, 0 3px 6px ${colors[group]}`,
+      }}
+    >
       <img className="card-book__image" src={`${SERVER_PATH}/${image}`} alt="imagine"></img>
       <div className="card-book__word">
         <div>{word}</div>

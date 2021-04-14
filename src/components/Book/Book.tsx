@@ -59,7 +59,13 @@ export const Book: React.FC = () => {
         <div className="cards-container">
           {words.map((elem) => {
             return wordsSettings.has(elem.id) && wordsSettings.get(elem.id).difficulty === 'delete' ? null : (
-              <Card key={elem.id} data={elem} isAudioPlaying={isAudioPlaying} setIsAudioPlaying={setIsAudioPlaying} />
+              <Card
+                key={elem.id}
+                data={elem}
+                isAudioPlaying={isAudioPlaying}
+                setIsAudioPlaying={setIsAudioPlaying}
+                group={group}
+              />
             );
           })}
         </div>
