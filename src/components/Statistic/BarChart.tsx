@@ -45,4 +45,4 @@ export const BarChart: React.FC<BarChartProps> = (props: BarChartProps) => {
       />
     </div>
   );
-}
+};
