@@ -4,7 +4,7 @@ import { Video } from './video/Video';
 import enPng from '../assets/img/en1.svg';
 
 export const Home: React.FC = () => {
-  const src = 'https://www.youtube.com/watch?v=BuaZF0vItXI'; // video source
+  const src = 'https://youtu.be/y_JAsPgBcks'; // video source
 
   return (
     <main className="main_home__wrapper">
