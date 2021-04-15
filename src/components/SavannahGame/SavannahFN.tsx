@@ -26,9 +26,9 @@ function SavannahWrap() {
   return (
     <>
       {isStart ? (
-        <div className='savannah-wrapper'>
-        <h1 className='savannah-title'>Саванна</h1>
-        <StartGame setIsStart={setIsStart} />
+        <div className="savannah-wrapper">
+          <h1 className="savannah-title">Саванна</h1>
+          <StartGame setIsStart={setIsStart} />
         </div>
       ) : isLoading ? (
         <div>Загружаем игру...</div>

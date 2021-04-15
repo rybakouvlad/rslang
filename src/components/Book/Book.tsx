@@ -51,6 +51,7 @@ export const Book: React.FC = () => {
 
   return (
     <div className="book">
+      <h1 className="sprint-game-header">Электронный учебник</h1>
       <Panel />
       <ChoiceGameTopMenu pathWords={'book'} page={query.get('page')} group={query.get('group')} />
       {loading ? (

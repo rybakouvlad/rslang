@@ -33,7 +33,8 @@ export const DifficultySelection: React.FC<IProps> = (props: IProps) => {
         onChange={changeHandler}
         options={options}
       />
-      <Button variant="info"
+      <Button
+        variant="info"
         onClick={() => {
           changeDifficulty(select.value);
           props.setIsStart(false);
