@@ -25,6 +25,9 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
 
 .savannah-title {
   text-align: center;
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 }
 
 .mute-sound {
