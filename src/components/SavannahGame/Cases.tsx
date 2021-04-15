@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+
 
 interface CasesProps {
   currentWord: { word: string; wordTranslate: string };
@@ -26,9 +28,9 @@ class Cases extends Component<CasesProps> {
         {answers.map((translateWord, index) => {
           const buttonName = `${index + 1}. ${translateWord}`;
           return (
-            <button key={index} data-answer={translateWord} onClick={() => this.handleClick(translateWord)}>
+            <Button variant='secondary' key={index} data-answer={translateWord} onClick={() => this.handleClick(translateWord)}>
               {buttonName}
-            </button>
+            </Button>
           );
         })}
       </div>
