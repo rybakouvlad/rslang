@@ -1,9 +1,9 @@
 export interface IGameStat {
-  name: string;
-  correct: number;
-  incorrect: number;
-  series: number;
-  learn: number;
+  name?: string;
+  correct?: number;
+  incorrect?: number;
+  series?: number;
+  learn?: number;
 }
 
 export interface IDayStat {

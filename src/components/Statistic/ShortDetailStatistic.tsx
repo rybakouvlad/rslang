@@ -8,16 +8,19 @@ interface IProps {
 
 export const ShortDetailStatistic: React.FC<IProps> = (props: IProps) => {
   const [gameName, setGameName] = useState<string>('audiocall');
-  const [gameResult, setGameResult] = useState<IGameStat>();
+  const [gameResult, setGameResult] = useState<IGameStat>({});
+
   useEffect(() => {
     const data = props.results.games.find((el) => {
       return el.name === gameName;
     });
     setGameResult(data);
   }, [gameName]);
+
   if (!gameResult) {
     return <h1>Данных сегодня нету</h1>;
   }
+
   return (
     <>
       <StatisticSelector setGameName={setGameName} />
