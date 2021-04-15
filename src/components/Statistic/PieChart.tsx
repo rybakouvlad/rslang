@@ -8,7 +8,7 @@ interface BarChartProps {
 export const PieChart: React.FC<BarChartProps> = (props: BarChartProps) => {
   const { data } = props;
   const dataForChart = {
-    labels: ['Rigth answers %', 'Wrong answers %'],
+    labels: ['Правильные ответы %', 'Неправильные ответы %'],
     datasets: [
       {
         label: 'Pie of right and wrong answers',
@@ -24,13 +24,13 @@ export const PieChart: React.FC<BarChartProps> = (props: BarChartProps) => {
     <div>
       <Pie
         data={dataForChart}
-        width={300}
-        height={300}
+        width={350}
+        height={350}
         options={{
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: 'Pie of right and wrong answers',
+            text: 'График правильных и не правильных ответов',
             fontSize: 16,
           },
         }}
