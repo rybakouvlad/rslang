@@ -1,3 +1,20 @@
-.dev-card {
+.card-container {
+    width: 300px;
+    margin-bottom: 25px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.card-text {
+    padding: 0px 0px 25px 0px;
+}
+
+.card-link {
+    position: absolute;
+    bottom: 5px; 
+    left: 15px;
+}
+
+.card-img {
+    width: 300px; 
+    height: 300px;
 }
