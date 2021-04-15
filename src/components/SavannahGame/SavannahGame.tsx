@@ -82,7 +82,7 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
   playSound = (type: 'correct' | 'wrong'): void => {
     const { isPlaySound } = this.state;
-    console.log(isPlaySound);
+
     if (!isPlaySound) return;
 
     if (type === 'correct') {
@@ -178,12 +178,18 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
     }, roundTimeLife);
   };
 
+  updateIsFullScreen = () => {
+    this.setState({ isFullScreen: !!document.fullscreenElement });
+  };
+
   componentDidMount() {
+    document.addEventListener('fullscreenchange', this.updateIsFullScreen);
     window.addEventListener('keyup', this.handleKeyUp);
     this.roundTimeOut();
   }
 
   componentWillUnmount() {
+    document.removeEventListener('fullscreenchange', this.updateIsFullScreen);
     window.removeEventListener('keyup', this.handleKeyUp);
   }
 
@@ -194,11 +200,21 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   newGame = (): void => {
     const initState = this.createInitState();
     this.changeBGPosition('initial');
-    this.setState(initState);
+    this.setState({ ...initState, isFullScreen: !!document.fullscreenElement });
   };
 
   setIsPlaySound = (flag: boolean) => {
     this.setState({ isPlaySound: flag });
+  };
+
+  toggleFullScreen = (): void => {
+    if (!document.fullscreenElement) {
+      this.gameContainer.current.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
   };
 
   render() {
@@ -206,16 +222,12 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
     return (
       <>
-        <h1>Саванна</h1>
+        <h1 className="savannah-title">Саванна</h1>
 
         <div className={`game-container ${isFullScreen ? 'full-screen' : ''}`} ref={this.gameContainer}>
-          <div>
+          <div className="btns-wrapper">
             <SoundToggle setIsPlaySound={this.setIsPlaySound} />
-            <Button
-              className="full-screen-btn"
-              variant="info"
-              onClick={() => this.setState({ isFullScreen: !isFullScreen })}
-            >
+            <Button className="full-screen-btn" variant="info" onClick={this.toggleFullScreen}>
               {isFullScreen ? 'выйти из полноэкранного режима' : 'на весь экран'}
             </Button>
           </div>

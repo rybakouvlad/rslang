@@ -14,18 +14,24 @@ export const ShortDetailStatistic: React.FC<IProps> = (props: IProps) => {
       return el.name === gameName;
     });
     setGameResult(data);
-  }, [gameName]);
-  if (!gameResult) {
-    return <h1>Данных сегодня нету</h1>;
-  }
+  }, [gameName, gameResult]);
+  // if (!gameResult) {
+  //   return <h1>Данных сегодня нету</h1>;
+  // }
   return (
     <>
       <StatisticSelector setGameName={setGameName} />
-      <div>Новых слов изучено {gameResult.learn}</div>
-      <div>
-        Процент правильных {Math.trunc((gameResult.correct / (gameResult.correct + gameResult.incorrect)) * 100)}%
-      </div>
-      <div>Самая длинная сери {gameResult.series}</div>
+      {gameResult ? (
+        <>
+          <div>Новых слов изучено {gameResult.learn}</div>
+          <div>
+            Процент правильных {Math.trunc((gameResult.correct / (gameResult.correct + gameResult.incorrect)) * 100)}%
+          </div>
+          <div>Самая длинная сери {gameResult.series}</div>
+        </>
+      ) : (
+        <h1>Данных сегодня нету</h1>
+      )}
     </>
   );
 };

@@ -16,7 +16,7 @@ export const Main: React.FC = () => {
   const { loading, token, userID } = useTypeSelector((state) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
+
   useEffect(() => {
     dispatch(checkLogin());
   }, [dispatch]);
