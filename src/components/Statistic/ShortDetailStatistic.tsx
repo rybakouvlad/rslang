@@ -27,7 +27,7 @@ export const ShortDetailStatistic: React.FC<IProps> = (props: IProps) => {
           <li>
             Процент правильных {Math.trunc((gameResult.correct / (gameResult.correct + gameResult.incorrect)) * 100)}%
           </li>
-          <li>Самая длинная сери {gameResult.series}</li>
+          <li>Самая длинная серия {gameResult.series}</li>
         </ul>
       ) : (
         <span className="statistics-error">Данных сегодня нет</span>
