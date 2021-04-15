@@ -3,13 +3,15 @@ import Lifes from './Lifes';
 import Cases from './Cases';
 import GameOver from './GameOver';
 import WordComponent from './WordComponent';
-import { Button } from 'react-bootstrap';
+import sound_on from '../../assets/svg/sound_on.svg';
+import sound_off from '../../assets/svg/sound_off.svg';
+import full_screen_expand from '../../assets/svg/full_screen_expand.svg';
+import full_screen_collapse from '../../assets/svg/full_screen_collapse.svg';
 import { roundTimeLife } from './constants';
 import { Word } from '../../types/book';
 import { shuffle } from '../../utils/shuffleArray';
 import wrong from '../../assets/sounds/wrong.mp3';
 import correct from '../../assets/sounds/correct.mp3';
-import { SoundToggle } from './SoundToggle';
 
 interface SavannahProps {
   words: Word[];
@@ -18,7 +20,7 @@ interface SavannahProps {
 
 interface SavannahState {
   currentWord: { word: string; wordTranslate: string };
-  isPlaySound: boolean;
+  muteSound: boolean;
   isFullScreen: boolean;
   answers: string[];
   lifes: number;
@@ -51,8 +53,8 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
     return {
       currentWord: { word: initWord, wordTranslate: initWordTranslate },
-      isPlaySound: true,
       isFullScreen: false,
+      muteSound: false,
       answers: shuffledAnswers,
       lifes: 5,
       words: wordsArray,
@@ -81,9 +83,9 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   }
 
   playSound = (type: 'correct' | 'wrong'): void => {
-    const { isPlaySound } = this.state;
+    const { muteSound } = this.state;
 
-    if (!isPlaySound) return;
+    if (muteSound) return;
 
     if (type === 'correct') {
       new Audio(correct).play();
@@ -198,13 +200,16 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   }
 
   newGame = (): void => {
+    const { muteSound } = this.state;
     const initState = this.createInitState();
     this.changeBGPosition('initial');
-    this.setState({ ...initState, isFullScreen: !!document.fullscreenElement });
+    this.setState({ ...initState, isFullScreen: !!document.fullscreenElement, muteSound });
   };
 
-  setIsPlaySound = (flag: boolean) => {
-    this.setState({ isPlaySound: flag });
+  toggleSound = () => {
+    this.setState(({ muteSound }) => ({
+      muteSound: !muteSound,
+    }));
   };
 
   toggleFullScreen = (): void => {
@@ -218,19 +223,18 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   };
 
   render() {
-    const { currentWord, lifes, answers, index, gameOver, statistics, animation, isFullScreen } = this.state;
+    const { currentWord, lifes, answers, index, gameOver, statistics, animation, isFullScreen, muteSound } = this.state;
+    const soundImgSrc = muteSound ? sound_off : sound_on;
+    const fullScreenSrc = isFullScreen ? full_screen_collapse : full_screen_expand;
 
     return (
       <>
         <h1 className="savannah-title">Саванна</h1>
 
-        <div className={`game-container ${isFullScreen ? 'full-screen' : ''}`} ref={this.gameContainer}>
-          <div className="btns-wrapper">
-            <SoundToggle setIsPlaySound={this.setIsPlaySound} />
-            <Button className="full-screen-btn" variant="info" onClick={this.toggleFullScreen}>
-              {isFullScreen ? 'выйти из полноэкранного режима' : 'на весь экран'}
-            </Button>
-          </div>
+        <div className='game-container' ref={this.gameContainer}>
+          
+          <img className='mute-sound' src={soundImgSrc} onClick={this.toggleSound}></img>
+          <img className='full-screen' src={fullScreenSrc} onClick={this.toggleFullScreen}></img>
           {gameOver ? (
             <GameOver newGame={this.newGame} statistics={statistics} />
           ) : (

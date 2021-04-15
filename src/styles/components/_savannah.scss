@@ -25,17 +25,25 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
 
 .savannah-title {
   text-align: center;
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 }
 
-.btns-wrapper {
-  width: 200px;
+.mute-sound {
+  width: 40px;
   position: absolute;
   top: 10px;
   left: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: center;
+  cursor: pointer;
+}
+
+.full-screen {
+  width: 35px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .lifes-container {
@@ -43,7 +51,7 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
   gap: 5px;
   position: absolute;
 
-  top: 10px;
+  top: 50px;
   right: 10px;
 
   list-style: none;
@@ -64,6 +72,23 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
   gap: 5px;
   justify-content: center;
   padding-top: 40vh;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}
+
+.btn-answer {
+  background-color: #6c757d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  text-align: start;
+  text-decoration: none;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .game-word {
@@ -75,19 +100,11 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
   animation-duration: 3.5s;
   animation-name: wordFallDown;
   animation-timing-function: linear;
-}
 
-// .full-screen {
-//   position: fixed;
-//   left: 0;
-//   top: 0;
-//   z-index: 1500;
-//   background-image: $savana-bg;
-//   height: 100%;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-// }
+  @media (max-width: 600px) {
+    font-size: 25px;
+  }
+}
 
 .game-over-wrapper {
   background-color: white;
