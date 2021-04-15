@@ -1,6 +1,19 @@
 .about-team-container {
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  &::-webkit-scrollbar {
+    width: 6px;
+    margin-left: 3px;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(115, 175, 186, 0.5);
+  }
 }
