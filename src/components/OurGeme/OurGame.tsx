@@ -108,12 +108,16 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
     const dropCard: string = e.target.id;
     const isRuMarkerWords = e.target.dataset.ru;
     const isWrongWord = e.target.dataset.wrong;
+
+    const currentWord = words.find((word: any) => (word.id === card.target.id));
+    (currentCard === dropCard) ? checkWords(currentWord, true) : checkWords(currentWord, false);
+    
     if (currentCard === dropCard) {
       if (soundToggler) playSound().successAnswer.play();
       setWords((words: any) =>
         words.filter((word: any) => {
           if (word.id === card.target.id && !isWrongWord) {
-            checkWords(word, true);
+            // checkWords(word, true);
             setScore((prev) => prev + 10);
             setFindWords((prev) => {
               return [...prev.concat([word])];
@@ -128,7 +132,7 @@ export const OurGame: React.FC<I_qq> = (props: I_qq) => {
       e.target.style.background = 'rgba(153, 46, 55, 0.39)';
       words.map((word: any) => {
         if (word.id + '_EN' === dropCard) {
-          checkWords(word, false);
+          // checkWords(word, false);
 
           e.target.dataset.wrong = 'wrong';
           setNotCurrentWords((prev) => {
