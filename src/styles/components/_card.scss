@@ -1,0 +1,131 @@
+.card-book {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-template-areas: 
+  'word image'
+  'mean mean'
+  'mean-tr mean-tr'
+  'ex ex'
+  'ex-tr ex-tr'
+  'difficult delete';
+  border: 1px solid black;
+  border-radius: 10px;
+
+  .card-book__image {
+    grid-area: image;  
+    border-radius: 20px;
+    width: 100px;
+    padding: 5px;
+    align-self: top;
+    justify-self: center;
+  }
+
+  .card-book__word {
+    grid-area: word;
+  }
+
+  .card-book__meaning {
+    grid-area: mean;
+  }
+
+  .card-book__example {
+    grid-area: ex;
+  }
+
+  .card-book__meaning-translate {
+    grid-area: mean-tr;
+  }
+
+  .card-book__example-translate {
+    grid-area: ex-tr;
+  }
+
+  .card-book-audio {
+    width: 20px;
+    margin-left: 5px;
+  }
+
+  .card-book-audio:hover {
+    cursor: pointer;
+  }
+  button{
+    width: 47px;
+    background: no-repeat;
+    border: none;
+    .hard-added-svg, .deleted-added-svg{
+      fill: firebrick;
+    }
+    .deleted-added-svg{
+      fill: firebrick;
+    }
+    svg {
+      &:hover {
+        fill: rebeccapurple;
+      }
+    }
+  }
+}
+
+.card-book > * {
+  padding-left: 10px;
+}
+
+.cards-container {  
+  align-self: stretch; // for flex container
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  // grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 10px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 6px;
+    margin-left: 3px;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(115, 175, 186, 0.5);
+  }
+}
+
+.hard-word{
+  background-color: cadetblue;
+}
+
+.add-hard-btn{
+  grid-area: difficult;
+}
+.add-deleted-btn{
+  grid-area: delete;
+}
+
+.played-count{
+  display: flex;
+  .played-count-true{
+    background-color: greenyellow;
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 700;
+    height: 22px;
+  }
+  .played-count-false{
+    background-color: lightcoral;
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 700;
+    height: 22px;
+  }
+}

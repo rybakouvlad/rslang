@@ -1,0 +1,25 @@
+
+.settings-container {
+  margin-bottom: auto;
+  align-self: center;
+}
+
+.settings-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.settings-main {
+  display: flex;
+  flex-direction: column;
+  label{
+    display: flex;
+    align-items: baseline;
+  }
+}
+
+.settings-main input {
+  margin-right: 10px;
+}
+
+

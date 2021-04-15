@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/bootstrap';
+
+// Abstract
+
+@import 'abstract/constants';
+
+//Base
+
+@import 'base/base';
+
+//Layouts
+@import 'layouts/main';
+@import 'layouts/header';
+@import 'layouts/footer';
+
+//components
+@import 'components/smartMenu';
+@import 'components/auth';
+@import 'components/audiocallgame';
+@import 'components/savannah';
+@import 'components/sprintgame';
+@import 'components/dictionary';
+@import 'components/card';
+@import 'components/book';
+@import 'components/ourGameStyle.scss';
+@import 'components/choiceGameTopMenu';
+@import 'components/startGame';
+@import 'components/aboutTeam';
+@import 'components/cardDev';
+@import 'components/home';
+@import 'components/video';
+@import 'components/statistics';
+@import 'components/pagination';
+@import 'components/settings';
+
+

@@ -1,0 +1,36 @@
+.auth-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: #ad5f82;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  right: 25px;
+  overflow: hidden;
+  img {
+    width: 60px;
+    min-height: 60px;
+  }
+  svg {
+    width: 45px;
+    fill: white;
+    &:hover {
+      fill: #576566;
+    }
+  }
+}
+
+.auth-popup {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  a {
+    cursor: pointer;
+  }
+}

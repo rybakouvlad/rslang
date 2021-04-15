@@ -1,0 +1,186 @@
+.audiocall-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
+  .full-screen-btn {
+    margin-bottom: 10px;
+  }
+}
+.audiocall-game {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  background-color: white;
+  // min-width: 700px;
+  width: 90%;
+  border-radius: 30px;
+}
+
+.audiocall-game-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+  background: none;
+  border: none;
+}
+.audiocall-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.audiocall-body {
+  height: 200px;
+  .audiocall-text-block {
+    height: 100px;
+    text-align: center;
+  }
+  button {
+    margin: 0 3px;
+  }
+}
+.audiocall-controls-btn {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.audiocall-repeat-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: yellowgreen;
+  svg {
+    g {
+      stroke: white;
+    }
+    &:hover g {
+      stroke: red;
+    }
+  }
+}
+
+.audiocall-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .audiocall-result {
+    display: flex;
+    overflow-y: scroll;
+    height: 410px;
+    margin: 10px;
+    width: 100%;
+    justify-content: center;
+    &::-webkit-scrollbar {
+      width: 6px;
+      margin-left: 3px;
+      background-color: rgba(255, 255, 255, 0);
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgba(115, 175, 186, 0.5);
+    }
+    .audiocall-result-row {
+      min-width: 200px;
+      display: flex;
+      justify-content: center;
+      justify-content: center;
+      // border: 1px solid;
+    }
+    .audiocall-true {
+      color: yellowgreen;
+    }
+    .audiocall-false {
+      color: lightcoral;
+    }
+  }
+}
+
+.audiocall-progress {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.audiocall-progress-correct {
+  background-color: rgba(120, 203, 100, 1);
+  left: 20px;
+}
+.audiocall-progress-incorrect {
+  background-color: rgba(235, 85, 82, 1);
+  right: 20px;
+}
+
+.audiocall-wrapper-full-screen {
+  background: $background-main;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.audiocall-game-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1000px) {
+  .audiocall-body {
+    height: 300px;
+  }
+  .audiocall-game-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+  .audiocall-img {
+    display: none;
+  }
+  .audiocall-text-block {
+    div {
+      font-size: 1rem;
+    }
+  }
+  .audiocall-body {
+    display: flex;
+    flex-direction: column;
+    button {
+      font-size: 14px;
+      height: 30px;
+    }
+  }
+  .audiocall-repeat-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: yellowgreen;
+    position: absolute;
+    top: 5px;
+  }
+  .audiocall-end {
+    .audiocall-result {
+      flex-direction: column-reverse;
+      background: white;
+      justify-content: flex-end;
+      height: 100%;
+      border-radius: 30px;
+    }
+  }
+}

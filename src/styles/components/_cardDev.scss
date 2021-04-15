@@ -1,0 +1,21 @@
+.card-container {
+    width: 350px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.card-text {
+    padding: 0px 0px 25px 0px;
+    text-align: justify;
+}
+
+.card-link {
+    position: absolute;
+    bottom: 5px; 
+    left: 15px;
+}
+
+.card-img {
+    width: 350px; 
+    height: 350px;
+}
