@@ -24,8 +24,6 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
-    "cloudinary-core": "^2.11.3",
-    "cloudinary-react": "^1.7.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",

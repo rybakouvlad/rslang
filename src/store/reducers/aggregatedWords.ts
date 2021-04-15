@@ -9,7 +9,8 @@ export default function (state: IAggregatedWords = initialState, action: Aggrega
   switch (action.type) {
     case AggregatedWordsTypes.GET_AGGREGATED_WORDS:
       return { ...action.payload };
-
+    case AggregatedWordsTypes.AGGREGATED_WORDS_ERROR:
+      return { ...initialState };
     default:
       return {
         ...state,

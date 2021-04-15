@@ -82,6 +82,7 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
   playSound = (type: 'correct' | 'wrong'): void => {
     const { isPlaySound } = this.state;
+
     if (!isPlaySound) return;
 
     if (type === 'correct') {
@@ -179,7 +180,7 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
 
   updateIsFullScreen = () => {
     this.setState({ isFullScreen: !!document.fullscreenElement });
-  }
+  };
 
   componentDidMount() {
     document.addEventListener('fullscreenchange', this.updateIsFullScreen);
@@ -192,7 +193,6 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
     window.removeEventListener('keyup', this.handleKeyUp);
   }
 
-
   componentDidUpdate() {
     this.roundTimeOut();
   }
@@ -200,7 +200,7 @@ class SavannahGame extends Component<SavannahProps, SavannahState> {
   newGame = (): void => {
     const initState = this.createInitState();
     this.changeBGPosition('initial');
-    this.setState({...initState, isFullScreen: !!document.fullscreenElement});
+    this.setState({ ...initState, isFullScreen: !!document.fullscreenElement });
   };
 
   setIsPlaySound = (flag: boolean) => {

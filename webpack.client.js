@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const WebpackNotifierPlugin = require('webpack-notifier');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpackConfig = require('./webpack.config');
 const ESLintPlugin = require('eslint-webpack-plugin');
-// const Dotenv = require('dotenv-webpack');
-// const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => {
   const watchMode = argv.liveReload || false;
@@ -42,10 +39,6 @@ module.exports = (env, argv) => {
       hot: true,
       open: true,
       historyApiFallback: true,
-      proxy: {
-        '/users': 'http://localhost:3333',
-        // '/api/streams': 'http://localhost:8080',
-      },
     },
     resolve: config.resolve,
     module: {
@@ -65,16 +58,6 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './src/Html/Browser.html',
       }),
-      // new CopyPlugin({
-      //   patterns: [
-      //     {
-      //       from: './src/client/locales',
-      //       to: './locales',
-      //     },
-      //   ],
-      // }),
-      // new WebpackNotifierPlugin({ alwaysNotify: false }),
-      // new Dotenv(),
     ],
     entry: {
       main: './src/Client.tsx',
