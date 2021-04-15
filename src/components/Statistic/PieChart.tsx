@@ -30,7 +30,7 @@ export const PieChart: React.FC<BarChartProps> = (props: BarChartProps) => {
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: 'График правильных и не правильных ответов',
+            text: 'Правильные и не правильные ответы',
             fontSize: 16,
           },
         }}
