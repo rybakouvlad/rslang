@@ -16,5 +16,8 @@ export const AboutTeam: React.FC = () => {
     );
   });
 
-  return <div className="about-team-container">{dataMap}</div>;
+  return (<>
+    <h1 className="sprint-game-header">Наша команда</h1>
+    <div className="about-team-container">{dataMap}</div>
+    </>);
 };

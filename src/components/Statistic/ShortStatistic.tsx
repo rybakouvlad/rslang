@@ -31,7 +31,7 @@ export const ShortStatistic: React.FC = () => {
   }
   return (
     <div className="dictionary-container">
-      <h1 className="dictionary-header" style={{ color: '#FC983A' }}>
+      <h1 className="dictionary-header">
         Краткосрочная статистика
       </h1>
       <ShortAllStatistic results={results} />

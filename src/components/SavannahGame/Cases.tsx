@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 interface CasesProps {
   currentWord: { word: string; wordTranslate: string };
   answers: string[];

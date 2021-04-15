@@ -12,7 +12,10 @@ export const EndGame: React.FC<iProps> = (props: iProps) => {
       <h1>Конец игры</h1>
       <div className="audiocall-result">
         <div className="audiocall-result-col">
-          <div className="audiocall-result-row audiocall-true" style={{ fontWeight: 700 }}>{`Правильно: ${props.results.correct}`}</div>
+          <div
+            className="audiocall-result-row audiocall-true"
+            style={{ fontWeight: 700 }}
+          >{`Правильно: ${props.results.correct}`}</div>
           {props.results.correctWords.map((el) => {
             return (
               <div className="audiocall-result-row audiocall-true" key={el.id}>
@@ -22,7 +25,10 @@ export const EndGame: React.FC<iProps> = (props: iProps) => {
           })}
         </div>
         <div>
-          <div className="audiocall-result-row audiocall-false" style={{ fontWeight: 700 }}>{`Неправильно: ${props.results.incorrect}`}</div>
+          <div
+            className="audiocall-result-row audiocall-false"
+            style={{ fontWeight: 700 }}
+          >{`Неправильно: ${props.results.incorrect}`}</div>
           {props.results.incorrectWords.map((el) => {
             return (
               <div className="audiocall-result-row audiocall-false" key={el.id}>
