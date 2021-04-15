@@ -6,6 +6,7 @@
   //   justify-content: center;
   align-items: center;
   position: relative;
+  overflow-y: scroll;
   .full-screen-btn {
     margin-bottom: 10px;
   }
@@ -15,7 +16,8 @@
   flex-direction: column;
   height: 70vh;
   background-color: white;
-  min-width: 700px;
+  // min-width: 700px;
+  width: 90%;
   border-radius: 30px;
 }
 
@@ -76,6 +78,21 @@
     overflow-y: scroll;
     height: 410px;
     margin: 10px;
+    width: 100%;
+    justify-content: center;
+    &::-webkit-scrollbar {
+      width: 6px;
+      margin-left: 3px;
+      background-color: rgba(255, 255, 255, 0);
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgba(115, 175, 186, 0.5);
+    }
     .audiocall-result-row {
       min-width: 200px;
       display: flex;
@@ -84,10 +101,10 @@
       // border: 1px solid;
     }
     .audiocall-true {
-      color: rgba(120, 203, 100, 1);
+      color: yellowgreen;
     }
     .audiocall-false {
-      color: rgba(235, 85, 82, 1);
+      color: lightcoral;
     }
   }
 }
@@ -119,8 +136,52 @@
   justify-content: center;
 }
 
-.audiocall-game-header{
+.audiocall-game-header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 1000px) {
+  .audiocall-body {
+    height: 300px;
+  }
+  .audiocall-game-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+  .audiocall-img {
+    display: none;
+  }
+  .audiocall-text-block {
+    div {
+      font-size: 1rem;
+    }
+  }
+  .audiocall-body {
+    display: flex;
+    flex-direction: column;
+    button {
+      font-size: 14px;
+      height: 30px;
+    }
+  }
+  .audiocall-repeat-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: yellowgreen;
+    position: absolute;
+    top: 5px;
+  }
+  .audiocall-end {
+    .audiocall-result {
+      flex-direction: column-reverse;
+      background: white;
+      justify-content: flex-end;
+      height: 100%;
+      border-radius: 30px;
+    }
+  }
 }

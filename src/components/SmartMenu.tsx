@@ -33,7 +33,7 @@ export const SmartMenu: React.FC = () => {
           {token && (
             <>
               <Link to="/dictionary">
-                <div className="svg-wrapper" style={{ backgroundColor: '#FDF386' }}>
+                <div className="svg-wrapper" style={{ backgroundColor: '#A1C244' }}>
                   <PencilSvg />
                 </div>
               </Link>
@@ -55,7 +55,7 @@ export const SmartMenu: React.FC = () => {
             </div>
           </Link>
           <Link to="/savana">
-            <div className="svg-wrapper" style={{ backgroundColor: '#BFA57B' }}>
+            <div className="svg-wrapper" style={{ backgroundColor: '#583EDE' }}>
               <SavannahSvg />
             </div>
           </Link>

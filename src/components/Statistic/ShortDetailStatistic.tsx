@@ -19,19 +19,19 @@ export const ShortDetailStatistic: React.FC<IProps> = (props: IProps) => {
   //   return <h1>Данных сегодня нету</h1>;
   // }
   return (
-    <>
+    <div className="game-statistics">
       <StatisticSelector setGameName={setGameName} />
       {gameResult ? (
-        <>
-          <div>Новых слов изучено {gameResult.learn}</div>
-          <div>
+        <ul className="short-statistics-games">
+          <li>Новых слов изучено {gameResult.learn}</li>
+          <li>
             Процент правильных {Math.trunc((gameResult.correct / (gameResult.correct + gameResult.incorrect)) * 100)}%
-          </div>
-          <div>Самая длинная сери {gameResult.series}</div>
-        </>
+          </li>
+          <li>Самая длинная серия {gameResult.series}</li>
+        </ul>
       ) : (
-        <h1>Данных сегодня нету</h1>
+        <span className="statistics-error">Данных сегодня нет</span>
       )}
-    </>
+    </div>
   );
 };
