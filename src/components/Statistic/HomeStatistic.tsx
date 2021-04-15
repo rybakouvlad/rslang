@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 export const HomeStatistic: React.FC = () => {
   return (
-    <>
-      <h1>Статистика</h1>
+    <div className="dictionary-container" >
+    <h1 className="dictionary-header" style={{color: '#FC983A', marginTop: '5%', marginBottom: '12%'}}>Статистика</h1>
       <div className="dictionary-wrapper">
         <Link to="/statistic/short" className="dictionary-block learn-block">
-          <div>Короткая статистика</div>
+          <div>Краткосрочная статистика</div>
         </Link>
         <Link to="/statistic/long" className="dictionary-block hard-block">
-          <div>Длинная статистика</div>
+          <div>Долгосрочная статистика</div>
         </Link>
       </div>
-    </>
+    </div>
   );
 };

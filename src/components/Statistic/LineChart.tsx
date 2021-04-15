@@ -12,13 +12,13 @@ export const LineChart: React.FC<BarChartProps> = (props: BarChartProps) => {
     labels: labels,
     datasets: [
       {
-        label: 'Second chart',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        label: 'Статистика слов за весь период',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data: data,
+        fill: false,
       },
     ],
   };

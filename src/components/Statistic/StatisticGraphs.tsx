@@ -59,6 +59,7 @@ export const StatisticGraphs: React.FC = () => {
   }
   return (
     <div className="statistics-container">
+      <h1 className="dictionary-header" style={{ color: '#FC983A', margin: 0 }}>Долгосрочная статистика</h1>
       <BarChart data={everyData} labels={label} />
       <LineChart data={increaseData} labels={label} />
     </div>
