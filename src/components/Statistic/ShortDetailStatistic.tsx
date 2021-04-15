@@ -30,7 +30,7 @@ export const ShortDetailStatistic: React.FC<IProps> = (props: IProps) => {
           <li>Самая длинная сери {gameResult.series}</li>
         </ul>
       ) : (
-        <span className="statistics-error">Данных сегодня нету</span>
+        <span className="statistics-error">Данных сегодня нет</span>
       )}
     </div>
   );

@@ -27,7 +27,7 @@ export const ShortStatistic: React.FC = () => {
   }, [optional]);
 
   if (!results) {
-    return <span className="statistics-error">Данных нету</span>;
+    return <span className="statistics-error">Данных нет</span>;
   }
   return (
     <div className="dictionary-container">
