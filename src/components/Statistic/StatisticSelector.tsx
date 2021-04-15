@@ -11,6 +11,7 @@ const options: OptionType[] = [
   { value: 'audiocall', label: 'Аудиовызов' },
   { value: 'sprint', label: 'Спринт' },
   { value: 'savana', label: 'Савана' },
+  { value: 'our-game', label: 'Перетаскивание' },
 ];
 
 export const StatisticSelector: React.FC<IProps> = (props: IProps) => {

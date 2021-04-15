@@ -26,7 +26,11 @@ export const getAggregatedWords = (userID: string, userToken: string, difficulty
           }),
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatch({
+        type: AggregatedWordsTypes.AGGREGATED_WORDS_ERROR,
+      });
+    }
   };
 };
 
@@ -55,6 +59,10 @@ export const getAggregateLearndWords = (userID: string, userToken: string, page 
           }),
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatch({
+        type: AggregatedWordsTypes.AGGREGATED_WORDS_ERROR,
+      });
+    }
   };
 };

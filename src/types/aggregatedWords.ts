@@ -7,6 +7,7 @@ export interface IAggregatedWords {
 
 export enum AggregatedWordsTypes {
   GET_AGGREGATED_WORDS = 'GET_AGGREGATED_WORDS',
+  AGGREGATED_WORDS_ERROR = 'AGGREGATED_WORDS_ERROR',
 }
 
 interface GetAggregatedAction {
@@ -14,4 +15,8 @@ interface GetAggregatedAction {
   payload: { paginatedResults: Word[]; totalCount: number };
 }
 
-export type AggregatedActions = GetAggregatedAction;
+interface aggregatedWordsErrorAcrtion {
+  type: AggregatedWordsTypes.AGGREGATED_WORDS_ERROR;
+}
+
+export type AggregatedActions = GetAggregatedAction | aggregatedWordsErrorAcrtion;
