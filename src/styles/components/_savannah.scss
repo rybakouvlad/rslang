@@ -36,19 +36,21 @@ $savana-bg: url('https://i.pinimg.com/originals/dc/6d/c2/dc6dc2f53432d120c8bd140
   flex-wrap: wrap;
   align-items: start;
   justify-content: center;
-
-  // .full-screen-btn.btn.btn-info {
-  //   justify-self: stretch;
-  // }
 }
 
-.game-lifes {
+.lifes-container {
+  display: flex;
+  gap: 5px;
   position: absolute;
+
   top: 10px;
   right: 10px;
-  text-align: center;
-  font-size: 30px;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 .contrast-color {
   color: white;
 
