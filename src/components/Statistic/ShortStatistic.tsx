@@ -26,9 +26,9 @@ export const ShortStatistic: React.FC = () => {
     checkResult();
   }, [optional]);
 
-  /*if (!results) {
+  if (!results) {
     return <h1>Данных нету</h1>;
-  }*/
+  }
   return (
     <div className="dictionary-container">
       <h1 className="dictionary-header" style={{ color: '#FC983A' }}>
