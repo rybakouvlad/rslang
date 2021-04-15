@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  overflow: auto;
+
   .game-card {
     position: relative;
     display: flex;
@@ -61,7 +63,6 @@
       background-color: rgba(0, 128, 0, 0.5);
     }
   }
-
 }
 
 .wrong-answer {
@@ -150,18 +151,36 @@
   border-radius: 50%;
   margin-left: 10px;
   svg {
-    fill: #92BBE0;
+    fill: #92bbe0;
 
     &:hover {
       cursor: pointer;
       fill: deepskyblue;
     }
   }
-
 }
 
 #popover-basic {
-  .popover-body{
+  .popover-body {
     background-color: azure;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sprint-game {
+    .game-card {
+      width: 325px;
+      height: 280px;
+    }
+    .sprint-score {
+      top: 20px;
+      right: 20px;
+
+      height: 90px;
+      width: 120px;
+    }
+    .sprint-game-settings {
+      width: 90%;
+    }
   }
 }
