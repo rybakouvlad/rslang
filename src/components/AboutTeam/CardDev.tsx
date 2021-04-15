@@ -12,20 +12,14 @@ interface CardDevProps {
 export const CardDev: React.FC<CardDevProps> = (props: CardDevProps) => {
   const { avatar, name, position, discription, linkToGitHub } = props;
   return (
-    <Card
-      className="dev-card"
-      style={{
-        width: '300px',
-        marginBottom: '25px',
-      }}
-    >
-      <Card.Img style={{ width: '300px', height: '300px' }} variant="top" src={avatar} />
+    <Card className="card-container">
+      <Card.Img className="card-img" variant="top" src={avatar} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{position}</Card.Subtitle>
-        <Card.Text>{discription}</Card.Text>
-        <Card.Link href={linkToGitHub}>
-          <img src="https://img.icons8.com/ios/452/github.png" alt="GitHub" style={{ width: '20px' }} />
+        <Card.Text className="card-text">{discription}</Card.Text>
+        <Card.Link className="card-link" href={linkToGitHub} target="_blank">
+          <img src="https://img.icons8.com/ios/452/github.png" alt="GitHub" style={{ width: '25px' }} />
         </Card.Link>
       </Card.Body>
     </Card>
